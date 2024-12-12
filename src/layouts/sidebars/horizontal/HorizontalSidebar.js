@@ -6,11 +6,11 @@ import NavSubItem from './NavSubItem';
 import NavSingleItem from './NavSingleItem';
 
 const HorizontalSidebar = () => {
-  const activeBg = useSelector((state) => state.customizer?.sidebarBg);
+  const activeBg = useSelector((state) => state.customizer.sidebarBg);
   const location = useLocation();
   const currentURL = location.pathname.split('/').slice(0, -1).join('/');
-  const isFixed = useSelector((state) => state.customizer?.isSidebarFixed);
-  const isMobileSidebar = useSelector((state) => state.customizer?.isMobileSidebar);
+  const isFixed = useSelector((state) => state.customizer.isSidebarFixed);
+  const isMobileSidebar = useSelector((state) => state.customizer.isMobileSidebar);
   return (
     <div
       className={`horizontalNav shadow bg-${activeBg}  ${isFixed ? 'fixedSidebar' : ''} ${
