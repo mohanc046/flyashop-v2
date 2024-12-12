@@ -72,7 +72,29 @@ const SidebarData = [
     collapisble: false,
   },
 
-  { caption: "Non needed" },
+  // { caption: "Non needed" },
+  // { caption: "Tables" },
+  // {
+  //   title: "Basic Table",
+  //   href: "/tables/basic-table",
+  //   icon: <Icon.Codepen />,
+  //   id: 4.1,
+  //   collapisble: false,
+  // },
+  // {
+  //   title: "React Table",
+  //   href: "/tables/react-table",
+  //   icon: <Icon.Disc />,
+  //   id: 4.2,
+  //   collapisble: false,
+  // },
+  // {
+  //   title: "Bootstrap Datatable",
+  //   href: "/tables/data-table",
+  //   icon: <Icon.HardDrive />,
+  //   id: 4.3,
+  //   collapisble: false,
+  // },
   // {
   //   title: "Notes",
   //   href: "/apps/notes",

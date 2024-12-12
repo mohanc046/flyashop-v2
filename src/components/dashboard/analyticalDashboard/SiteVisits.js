@@ -21,7 +21,7 @@ const SiteVisits = () => {
               {
                 latLng: [-24.27, 133.77],
                 name: 'Australia',
-                style: { r: 6, fill: '#e46a76', stroke: 0 },
+                style: { r: 6, fill: '#6E3BFF', stroke: 0 },
               },
               {
                 latLng: [20.59, 78.96],

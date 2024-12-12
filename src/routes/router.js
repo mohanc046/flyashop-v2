@@ -7,6 +7,7 @@ const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
 /***** Pages ****/
 
+const ProductList = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
 const Minimal = Loadable(lazy(() => import('../views/dashboards/Minimal')));
 const Analytical = Loadable(lazy(() => import('../views/dashboards/Analytical')));
 const Demographical = Loadable(lazy(() => import('../views/dashboards/Demographical')));
@@ -108,7 +109,7 @@ const ThemeRoutes = [
     children: [
       { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
       { path: '/order-list', name: 'Order', exact: true, element: <Analytical /> },
-      { path: '/product-list', name: 'Product', exact: true, element: <Analytical /> },
+      { path: '/product-list', name: 'Product', exact: true, element: <ProductList /> },
 
       { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
       { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },
