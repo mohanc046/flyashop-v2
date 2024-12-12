@@ -1,0 +1,27 @@
+.checkout-desktop {
+    padding: 60px 100px;
+    display: flex;
+}
+
+.checkout-desktop .shop-mob-layout {
+    flex: 1;
+}
+
+.checkout-desktop .commonPadding {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+}
+
+.checkout-desktop .boxOrderSmall {
+    margin: 0;
+    padding: 15px;
+    padding-left: 0;
+    border: 1px solid #dfdfdf;
+    border-radius: 25px;
+}
+
+.checkout-desktop .commonPadding .orderSummary {
+    margin-top: 0;
+}

@@ -1,0 +1,11 @@
+.shop-footer {
+    display: flex;
+    padding: 16px;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 16px -40px 40px 0px #8E8E8E33;
+    z-index: 10;
+    background: #fff;
+}

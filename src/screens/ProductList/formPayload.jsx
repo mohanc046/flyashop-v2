@@ -63,6 +63,7 @@ const ProductList = () => {
 
   return (
     <div>
+      <div></div>
       <ComponentCard title="All Products">
         <ReactTable
           columns={[

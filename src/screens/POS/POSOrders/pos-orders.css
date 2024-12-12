@@ -1,0 +1,119 @@
+/* Base wrapper css */
+.pos-orders-container {
+    background: #F5F9FC;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 25px;
+}
+
+.pos-orders-container .left {
+    padding: 0 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.pos-orders-container .right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Base wrapper css end*/
+
+.pos-orders-container .orders-header .btn {
+    height: 36px;
+    min-width: 90px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.42px;
+}
+
+.pos-orders-container .orders-header .btn.report,
+.pos-orders-container .orders-header .btn.report:hover,
+.pos-orders-container .orders-header .btn.report:active {
+    border: 0 !important;
+    box-shadow: none !important;
+    color: #000000;
+}
+
+.pos-orders-container .orders-header .btn.report img {
+    margin-left: 5px;
+}
+
+.pos-orders-container .left .orders-container {
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid #E0EAF1;
+    overflow: auto;
+}
+
+.pos-orders-container .controls .search,
+.pos-orders-container .controls .search:active,
+.pos-orders-container .controls .search:hover {
+    height: 36px !important;
+    border-radius: 30px;
+    min-width: 230px;
+    border: 1px solid #00000080 !important;
+    box-shadow: none;
+    background: transparent;
+    padding: 0 20px 0 10px;
+    background-color: transparent !important;
+}
+
+.pos-orders-container .controls .btn {
+    height: 36px;
+}
+
+.pos-orders-container .controls .btn img {
+    height: 20px;
+    width: 20px;
+    margin-left: 5px;
+}
+
+.pos-orders-container .duration-dropdown,
+.pos-orders-container .duration-dropdown:hover {
+    min-width: 131px;
+    height: 36px;
+    border-radius: 30px;
+}
+
+.pos-orders-container .duration-dropdown .ant-select-selector {
+    height: 36px !important;
+    border: 1px solid #00000080 !important;
+    box-shadow: none !important;
+}
+
+.pos-orders-container .orders-container .item-header-label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+}
+
+.pos-orders-container .orders-container .header-row {
+    padding: 0 23px;
+}
+
+.pos-orders-container .orders-container .orders {
+    max-height: 700px;
+    overflow: auto;
+}
+
+.pos-orders-container .orders-container .content-row {
+    border-radius: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #EAECF0;
+    box-shadow: 58px 26px 68px 0px #232C5D08;
+    padding: 16px 23px;
+}
+
+.pos-orders-container .orders-container .content-row .customer-icon {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: #E0EAF1;
+}

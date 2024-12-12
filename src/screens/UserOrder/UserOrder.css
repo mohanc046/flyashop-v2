@@ -1,0 +1,42 @@
+.addButton {
+    padding: 3px;
+    width: max-content;
+    border: none;
+    font-size: 18px;
+    font-weight: 800;
+    width: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+}
+
+.BOLD-TEXT {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.imageFullSize {
+    height: 100%;
+    width: 100%;
+}
+
+.orderImage {
+    height: 400px;
+}
+.parent-container {
+    width: 90%;
+    bottom: 5%;
+    position: absolute;
+    display: flex;
+    align-items: center; /* Align items horizontally at the center */
+  }
+  
+  .orderButton {
+    height: 45px;
+    width: 95%;
+  }
+
+.width10 {
+    width: 10%;
+}

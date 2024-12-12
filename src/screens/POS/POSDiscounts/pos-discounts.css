@@ -1,0 +1,127 @@
+/* Base wrapper css */
+.pos-discounts-container {
+    background: #F5F9FC;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 25px;
+}
+
+.pos-discounts-container .left {
+    padding: 0 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.pos-discounts-container .right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Base wrapper css end*/
+
+.pos-discounts-container .discounts-header .btn {
+    height: 36px;
+    min-width: 90px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.42px;
+}
+
+.pos-discounts-container .discounts-header .btn.report,
+.pos-discounts-container .discounts-header .btn.report:hover,
+.pos-discounts-container .discounts-header .btn.report:active {
+    border: 0 !important;
+    box-shadow: none !important;
+    color: #000000;
+}
+
+.pos-discounts-container .discounts-header .btn.report img {
+    margin-left: 5px;
+}
+
+.pos-discounts-container .left .discounts-container {
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid #E0EAF1;
+    overflow: auto;
+}
+
+.pos-discounts-container .controls .search,
+.pos-discounts-container .controls .search:active,
+.pos-discounts-container .controls .search:hover {
+    height: 36px !important;
+    border-radius: 30px;
+    min-width: 230px;
+    border: 1px solid #00000080 !important;
+    box-shadow: none;
+    background: transparent;
+    padding: 0 20px 0 10px;
+    background-color: transparent !important;
+}
+
+.pos-discounts-container .controls .btn {
+    height: 36px;
+}
+
+.pos-discounts-container .controls .btn img {
+    height: 20px;
+    width: 20px;
+    margin-left: 5px;
+}
+
+.pos-discounts-container .duration-dropdown,
+.pos-discounts-container .duration-dropdown:hover {
+    min-width: 131px;
+    height: 36px;
+    border-radius: 30px;
+}
+
+.pos-discounts-container .duration-dropdown .ant-select-selector {
+    height: 36px !important;
+    border: 1px solid #00000080 !important;
+    box-shadow: none !important;
+}
+
+.pos-discounts-container .discounts-container .item-header-label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+}
+
+.pos-discounts-container .discounts-container .header-row {
+    padding: 0 23px;
+}
+
+.pos-discounts-container .discounts-container .discounts {
+    max-height: 700px;
+    overflow: auto;
+}
+
+.pos-discounts-container .discounts-container .content-row {
+    border-radius: 14px;
+    margin-bottom: 10px;
+    border: 1px solid #EAECF0;
+    box-shadow: 58px 26px 68px 0px #232C5D08;
+    padding: 16px 23px;
+}
+
+.pos-discounts-container .discounts-container .content-row .customer-icon {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: #E0EAF1;
+}
+.pos-discounts-container .discounts-container .discount-toggler{
+    min-width: 40px;
+    margin-right: 5px;
+    background: #E54B41;
+}
+.pos-discounts-container .discounts-container .discount-toggler.ant-switch-checked{
+    background: #6E3BFF;
+}

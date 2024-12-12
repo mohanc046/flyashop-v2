@@ -1,0 +1,184 @@
+.tracking-container .container {
+    padding: 26px;
+}
+
+.header-profile-container {
+    background: #C4C4C4;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.tracking-search {
+    background: #D0D0D080;
+    background-color: #D0D0D080 !important;
+    border-color: #D0D0D080 !important;
+    padding: 7px 8px 7px 21px !important;
+}
+
+.tracking-search input {
+    background-color: #D0D0D000;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0px;
+    color: #525252;
+}
+
+.tracking-search .arrow-right {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: 50%;
+}
+
+.tracking-container .search-container {
+    background: #fff;
+    width: 100%;
+    padding: 25px 12px;
+}
+
+.tracking-container .search-container .tracking-search {
+    height: 55px !important;
+}
+
+.tracking-search input::placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.ongoing-delivery .title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+}
+
+.ongoing-delivery .details-container {
+    border-radius: 12px;
+    border: 1px solid #6E3BFF;
+    padding: 17px 19px;
+    margin-top: 15px;
+}
+
+.ongoing-delivery .details-container .top {
+    padding-bottom: 25px;
+    border-bottom: 2px solid #ECECEC
+}
+
+.ongoing-delivery .details-container .top .label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #B0B0B0;
+}
+
+.ongoing-delivery .details-container .top .value {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.ongoing-delivery .details-container .top .category {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #484A58;
+    margin-top: 8px;
+}
+
+.ongoing-delivery .details-label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.ongoing-delivery .shop-info {
+    padding: 14px 0 5px;
+    border-top: 2px solid #ECECEC;
+    margin-top: 10px;
+    gap: 8px;
+}
+
+.ongoing-delivery .shop-logo {
+    width: 40px;
+    height: 42px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #B0B0B0;
+}
+
+.ongoing-delivery .shop-info .details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.ongoing-delivery .shop-info .details .label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17px;
+    letter-spacing: 0.01em;
+    color: #B0B0B0;
+}
+
+.ongoing-delivery .shop-info .details .name {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0.01em;
+    color: #232323;
+    margin: 4px 0 3px;
+}
+
+.ongoing-delivery .shop-info .details .manager {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    color: #484A58;
+}
+
+.ongoing-delivery .shop-info .action-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 30px;
+    background: #F7F5FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3px;
+}
+
+.last-tracked {
+    margin-top: 25px;
+}
+
+.last-tracked .title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+}
+
+.last-tracked .last-tracked-list {
+    margin-top: 18px;
+    gap: 10px;
+}

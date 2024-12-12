@@ -1,0 +1,213 @@
+.imageFullOrderSize {
+    height: 100%;
+    width: 100%;
+}
+.headingLabel {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.fullLayoutPaymentBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    gap: 20px;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    box-shadow: 0 0 8px 2px #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-radius: 20px;
+}
+
+.flexWrap {
+    flex-wrap: wrap;
+}
+
+.fullLayoutFilterPaymentBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    margin-bottom: 0%;
+    margin-top: 0%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.setUpButton {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #6E3BFF;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    width:max-content
+}
+
+.paymentLabelMargin {
+    margin-left: 5%;
+}
+
+.textCenterButton {
+    text-align: center;
+}
+
+.react-switch-handle {
+    height: 23px !important;
+    width: 23px !important;
+}
+
+@media only screen and (min-width : 600px) { 
+    .textCenterButton {
+        text-align: left;
+    } 
+    .headingLabel {
+        margin-left: 35.5%;
+        font-size: 16px;
+        font-weight: 800;
+    }
+    .fullLayoutPaymentBox {
+        padding: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 70%;
+        margin-left: 34.5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        box-shadow: 0 0 8px 2px #e8e8e8;
+        border: 1px solid #e8e8e8;  
+        border-radius: 20px;
+    }
+    .fullLayoutFilterPaymentBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 70%;
+        margin-left: 34.5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+    .imageFullOrderSize {
+        height: 100px;
+        width: 100px;
+    }
+    .setUpButton {
+        width: max-content;
+    }
+}
+
+@media only screen and (min-width : 992px) {
+    .textCenterButton {
+        text-align: left;
+    } 
+    .headingLabel {
+        margin-left: 26.5%;
+        font-size: 16px;
+        font-weight: 800;
+    }
+    .fullLayoutPaymentBox {
+        padding: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 73%;
+        margin-left: 25.5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        box-shadow: 0 0 8px 2px #e8e8e8;
+        border: 1px solid #e8e8e8;  
+        border-radius: 20px;
+    }
+    .fullLayoutFilterPaymentBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 73%;
+        margin-left: 14.5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+    .imageFullOrderSize {
+        height: 100px;
+        width: 100px;
+    }
+    .setUpButton {
+        width: 180px;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .textCenterButton {
+        text-align: left;
+    } 
+    .headingLabel {
+        margin-left: 22.5%;
+        font-size: 16px;
+        font-weight: 800;
+    }
+    .imageFullOrderSize {
+        height: 100px;
+        width: 100px;
+    }
+    .setUpButton {
+        width: 180px;
+    }
+    .fullLayoutPaymentBox {
+        padding: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 75%;
+        margin-left: 21.5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        box-shadow: 0 0 8px 2px #e8e8e8;
+        border: 1px solid #e8e8e8; 
+        border-radius: 20px;
+    }
+    .fullLayoutFilterPaymentBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2%;
+        margin-bottom: 0%;
+        margin-top: 0%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        width: 75%;
+        margin-left: 2%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+}
+
+@media (max-width: 500px) {
+    .headingLabel {
+        margin-left: 10px;
+    }
+    .setUpButton {
+        padding: 5px;
+    }
+}

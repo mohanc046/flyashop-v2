@@ -1,0 +1,340 @@
+.orderCardContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px !important;
+    height: 68px;
+    border-radius: 14px;
+    border: 1px;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, #EAECF0, #EAECF0);
+    box-shadow: 58px 26px 68px 0px #232C5D0F;
+    border: 1px solid #EAECF0;
+    justify-content: center;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+.order-image img {
+    margin-left: 20px;
+    width: 33px;
+    height: 33px;
+}
+
+.product-details {
+    flex: 1;
+    margin: 0 10px;
+    max-width: 50%;
+}
+
+.orderImage {
+    height: 100px;
+    width: 100px;
+}
+
+.orderImageMobile {
+    border-radius: 50px;
+}
+
+.order-details {
+    flex: 1;
+    margin: 0 10px;
+    max-width: 50%;
+}
+
+.mobileOrderLayout {
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    position: relative;
+}
+
+.orderTimingTextColor {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #9B9BA1;
+}
+
+.orderStatusContainer {
+    display: flex;
+    width: 71px;
+    height: 22px;
+    left: 257px;
+    border-radius: 30px;
+    border: 0.5px solid #000000;
+    justify-content: center;
+    margin-right: 7px;
+    text-overflow: ellipsis;    
+}
+
+.orderStatusLabel {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%; 
+}
+
+.subSectionMobileLayout {
+    height: 44vh;
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 20px;
+    position: relative;
+    overflow: auto; /* Add this line to enable scrolling */
+}
+
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.orderListSubSectionMobileLayout {
+    /* height: 44vh; */
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 20px;
+    position: relative;
+    overflow: auto;
+    /* Add this line to enable scrolling */
+}
+
+.accept-button {
+    background: #6E3BFF !important;
+    border: none;
+    color: #ffffff;
+    font-size: 13px;
+    border-radius: 23px;
+    cursor: pointer;
+    padding: 10px;
+    width: 90px;
+}
+.track-button {
+    background: #ffffff !important;
+    border: 1px solid;
+    color: #484848;
+    font-size: 13px;
+    border-radius: 23px;
+    cursor: pointer;
+    padding: 10px;
+    width: 90px;
+}
+
+.reject-button {
+    color: #000000;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.circle-icon-order {
+    width: 10px !important;
+    height: 10px;
+    border-radius: 50%;
+    background: #E95757;
+}
+
+.circle-icon-order-accept {
+    width: 10px !important;
+    height: 10px;
+    border-radius: 50%;
+    background: #57E9E9;
+}
+
+.circle-icon-order-ship {
+    width: 10px !important;
+    height: 10px;
+    border-radius: 50%;
+    background: #FFBC39;
+}
+
+.circle-icon-order-reject {
+    width: 10px !important;
+    height: 10px;
+    border-radius: 50%;
+    background: red;
+}
+
+.circle-icon-order-delivery {
+    width: 10px !important;
+    height: 10px;
+    border-radius: 50%;
+    background: #6E3BFF;
+}
+
+.FORT11-Order {
+    font-size: 11px;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+textarea {
+    width: 100%;
+    height: 101px;
+    padding: 10px;
+    font-size: 13px !important;
+    border: 1px solid #dfdfdf;
+}
+
+.message-pop {
+    font-size: 14px;
+    margin-bottom: 5%;
+}
+
+/* Hide default radio buttons */
+input[type="radio"] {
+    display: none;
+  }
+  
+  /* Style for custom radio buttons */
+  .radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .radio-custom {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    position: relative;
+    margin-right: 10px;
+  }
+  
+  /* Checked state style */
+  input[type="radio"]:checked + .radio-custom::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #4CAF50;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  .radio-margin {
+    margin-left: 10px;
+  }
+  
+  .order35 {
+    width: 35%;
+  }
+   
+  .order65 {
+    width: 65%;
+    justify-content: space-between;
+  }
+
+  .tracking-input {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 22px;
+    padding: 7px;
+    font-size: 13px !important;
+    border: 1px solid #dfdfdf;
+  }
+
+  .BadgeGroup {
+    margin-left: 5px;
+  }
+
+  .StateBadge {
+    font-weight: 700;
+    background-color: #ECF2F8;
+    padding: 2px 3px;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    font-size:13px
+  }
+
+  .TransitionArrow {
+    margin: 0 10px;
+  }
+
+  .history {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .historyDate {
+    font-size: 10px;
+    font-weight: 500;
+  }
+  .faceIcon {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    padding: 25px;
+    margin: 10px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background: #f9e9e6;
+    color: #e08751;
+    font-size: 18px;
+  }
+
+  .flexColHistory {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .flexHeading {
+    margin-left: 20px;
+  }
+
+  .activityButton {
+    background: #dfdfdf !important;
+    border: 1px solid #dfdfdf;
+    color: #484848;
+    font-size: 13px;
+    border-radius: 23px;
+    cursor: pointer;
+    padding: 10px;
+    width: 90px;
+  }
+
+  .mobile-alignCenter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+  }
+
+  .mobileHalfWidth {
+    width: 30%;
+  }
+  .mobileMediaHalf {
+    width: 65%;
+  }
+
+  .mobileFont {
+    font-size: 8px !important;
+  }

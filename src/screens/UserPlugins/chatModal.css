@@ -1,0 +1,67 @@
+.custom-modal .ant-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.left-column {
+    width: 30%;
+    padding: 20px;
+    background-color: transparent !important;
+}
+
+.right-column {
+    width: 70%;
+    padding: 20px;
+}
+
+.instruction-details {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.instruction-details h3 {
+    margin-bottom: 10px;
+}
+
+.instruction-details p {
+    margin-bottom: 10px;
+}
+
+.pluginConfigInput {
+    width: 97% !important;
+    border-radius: 10px !important;
+    border: 1px !important;
+    position: static !important;
+    border: 1px solid #9C9C9C !important;
+    margin-top: 5% !important;
+}
+
+
+.pluginConfigureButton {
+    height: 32px;
+    padding: 6px 16px 6px 16px;
+    border-radius: 10px !important;
+    margin: 0;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center !important;
+}
+
+.defaultPluginMarginTop{
+    margin-top: 5%;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+}

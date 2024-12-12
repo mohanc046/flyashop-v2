@@ -1,0 +1,240 @@
+.margin7Right {
+   margin-right:  6px !important;
+   cursor: pointer;
+}
+
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mobileLoginLayout {
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 20px;
+    position: relative;
+}
+
+.container {
+    max-width: 700px;;
+}
+.justify-content-center .col-md-4 {
+    max-width: 800px !important; 
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .justify-content-center .col-md-4 {
+        flex: 0 0 auto;
+        width: 60% !important; 
+    }
+}
+
+.justifyCenter {
+    justify-content: center;
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+.loginHead {
+    color: #6E3BFF;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 35px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+.loginSubHead {
+    padding-bottom: 8%;
+
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.loginButton{
+    width: 100% !important;
+}
+
+.remember-me-container {
+    margin-top: -8px;
+}
+
+.remember-me {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #949090;
+}
+
+.remember-me img {
+    width: 22px;
+    height: 22px;
+}
+
+.forgot-password {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #6E3BFF;
+}
+
+.otp-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #262626;
+    border-bottom: 24px;
+}
+
+.btn-at-bottom {
+    position: absolute;
+    width: calc(100% - 40px) !important;
+    bottom: 10%;
+}
+
+.otp-container {
+    width: 100%;
+}
+
+.otp-container div {
+    /* gap: 10px; */
+    height: 70px;
+    background: #F4F4F4;
+}
+
+.otp-container input {
+    width: 54px !important;
+    height: 54px;
+    border: 0;
+    border-bottom: 2px solid #A8A8A8;
+    background: #F4F4F4;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0px;
+    position: relative;
+    margin: 0 8px;
+}
+
+.otp-container input::after {
+    content: '';
+    width: 100%;
+    border-bottom: solid 1px #fff;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.otp-container span {
+    width: 21px;
+    height: 100%;
+    background: white;
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    .loginButton {
+        border-radius: 23px;
+        height: 47px;
+    }   
+    .inputBox {
+        padding: 18px;
+        border-radius: 20px !important;
+    }   
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+    .loginButton {
+        border-radius: 23px;
+        height: 47px;
+    }
+    .inputBox {
+        padding: 18px;
+        border-radius: 20px !important;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .loginButton {
+        border-radius: 20px;
+        height: 47px;
+    }
+    .inputBox {
+        padding: 18px;
+        border-radius: 20px !important;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .loginButton {
+        border-radius: 20px;
+        height: unset;
+    }
+    .inputBox {
+        padding: 8px;
+        border-radius: 20px !important;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .loginButton {
+        border-radius: 20px;
+        height: unset;
+    }
+    .inputBox {
+        padding: 8px;
+        border-radius: 20px !important;
+    }
+}
+
+.tabLayoutMobileView {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 5%;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+.tabLayoutMobileView .active {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 30%;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 800;
+    border-bottom: 2px solid #6E3BFF;
+}
+
+.tabLayoutMobileView .inactive {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 30%;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.storeNameLabel {
+    width: 100%;
+    font-size: 17px;
+}

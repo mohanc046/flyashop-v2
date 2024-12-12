@@ -1,0 +1,82 @@
+.previewImageContainer {
+    width: 100%;
+    overflow: hidden;
+}
+
+.previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.parentPreviewContainer {
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 69vh;
+    overflow: auto;
+}
+
+.productDetailsContainer {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.productTitleLabel {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    color: #333333;
+}
+
+.productDescriptionLabel {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 15px;
+    text-align: center;
+    color: #333333;
+}
+
+.productPricingLabel {
+    margin-top: 2%;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #000000;
+}
+
+.previewInfoContainer {
+    margin-top: 7%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.previewInfoLeftContainer {
+    width: 20%;
+}
+
+.previewInfoRightContainer {
+    width: 78%;
+}
+
+.previewHeaderLabel {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #262626;
+    text-transform: uppercase;
+}
+
+.previewDescriptionLabel {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #262626;
+}

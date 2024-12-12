@@ -1,0 +1,418 @@
+.orderCardContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px !important;
+    border-radius: 14px;
+    border: 1px;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, #EAECF0, #EAECF0);
+    box-shadow: 58px 26px 68px 0px #232C5D0F;
+    border: 1px solid #EAECF0;
+    justify-content: center;
+}
+
+
+.selectedOrderCardContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px !important;
+    border-radius: 14px;
+    border: 1px;
+    background: #E1EBF3;
+    box-shadow: 58px 26px 68px 0px #232C5D0F;
+    border: 1px solid #EAECF0;
+    justify-content: center;
+
+}
+
+.pricing-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 1% 10px 4%;
+}
+
+.pricing-details {
+    flex: 1;
+    margin: 0 10px;
+    max-width: 50%;
+}
+
+.order-details {
+    flex: 1;
+    margin: 0 10px;
+    max-width: 50%;
+}
+
+.mobileOrderLayout {
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    position: relative;
+}
+
+.orderDescriptionLabel {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #9B9BA1;
+}
+
+.selectedOrderDescriptionLabel {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #000000;
+}
+
+.detailsContainer {
+    display: flex;
+    width: 71px;
+    height: 22px;
+    left: 257px;
+    border-radius: 30px;
+    border: 0.5px solid #000000;
+    justify-content: center;
+    margin-right: 7px;
+    text-overflow: ellipsis;
+}
+
+.detailLabel {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+
+.pricingSubSectionMobileLayout {
+    height: 55vh;
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    padding: 20px;
+    position: relative;
+    overflow: auto;
+    /* Add this line to enable scrolling */
+}
+
+.pricingHeaderContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, #EAECF0, #EAECF0);
+    justify-content: center;
+}
+
+.pricingHeaderTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 20px 0 20px;
+}
+
+.discountLayout {
+    display: flex;
+    margin-top: 2px;
+    width: 117px;
+    padding: 2px;
+    justify-content: center;
+    border-radius: 30px;
+    background: #262626;
+}
+
+.discountLabel {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #FFFFFF;
+
+}
+
+.pricing-container .drop-down {
+    margin-right: 10%;
+}
+
+.pricing-container .drop-down .form-select {
+    width: 300px;
+    border-radius: 300px !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    height: 36px;
+}
+
+.pricing-container .select-plan-container {
+    margin-top: 52px;
+}
+
+.pricing-container .select-plan-container .title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0em;
+    margin-bottom: 23px;
+}
+
+.pricing-container .select-plan-container .description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.pricing-container .price-table {
+    table-layout: fixed;
+    height: 1px;
+    width: min(80%, 1040px);
+}
+
+.pricing-container .price-table th,
+.pricing-container .price-table td {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    min-height: 10px;
+}
+
+.pricing-container .price-table .no-border {
+    border: 0 !important;
+}
+
+.pricing-container .price-table th div,
+.pricing-container .price-table td div {
+    width: 100%;
+    border: 2px solid #EBEAED;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0px;
+    text-align: center;
+    border-right: 0;
+    border-bottom: 0;
+    padding: 16px 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.pricing-container .price-table td div {
+    padding: 30px 23px;
+}
+
+.pricing-container .price-table th div {
+    justify-content: center;
+}
+
+.pricing-container .price-table th:last-child div,
+.pricing-container .price-table td:last-child div {
+    border-right: 2px solid #EBEAED;
+}
+
+.pricing-container .price-table tr:last-child th div,
+.pricing-container .price-table tr:last-child td div {
+    border-bottom: 2px solid #EBEAED;
+}
+
+.pricing-container .price-table .double-width {
+    width: 200%;
+}
+
+.pricing-container .price-table td div.row-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0px;
+}
+
+.pricing-container .price-table td div .label {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+.price-table .price-card .label {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0px;
+    margin-bottom: 37px;
+}
+
+.price-table .price-card .label-sub {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #15143966;
+    position: absolute;
+    top: 55px;
+}
+
+.price-table .price-card .label-light {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #15143966;
+}
+
+.price-table .price-card .price {
+    font-size: 58px;
+    font-weight: 700;
+    line-height: 70px;
+    letter-spacing: -1px;
+    position: relative;
+}
+
+.price-table .price-card .price .currency {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0px;
+    position: absolute;
+    top: 12px;
+    left: -10px;
+}
+
+.price-table .price-card .discount {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: #6E3BFF;
+    margin-top: 7px;
+    margin-bottom: 8px;
+}
+
+.price-table .button {
+    width: 133px;
+    height: 48px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0px;
+}
+
+.included-in-all .title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0em;
+    margin-top: 80px;
+}
+
+.included-in-all-list {
+    width: calc(min(80%, 1040px) + 60px);
+    height: 1px;
+    border-spacing: 30px;
+    display: table;
+}
+
+.included-in-all-list-row {
+    display: table-row;
+}
+
+.included-in-all-card {
+    display: table-cell;
+    border: 2px solid #EBEAED;
+}
+
+.included-in-all-card .heading {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0em;
+    border-bottom: 4px solid #EBEAED;
+    padding: 15px 21px;
+}
+
+.included-in-all-card .content {
+    padding: 15px 21px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 34px;
+}
+
+.faq-container {
+    width: min(80%, 1040px);
+    box-shadow: 6px 0px 18px 0px #0000000F;
+    padding: 23px 53px 23px 41px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.faq-container .title {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: 0em;
+}
+
+.faq-list .accordion-item {
+    border: 0;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #00000033;
+}
+
+.faq-list .accordion-item:last-child {
+    border-bottom: 0;
+}
+
+.faq-list .accordion-button {
+    border: 0;
+    box-shadow: none;
+    background-color: #fff;
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    line-height: 31px;
+    letter-spacing: 0em;
+    color: #000000;
+    padding: 15px 0px;
+}
+
+.faq-list .accordion-body {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    color: #000000;
+    padding: 5px 0 20px 0;
+}
+
+.faq-list .accordion-button:not(.collapsed)::after {
+    background-image: var(--cui-accordion-btn-icon) !important;
+}
+
+.copyrights-container {
+    margin-top: 150px;
+    padding: 0 5%;
+}
+
+.copyrights-container img {
+    width: 192px;
+    height: 83px;
+}
+
+.copyrights-container .copyrights {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+}

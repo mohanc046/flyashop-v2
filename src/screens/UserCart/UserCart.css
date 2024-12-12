@@ -1,0 +1,340 @@
+.boxOrderSmall {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 8%;
+    margin-top: 8%;
+}
+
+.boxOrderSmall img {
+    width: 108px;
+    height: 105px;
+    border-radius: 10px;
+}
+
+.boxOrderSmall .content {
+    padding: 10px 10px 0 10px;
+}
+
+.boxMargin {
+    margin-left: 3%;
+}
+
+.boxMargin .name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.boxMargin .description {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.boxMargin .price {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.boxOrderSmall .right {
+    height: 100%;
+}
+
+.commonPadding {
+    padding: 10px;
+}
+
+.flexEnd {
+    text-align: center;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.addPaymentUI {
+    padding: 0px;
+    border-radius: 18px;
+    width: max-content;
+    border: none;
+    font-size: 15px;
+    font-weight: 800;
+    width: 64px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.marginBottom2 {
+    margin-bottom: 3%;
+}
+
+.orderSummary {
+    padding: 15px;
+    border: 1px solid #dfdfdf;
+    border-radius: 25px;
+    margin-top: 23px;
+}
+
+.orderSummary .title,
+.orderSummary .label,
+.orderSummary .value {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.editTagProduct svg {
+    height: 16px;
+    margin-top: 5px;
+}
+
+.offers-container,
+.address-container {
+    height: 50px;
+    border-radius: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 1px 4px 0px #9980AC80;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.offers-container input {
+    border: 0;
+    border-bottom: 1px dotted black;
+    padding: 5px;
+    width: 40%;
+}
+
+.address-container {
+    margin-bottom: 5px;
+}
+
+.offers-container input::placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #9980AC80;
+}
+
+.address-container select {
+    width: 40%;
+    border: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-desktop {
+    padding: 93px;
+}
+
+.cart-desktop .title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.cart-desktop-container {
+    width: 70%;
+}
+
+.cart-desktop .list {
+    border: 1px solid #0000001A;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: max-content;
+}
+
+.cart-desktop .boxOrderSmall {
+    margin: 8px 0;
+}
+
+.cart-desktop .boxOrderSmall img {
+    margin: 0 !important;
+}
+
+.cart-desktop .boxOrderSmall .name {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.cart-desktop .description {
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 4px;
+}
+
+.cart-desktop .description .label {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000;
+}
+
+.cart-desktop .price {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0em;
+    margin-top: 10px;
+}
+
+.cart-desktop .addPaymentUI {
+    padding: 5px 20px;
+    width: auto;
+    font-size: 18px;
+    gap: 18px;
+    font-weight: 400;
+    border-radius: 62px;
+}
+
+.cart-desktop .editTagProduct path {
+    fill: #FF3333;
+}
+
+.cart-desktop .orderSummary {
+    margin-top: 0;
+}
+
+.cart-desktop .orderSummary .title {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0em;
+    margin-bottom: 24px;
+}
+
+.cart-desktop .orderSummary .delivery-time {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    color: #00000099;
+    margin-top: 20px;
+}
+
+.cart-desktop .orderSummary .delivery-time .value {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21px;
+    letter-spacing: 0em;
+}
+
+.cart-desktop .orderSummary .btn-primary {
+    width: 100%;
+    height: 60px;
+    border-radius: 62px;
+    border: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.cart-desktop .orderSummary .offers-container {
+    border: 0;
+    box-shadow: none;
+    display: flex;
+    gap: 12px;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.cart-desktop .orderSummary input {
+    height: 48px;
+    /* background: #F0F0F0; */
+    /* border-radius: 62px; */
+    width: 300px;
+    /* border: 0; */
+    padding: 10px 20px;
+}
+
+.cart-desktop .orderSummary .btn-dark {
+    width: 100px;
+    height: 48px;
+    border-radius: 62px;
+    background: #000;
+    border: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    color: #FFFFFF;
+}
+
+.shippingLabelContainer {
+    margin: 5% 0% 5% 0%;
+    font-weight: 800;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.shippingAddressInputContainer {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.shippingAddressInputOutContainer {
+    margin-bottom: 3%;
+}
+
+.validationErrorTextLabelContainer {
+    color: red;
+    font-weight: 400;
+    font-size: small;
+}
+
+.order-summary-cart-desktop-container {
+    margin-top: 5%;
+}
+
+.orderSummary-container {
+    padding: 15px;
+    border: 1px solid #dfdfdf;
+    border-radius: 25px;
+    margin-top: 23px;
+}

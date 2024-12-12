@@ -1,0 +1,101 @@
+.with70 {
+    width: 70%;
+}
+
+.whiteBg {
+    background: #fff;
+    padding: 3%;
+}
+
+.with20 {
+    width: 20%;
+}
+.flexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.productImage {
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.productImageMobile {
+    width: 71px;
+    height: 71px;
+    border-radius: 8px
+}
+
+.commonPadding {
+    padding: 10px;
+}
+
+.alignCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
+.addButton {
+    border-radius: 20px;
+    padding: 7px;
+    background: #ffffff;
+    border: 1px solid;
+}
+
+.smallBoxLayout {
+    border: 1px solid #dfdfdf;
+    padding: 10px;
+    margin-bottom: 10%;
+}
+
+.FONT12 {
+    font-size: 12px;
+}
+
+.FONT13 {
+    font-size: 13px;
+}
+
+.FONT14 {
+    font-size: 14px;
+}
+
+.with50 {
+    width: 50%;
+}
+.with40 {
+    width: 40%;
+}
+
+.greenColor {
+    background: #6E3BFF;
+}
+
+.greyColor {
+    background: #F0F0F0;
+}
+
+.pinkFont {
+    color: #FF3333;
+}
+
+.blackColor {
+    background: #393939;
+}
+.cicleSmall {
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 7px;
+}

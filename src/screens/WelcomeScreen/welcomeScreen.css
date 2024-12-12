@@ -1,0 +1,147 @@
+.welcome-screen-container {
+    padding: 23px;
+    min-height: 100vh;
+    position: relative;
+}
+
+.welcome-screen-container .top {
+    padding: 9px;
+    gap: 36px;
+}
+
+.welcome-screen-container .radio-grp {
+    display: flex;
+}
+
+.welcome-screen-container .content-container .title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #0C0C0C;
+}
+
+.welcome-screen-container .content-container .sub-title {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+    margin-top: 20px;
+}
+
+.welcome-screen-container .get-started-btn {
+    height: 64px;
+    border-radius: 30px;
+    margin-top: 35px;
+}
+
+.welcome-screen-container .ant-radio-checked .ant-radio-inner,
+.welcome-screen-container .ant-radio-input:focus+.ant-radio-inner {
+    border-color: #000 !important;
+}
+
+.welcome-screen-container .ant-radio-inner::after {
+    background: #000;
+}
+
+.welcome-screen-container .radio-grp {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.welcome-screen-container .onboarding-container {
+    flex: 1;
+}
+
+.welcome-screen-container .onboarding-container .btn-grp {
+    display: flex;
+}
+
+.welcome-screen-container .skip-btn,
+.welcome-screen-container .skip-btn:active,
+.welcome-screen-container .skip-btn:focus-within {
+    background: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 0 20px;
+    width: max-content;
+}
+
+.welcome-screen-container .next-btn {
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    height: 68px;
+    margin: 0;
+    min-width: 118px;
+}
+
+.welcome-screen-container .start-btn {
+    width: 100%;
+    height: 64px;
+    border-radius: 34px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+}
+
+.onboarding-container .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+}
+
+.onboarding-container .image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.onboarding-container .steps {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+}
+
+.onboarding-container .step {
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    border: 1px solid #000000
+}
+
+.onboarding-container .step.active {
+    background: #000000;
+}
+
+.onboarding-container .content .title {
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.onboarding-container .content .sub-title {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+}

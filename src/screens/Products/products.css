@@ -1,0 +1,483 @@
+.DefaultMarginBottom {
+    margin-bottom: 15%;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex {
+    display: flex !important;
+}
+
+.flexCol {
+    flex-direction: column;
+}
+
+.with20 {
+    width: 20%;
+}
+.with75 {
+    width: 75%;
+}
+
+.layout {
+    background: #ffffff;
+    padding: 2% 3% 0;
+    border: 1px solid #dfdfdf;
+    margin: 3%;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.layout input, select {
+    border-radius: 5px !important;
+    /* margin-right: 20px !important; */
+}
+
+.flexEnd {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.with20px {
+    width: 20px;
+}
+
+.redColor {
+    color: red;
+    font-size: 15px;
+}
+
+.videoTag {
+    height: 150px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputAlign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.premiumLayout {
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.justifyContent {
+    justify-content: center !important;
+}
+
+.kvBA-du:hover {
+    background-color: transparent !important;
+    border-bottom-color: #dfdfdf !important;
+    border-top-color: #dfdfdf !important;
+}
+
+.hide {
+    display: none;
+}
+
+
+.buttonWrapperContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+}
+
+.buttonContainer {
+    border-radius: 30px;
+    gap: 10px;
+    color: white;
+    background: #6E3BFF;
+    display: flex;
+    height: 54px;
+    justify-content: center !important;
+    align-items: center;
+}
+
+.width36 {
+    width: 36%;
+}
+
+.width54 {
+    width: 54%;
+}
+
+.buttonLabelContainer {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #000000;
+}
+
+
+.publishContainer {}
+
+.publishLabel {
+    margin-top: 3%;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: center;
+    color: #262626;
+}
+
+.storeURLContainer {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    height: 42px;
+    border-radius: 64px;
+    border: 0.5px solid #000000;
+    background: linear-gradient(0deg, #ABF4B8, #ABF4B8);
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+}
+
+.urlAddressLabel {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19px;
+    text-align: left;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.storeURLLabel {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 19px;
+    text-align: left;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.shareEntryContainer{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+}
+
+.shareButtonContainer {
+    padding: 1%;
+    border-radius: 30px;
+    border: 0.5px solid #000000;
+    display: flex;
+    justify-content: space-around;
+}
+
+.shareButtonLabel {
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    width: 80%;
+}
+
+.shareButtonIcon {
+    width: 18%;
+}
+
+.width100{
+    width: 100% !important;
+}
+
+.add-product-modal .modal-dialog {
+    justify-content: center;
+}
+
+.add-product-modal .modal-content {
+    width: 94%;
+    border: 0;
+    border-radius: 32px;
+}
+
+.add-product-modal .modal-body {
+    padding: 65px 34px 24px;
+}
+
+.add-product-modal .modal-body .title {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 31px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000 !important;
+}
+
+.add-product-modal .modal-body .sub-title {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+    padding: 0 15px;
+    margin-bottom: 33px;
+}
+
+.add-product-modal .modal-body .label {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+    margin-top: 17px;
+}
+
+.add-product-modal .modal-body .add-products {
+    height: 54px;
+    padding: 8px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+}
+
+.modal-backdrop {
+    background: #D9D9D9CC;
+}
+
+.record-video {
+    padding: 10px;
+    width: 50%;
+    margin-bottom: 6%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.upload-video {
+    padding: 10px;
+    width: 50%;
+
+    margin-bottom: 6%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.record-video-active {
+    border-bottom: 4px solid green;
+}
+
+.addProductDraggerContainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    align-items: center;
+    padding: 43px 30px 33px;
+    gap: 20px;
+    border: 1px;
+    background-color: #E1EBF3 !important;
+    border: 1px solid #F5F9FC;
+}
+
+.addProductDraggerContainer .upload-icon {
+    height: 36px;
+    width: 36px;
+}
+
+.addProductDraggerContainer button {
+    width: 257px;
+    height: 54px;
+    padding: 8px;
+    border-radius: 30px;
+    border: 1px solid #000000;
+    background: transparent;
+}
+
+.button-div {
+    width: 257px;
+    height: 54px;
+    padding: 8px;
+    padding-top: 15px;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px solid #000000;
+    background: transparent;
+    cursor: pointer;
+}
+
+.addProductDraggerContainer .paste-link {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0.01em;
+    color: #757575;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #757575;
+    cursor: pointer;
+}
+
+.add-product-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #262626 !important;
+}
+
+.add-product-sub-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #000000 !important;
+    margin-top: 40px;
+}
+
+.addProductDraggerContainer .file-input {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.add-product-form-field input,
+.add-product-form-field select {
+    height: 54px;
+    border-radius: 33px !important;
+    border: 1px solid #9C9C9C;
+    padding: 5px 16px;
+}
+
+.add-product-form-field-select {
+    height: 54px;
+    border-radius: 33px !important;
+    border: 1px solid #9C9C9C;
+    padding: 5px 16px;
+}
+
+.add-product-details .accordion-body{
+    padding: 0;
+}
+.add-product-details .accordion-item{
+    border: 0;
+}
+.add-product-details .accordion-button:not(.collapsed),
+.add-product-details .accordion-button.collapsed {
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+    padding-left: 0;
+}
+.discount-notice{
+    position: absolute;
+    right: 0;
+    width: 49%;
+    top: 68px;
+    padding: 0 5%;
+}
+.discount-notice p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #787878;
+}
+
+.add-prod-preview-button,
+.add-prod-preview-button:hover,
+.add-prod-preview-button:active {
+    width: 122px;
+    height: 60px;
+    padding: 8px;
+    border-radius: 30px;
+    background: #E1EBF3 !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #000000;
+    border: 0;
+}
+
+.add-prod-publish-button,
+.add-prod-publish-button:hover,
+.add-prod-publish-button:active {
+    width: 209px;
+    height: 60px;
+    border-radius: 30px;
+    margin-left: 11px;
+    background: #6E3BFF !important;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #F5F9FC;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;    /* Centers vertically */
+    margin-top: 20px;       /* Optional: adds spacing above the button */
+  }
+
+  /* Tablet and larger */
+  @media (max-width: 1200px) {
+    .addProductDraggerContainer button {
+        width: 170px;
+        height: 44px;
+        padding: 8px;
+        border-radius: 30px;
+    }
+
+    .addProductDraggerContainer .paste-link {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 19px;
+        letter-spacing: 0.01em;
+        text-align: center;
+        color: #757575;
+        padding-bottom: 2px;
+    }
+
+    .button-div {
+        width: 170px;
+        height: 44px;
+        padding: 8px;
+        border-radius: 30px;
+    }
+  }
+  
+  @media (max-width: 450px) {
+    .addProductDraggerContainer button {
+        width: 170px;
+        height: 44px;
+        padding: 8px;
+        border-radius: 30px;
+    }
+
+    .button-div {
+        width: 180px;
+        height: 44px;
+        padding: 8px;
+        border-radius: 30px;
+    }
+  }
+  
+  
