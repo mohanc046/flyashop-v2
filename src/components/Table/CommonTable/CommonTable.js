@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { CardTitle, Table } from "reactstrap";
+import "./CommonTable.scss";
 
 const CommonTable = ({ title, columns, data }) => {
   return (
-    <div>
+    <div className="bg-white">
       {title && (
         <CardTitle tag="h4" className="border-bottom pb-3 mb-0">
           {title}
         </CardTitle>
       )}
-      <Table className="no-wrap align-middle" responsive>
+      <Table className="no-wrap align-middle table-bg" responsive>
         <thead>
           <tr>
             {columns.map((column) => (

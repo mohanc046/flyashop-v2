@@ -103,13 +103,13 @@ const ProductList = () => {
 
   return (
     <OutletCard>
-      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3">
+      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-white">
         <CategoryFilter
           categories={categories}
           onSelect={handleCategorySelect}
         />
 
-        <div className="d-flex align-items-center gap-3">
+        <div className="d-flex align-items-center gap-3 bg-white">
           <Button
             color="secondary"
             size="sm"

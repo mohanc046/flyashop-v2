@@ -15,14 +15,14 @@ const ComponentCardTable = ({
   searchInputName,
 }) => {
   return (
-    <Card>
+    <Card className="bg-white">
       <CardTitle
         tag="h4"
         className={title ? "border-bottom py-3 mb-0" : ""}
       >
         {title}
       </CardTitle>
-      <Card>
+      <Card className="bg-white">
         <div className="d-flex justify-content-between align-items-center px-3 py-3 border-bottom">
           <div className="me-3">
             <SearchInput
@@ -53,11 +53,11 @@ const ComponentCardTable = ({
         </div>
       </Card>
 
-      <CardBody className="py-0 px-0">
+      <CardBody className="py-0 px-0 bg-white">
         <CardSubtitle className="text-muted mb-3">
           {subtitle || ""}
         </CardSubtitle>
-        <div>{children}</div>
+        <div className="bg-white">{children}</div>
       </CardBody>
     </Card>
   );
