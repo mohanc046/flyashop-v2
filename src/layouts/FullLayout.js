@@ -58,7 +58,7 @@ const FullLayout = () => {
             <div>
               <Outlet />
             </div>
-            <Customizer className={customizerToggle ? "showCustomizer" : ""} />
+            {/* <Customizer className={customizerToggle ? "showCustomizer" : ""} /> */}
             {showMobileSidebar || customizerToggle ? (
               <div className="sidebarOverlay" />
             ) : (
