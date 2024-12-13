@@ -7,7 +7,17 @@ const FullLayout = Loadable(lazy(() => import('../layouts/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/BlankLayout')));
 /***** Pages ****/
 
+const Home = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const OrderList = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
 const ProductList = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const OnlineShop = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const Payments = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const Customers = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const Plugins = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const Discounts = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+const Settings = Loadable(lazy(() => import('../screens/ProductList/formPayload')));
+
+
 const Minimal = Loadable(lazy(() => import('../views/dashboards/Minimal')));
 const Analytical = Loadable(lazy(() => import('../views/dashboards/Analytical')));
 const Demographical = Loadable(lazy(() => import('../views/dashboards/Demographical')));
@@ -107,9 +117,16 @@ const ThemeRoutes = [
     path: '/',
     element: <FullLayout />,
     children: [
-      { path: '/', name: 'Home', element: <Navigate to="/dashboards/minimal" /> },
-      { path: '/order-list', name: 'Order', exact: true, element: <Analytical /> },
+      { path: '/', name: 'Home', element: <Navigate to="/home" /> },
+      { path: '/home', name: 'Order', exact: true, element: <Home /> },
+      { path: '/order-list', name: 'Order', exact: true, element: <OrderList /> },
       { path: '/product-list', name: 'Product', exact: true, element: <ProductList /> },
+      { path: '/online-shop', name: 'Order', exact: true, element: <OnlineShop /> },
+      { path: '/payments', name: 'Order', exact: true, element: <Payments /> },
+      { path: '/customers', name: 'Order', exact: true, element: <Customers /> },
+      { path: '/plugins', name: 'Order', exact: true, element: <Plugins /> },
+      { path: '/discounts', name: 'Order', exact: true, element: <Discounts /> },
+      { path: '/setting', name: 'Order', exact: true, element: <Settings /> },
 
       { path: '/dashboards/minimal', name: 'Minimal', exact: true, element: <Minimal /> },
       { path: '/dashboards/analytical', name: 'Analytical', exact: true, element: <Analytical /> },

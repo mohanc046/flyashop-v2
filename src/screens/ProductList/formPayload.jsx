@@ -1,157 +1,139 @@
-import React, { useState } from "react";
-import ReactTable from "react-table-v6";
+import React from "react";
 import "react-table-v6/react-table.css";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap";
-import ComponentCard from "../../components/ComponentCard";
-import * as data from "../../views/tables/ReacTableData";
+import { Button, Card } from "reactstrap";
+import * as Icon from "react-feather";
+import ComponentCardTable from "../../components/ComponentCardTable/ComponentCardTable";
+import CommonTable from "../../components/Table/CommonTable/CommonTable";
+import productImage1 from "../../assets/images/users/user1.jpg";
+import productImage2 from "../../assets/images/users/user2.jpg";
+import productImage3 from "../../assets/images/users/user3.jpg";
+import productImage4 from "../../assets/images/users/user4.jpg";
+import productImage5 from "../../assets/images/users/user5.jpg";
+import Switch from "../../components/Switch/Switch";
+import OutletCard from "../../components/OutletCard/OutletCard";
+import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 
 const ProductList = () => {
-  const [modal, setModal] = useState(false);
-  const [editData, setEditData] = useState(null); // To store data of the row being edited
-  const [jsonData, setJsonData] = useState(data.dataTable); // Load initial data
+  const categories = [
+    "All",
+    "Game & Sports",
+    "Home & Appliances",
+    "Electronics",
+    "Furnitures",
+    "Office Products",
+    "Eye Glass",
+    "Kitchen",
+  ];
 
-  // Toggle the modal
-  const toggle = () => {
-    setModal(!modal);
+  const handleCategorySelect = (category) => {
+    console.log("Selected Category:", category);
   };
 
-  // Handle form submission for editing
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const updatedData = jsonData.map((row, index) =>
-      index === editData.index
-        ? {
-            ...row,
-            item: event.target.item.value,
-            amount: event.target.amount.value,
-            inventory: event.target.inventory.value,
-            status: event.target.status.value,
-          }
-        : row
-    );
-    setJsonData(updatedData);
-    setModal(false);
-  };
+  const productData = [
+    {
+      item_image: productImage1,
+      item_name: "Product 1",
+      inventory: "7",
+      amount: "₹799",
+      status: "active", // Status should be "active" or "hidden"
+    },
+    {
+      item_image: productImage2,
+      item_name: "Product 2",
+      inventory: "3",
+      amount: "₹199",
+      status: "active",
+    },
+    {
+      item_image: productImage3,
+      item_name: "Product 3",
+      inventory: "5",
+      amount: "₹1,499",
+      status: "hidden", // Status should be "active" or "hidden"
+    },
+    {
+      item_image: productImage4,
+      item_name: "Product 4",
+      inventory: "20",
+      amount: "₹120",
+      status: "hidden",
+    },
+    {
+      item_image: productImage5,
+      item_name: "Product 5",
+      inventory: "2",
+      amount: "₹299",
+      status: "active",
+    },
+  ];
 
-  // Prepare data for React Table
-  const data2 = jsonData.map((row, index) => ({
-    ...row,
-    actions: (
-      <div className="text-center">
-        <Button
-          color="inverse"
-          size="sm"
-          onClick={() => {
-            setEditData({ index, ...row });
-            toggle();
-          }}
-        >
-          <i className="fa fa-edit" />
-        </Button>
-      </div>
-    ),
-  }));
+  const columns = [
+    {
+      label: "Item",
+      key: "item_image",
+      render: (value, row) => (
+        <div className="d-flex align-items-center">
+          <img
+            src={value}
+            alt="product"
+            width="45"
+            height="45"
+            className="rounded-circle me-3" // Add some margin to the right of the image
+          />
+          <h5 className="mb-0">{row.item_name}</h5>{" "}
+          {/* Render item name alongside the image */}
+        </div>
+      ),
+    },
+    { label: "Amount", key: "amount" },
+    { label: "Inventory", key: "inventory" },
+    {
+      label: "Status",
+      key: "status",
+      render: (value, row) => (
+        <Switch
+          initialStatus={value} // Ensure value is a string like "active" or "hidden"
+          activeText="Active"
+          hiddenText="Hidden"
+          onToggle={(newStatus) => console.log("New Status: ", newStatus)} // Handle status toggle
+        />
+      ),
+    },
+  ];
 
   return (
-    <div>
-      <div></div>
-      <ComponentCard title="All Products">
-        <ReactTable
-          columns={[
-            {
-              Header: "Item",
-              accessor: "item",
-            },
-            {
-              Header: "Amount",
-              accessor: "amount",
-            },
-            {
-              Header: "Inventory",
-              accessor: "inventory",
-            },
-            {
-              Header: "Status",
-              accessor: "status",
-            },
-            // {
-            //   Header: "Actions",
-            //   accessor: "actions",
-            //   sortable: false,
-            //   filterable: false,
-            // },
-          ]}
-          defaultPageSize={10}
-          showPaginationBottom
-          className="-striped -highlight"
-          data={data2}
-          filterable
+    <OutletCard>
+      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3">
+        <CategoryFilter
+          categories={categories}
+          onSelect={handleCategorySelect}
         />
-      </ComponentCard>
 
-      {/* Edit Modal */}
-      {editData && (
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Edit Product</ModalHeader>
-          <ModalBody>
-            <Form onSubmit={handleSubmit}>
-              <FormGroup>
-                <Label for="item">Item</Label>
-                <Input
-                  type="text"
-                  name="item"
-                  id="item"
-                  defaultValue={editData.item}
-                  required
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="amount">Amount</Label>
-                <Input
-                  type="text"
-                  name="amount"
-                  id="amount"
-                  defaultValue={editData.amount}
-                  required
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="inventory">Inventory</Label>
-                <Input
-                  type="text"
-                  name="inventory"
-                  id="inventory"
-                  defaultValue={editData.inventory}
-                  required
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="status">Status</Label>
-                <Input
-                  type="text"
-                  name="status"
-                  id="status"
-                  defaultValue={editData.status}
-                  required
-                />
-              </FormGroup>
-              <Button type="submit" color="primary">
-                Save Changes
-              </Button>
-            </Form>
-          </ModalBody>
-        </Modal>
-      )}
-    </div>
+        <div className="d-flex align-items-center gap-3">
+          <Button
+            color="secondary"
+            size="sm"
+            className="d-flex align-items-center gap-2"
+          >
+            <Icon.Download size={15} /> Report
+          </Button>
+          <Button
+            color="secondary"
+            size="sm"
+            className="d-flex align-items-center gap-2"
+          >
+            <Icon.PlusCircle size={15} /> Add New Product
+          </Button>
+        </div>
+      </Card>
+
+      <ComponentCardTable
+        title={"Manage Products"}
+        searchPlaceHolder={"Search Product by Name..."}
+      >
+        <CommonTable columns={columns} data={productData} />
+      </ComponentCardTable>
+    </OutletCard>
   );
 };
 

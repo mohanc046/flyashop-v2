@@ -1,0 +1,40 @@
+@import "../../assets/scss/variables";
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 10px;
+  padding: 10px;
+}
+
+.filter-btn {
+  border: 1px solid #ddd;
+  background-color: $white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    padding: 8px 16px; /* Adjust padding for smaller screens */
+    font-size: 13px;   /* Slightly smaller font size */
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px 12px; /* Further adjust for very small screens */
+    font-size: 12px;
+  }
+}
+
+.filter-btn.active {
+  background-color: $primary;
+  color: $white;
+  border-color: $primary;
+}
+
+.filter-btn:hover {
+  background-color: $gray-300;
+  border-color: $primary;
+  color: $black;
+}
