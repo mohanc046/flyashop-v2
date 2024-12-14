@@ -25,11 +25,6 @@ const FullLayout = () => {
     (state) => state.customizer.isSidebarFixed
   );
 
-  const location = useLocation();
-  const getTitle = location.pathname.split("/")[2];
-
-  console.log(getTitle);
-
   return (
     <main>
       <div

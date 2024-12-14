@@ -95,13 +95,13 @@ const SidebarData = [
   //   id: 4.3,
   //   collapisble: false,
   // },
-  {
-    title: "Notes",
-    href: "/apps/notes",
-    icon: <Icon.FileText />,
-    id: 1,
-    collapisble: false,
-  },
+  // {
+  //   title: "Notes",
+  //   href: "/apps/notes",
+  //   icon: <Icon.FileText />,
+  //   id: 1,
+  //   collapisble: false,
+  // },
   // {
   //   title: "Chat",
   //   href: "/apps/chat",

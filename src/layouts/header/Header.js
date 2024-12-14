@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { Navbar, Button } from "reactstrap";
+import { Navbar, Button, Container } from "reactstrap";
 import * as Icon from "react-feather";
 
 import {
@@ -9,11 +9,13 @@ import {
   ToggleMobileSidebar,
 } from "../../store/customizer/CustomizerSlice";
 import Logo from "../logo/Logo";
+import "./Header.scss";
 
 const Header = () => {
   const isDarkMode = useSelector((state) => state.customizer.isDark);
   const topbarColor = useSelector((state) => state.customizer.topbarBg);
   const dispatch = useDispatch();
+  const title = useSelector((state) => state.headerTitle.title);
 
   return (
     <Navbar
@@ -26,7 +28,7 @@ const Header = () => {
       {/******************************/}
       {/**********Toggle Buttons**********/}
       {/******************************/}
-      <div className="d-flex align-items-center">
+      <div className="d-flex flex-row align-items-center">
         <Button
           color={topbarColor}
           className="d-none d-lg-block"
@@ -44,11 +46,8 @@ const Header = () => {
         >
           <Icon.Menu size={22} />
         </Button>
+        <h5 className="title">{title}</h5>
       </div>
-
-      {/******************************/}
-      {/**********Left Nav Bar**********/}
-      {/******************************/}
     </Navbar>
   );
 };

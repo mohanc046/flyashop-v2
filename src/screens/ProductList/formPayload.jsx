@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "react-table-v6/react-table.css";
 import { Button, Card } from "reactstrap";
 import * as Icon from "react-feather";
@@ -12,8 +12,11 @@ import productImage5 from "../../assets/images/users/user5.jpg";
 import Switch from "../../components/Switch/Switch";
 import OutletCard from "../../components/OutletCard/OutletCard";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../store/reducers/headerTitleSlice";
 
 const ProductList = () => {
+  const dispatch = useDispatch();
   const categories = [
     "All",
     "Game & Sports",
@@ -28,6 +31,10 @@ const ProductList = () => {
   const handleCategorySelect = (category) => {
     console.log("Selected Category:", category);
   };
+
+  useEffect(() => {
+    dispatch(setTitle("All Products"));
+  }, []);
 
   const productData = [
     {
