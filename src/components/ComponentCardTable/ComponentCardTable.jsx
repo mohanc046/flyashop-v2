@@ -23,7 +23,7 @@ const ComponentCardTable = ({
         {title}
       </CardTitle>
       <Card className="bg-white">
-        <div className="d-flex justify-content-between align-items-center px-3 py-3 border-bottom">
+        <div className="d-flex justify-content-between align-items-center px-1 py-3 border-bottom">
           <div className="me-3">
             <SearchInput
               placeholder={searchPlaceHolder}

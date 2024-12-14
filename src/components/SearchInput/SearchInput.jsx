@@ -1,19 +1,20 @@
 import React from "react";
 import { Form, Input } from "reactstrap";
+import "./SearchInput.scss";
 
 const SearchInput = ({
   placeholder = "Search...",
   onChange,
   value,
   inputId = "searchInput",
-  inputName = "searchInput",
+  inputName = "searchInput"
 }) => {
   return (
-    <div className="">
+    <div>
       <Form>
         <div className="position-relative has-icon-left">
           <Input
-            className="form-control"
+            className="form-control search-container"
             id={inputId}
             name={inputName}
             type="text"
