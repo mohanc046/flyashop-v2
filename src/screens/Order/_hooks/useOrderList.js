@@ -6,7 +6,6 @@ import productImage4 from "../../../assets/images/users/user4.jpg";
 import productImage5 from "../../../assets/images/users/user5.jpg";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
-import Switch from "../../../components/Switch/Switch";
 
 export const useOrder = () => {
   const dispatch = useDispatch();

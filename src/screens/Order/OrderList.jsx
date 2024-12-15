@@ -1,12 +1,13 @@
 import React from "react";
 import "react-table-v6/react-table.css";
-import { Button, Card } from "reactstrap";
+import { Card } from "reactstrap";
 import * as Icon from "react-feather";
 import ComponentCardTable from "../../components/ComponentCardTable/ComponentCardTable";
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
 import OutletCard from "../../components/OutletCard/OutletCard";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import { useOrder } from "./_hooks/useOrderList";
+import Button from "../../components/Button/Button";
 
 const OrderList = () => {
   const { categories, handleCategorySelect, columns, orderData } = useOrder();
@@ -17,9 +18,7 @@ const OrderList = () => {
         <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
 
         <div className="d-flex align-items-center gap-3 bg-white">
-          <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
-            <Icon.Download size={15} /> Report
-          </Button>
+          <Button label="Report" icon={<Icon.Download size={15} />} />
         </div>
       </Card>
 

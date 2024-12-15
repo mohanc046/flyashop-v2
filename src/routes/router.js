@@ -7,10 +7,10 @@ const FullLayout = Loadable(lazy(() => import("../layouts/FullLayout")));
 const BlankLayout = Loadable(lazy(() => import("../layouts/BlankLayout")));
 /***** Pages ****/
 
-const Home = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
+const Home = Loadable(lazy(() => import("../screens/Home/Home")));
 const OrderList = Loadable(lazy(() => import("../screens/Order/OrderList")));
 const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
-const OnlineShop = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
+const OnlineShop = Loadable(lazy(() => import("../screens/OnlineShop/OnlineShop")));
 const Payments = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
 const Customers = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
 const Plugins = Loadable(lazy(() => import("../screens/ProductList/ProductList")));

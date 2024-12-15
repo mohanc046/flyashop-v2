@@ -1,4 +1,11 @@
-  .dataTableMargin {
+@import "../../assets/scss/variables"; 
+ 
+.button-container {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+ .dataTableMargin {
     margin-right: 3%;
   }
 

@@ -1,0 +1,44 @@
+@import "../../assets/scss/variables";
+
+/* Basic button styles */
+.button-container {
+    padding: 6px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid $primary;
+    border-radius: 50px;
+    background-color: $white;
+    color: $primary;
+    width: fit-content;
+    min-width: max-content;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-container:hover {
+    background-color: $primary;
+    color: $white;
+
+    .button {
+      color: $white;
+    }
+  }
+  
+  /* Disabled button styles */
+  .button-disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  /* Loading spinner */
+  .spinner-border {
+    margin-right: 10px;
+  }
+
+  .button {
+    background-color: transparent;
+    border: none;
+    color: $primary;
+  }
+  
+  /* You can customize the .btn class further based on your design system */
+  

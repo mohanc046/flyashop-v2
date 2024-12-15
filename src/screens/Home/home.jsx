@@ -1,77 +1,38 @@
-import React, { useEffect } from 'react';
-
-import { AppSidebar, AppFooter, AppHeader } from '../../components/index'
-
-import './home.css';
-
-import { Toaster } from 'react-hot-toast';
-
-import _ from 'lodash';
-
-import { useStoreState, useStoreActions } from '../../store/hooks';
-
-
-import { capitalizeFirstLetter, isMobileView } from '../../utils';
-
-import HomeMobile from './home.mobile';
-
-import { HomeDesktopUI } from './home.desktop';
+import React from "react";
+import "react-table-v6/react-table.css";
+import { Card } from "reactstrap";
+import OutletCard from "../../components/OutletCard/OutletCard";
+import "./Home.scss";
+import Button from "../../components/Button/Button";
+import { useHome } from "./_hooks/useHome";
+import { Eye } from "react-feather";
+import AnalyticsCard from "./components/AnalyticsCard";
 
 const Home = () => {
+  const {} = useHome();
 
-  const userInfo = useStoreState(state => state.user); 
+  return (
+    <OutletCard>
+      <Card className="d-flex flex-column justify-content-between flex-row flex-wrap gap-3 bg-white">
+        <div className="d-flex flex-column gap-3 bg-white mt-3">
+          <div className="heading-container">
+            <h3>Hi, Althaf Hussain!</h3>
+          </div>
+          <h4 className="description">
+            Your Store is Active Now. Customers can visit the following shop link and place their
+            orders.
+          </h4>
+          <Card className="store-lnk-container">
+            <Card className="lnk-container">
+              <h2 className="lnk-text">Shop Link : http://localhost:3000/store/ecommerce</h2>
+              <Button label="Visit" icon={<Eye size={20} />} />
+            </Card>
+          </Card>
+          <AnalyticsCard />
+        </div>
+      </Card>
+    </OutletCard>
+  );
+};
 
-  const { firstName, lastName, existingStoreInfo = [] } = userInfo.data;
-
-  const storeInfo = _.get(existingStoreInfo, "[0].store") || {};
-
-  const { businessName = "", _id: storeId = "", addressInfo = {} } = storeInfo || {}
-
-  const userName = _.isEmpty(firstName) ? "Welcome" : `${firstName} ${lastName}`;
-
-  const storeLink = `${window.location?.origin}/store/${businessName}`;
-
-  const greetings = `Hi, ${capitalizeFirstLetter(businessName)}`;
-
-  let updateHomePageOrders = useStoreActions(action => action.adminOrder.updateHomePageOrders);
-
-  let updateStoreAddressInformation = useStoreActions(action => action.user.updateStoreAddressInformation);
-
-  const resetOrderState = () => {
-    updateHomePageOrders({
-      orderList: [],
-      totalOrderCount: 0,
-      isLoaderEnabled: false,
-      currentPage: 0,
-      totalPages: 1
-    })
-  }
-
-  useEffect(() => {
-    resetOrderState()
-    return () => {
-      resetOrderState()
-    }
-  }, [])
-
-  return (isMobileView() ? <HomeMobile
-    userName={userName}
-    storeLink={storeLink}
-    greetings={greetings}
-    storeName={businessName}
-  /> :
-
-    <HomeDesktopUI
-      userName={userName}
-      storeLink={storeLink}
-      greetings={greetings}
-      storeName={businessName}
-      addressInfo={addressInfo}
-      storeId={storeId}
-      updateStoreAddressInformation={updateStoreAddressInformation}
-    />
-   
-  )
-}
-
-export default Home
+export default Home;

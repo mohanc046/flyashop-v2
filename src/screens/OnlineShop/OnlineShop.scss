@@ -1,3 +1,25 @@
+.heading-container {
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    gap: 100px;
+    justify-content: space-between;
+
+    h3 {
+        font-weight: 500;
+        margin-top: 5px;
+    }
+}
+
+.description {
+    font-size: 15px;
+}
+
+.banners-count-title {
+    font-weight: 400;
+    font-size: 17px;
+}
+
 .bannerBox {
     height: 170px;
     width: 170px;
