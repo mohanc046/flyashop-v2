@@ -7,16 +7,18 @@ import Button from "../../components/Button/Button";
 import { useHome } from "./_hooks/useHome";
 import { Eye } from "react-feather";
 import AnalyticsCard from "./components/AnalyticsCard";
+import PendingOrders from "./components/PendingOrders";
+import QuickLinks from "./components/QuickLinks";
 
 const Home = () => {
   const {} = useHome();
 
   return (
     <OutletCard>
-      <Card className="d-flex flex-column justify-content-between flex-row flex-wrap gap-3 bg-white">
+      {/* <Card className="d-flex flex-column justify-content-between flex-row flex-wrap gap-3 bg-white">
         <div className="d-flex flex-column gap-3 bg-white mt-3">
           <div className="heading-container">
-            <h3>Hi, Althaf Hussain!</h3>
+            <h3 className="welcomeUser">Hi, Althaf Hussain!</h3>
           </div>
           <h4 className="description">
             Your Store is Active Now. Customers can visit the following shop link and place their
@@ -29,8 +31,12 @@ const Home = () => {
             </Card>
           </Card>
           <AnalyticsCard />
+          <div className="bottom-view">
+            <PendingOrders />
+            <QuickLinks />
+          </div>
         </div>
-      </Card>
+      </Card> */}
     </OutletCard>
   );
 };

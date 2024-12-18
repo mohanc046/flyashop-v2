@@ -5,7 +5,7 @@ import "./DashCard.scss";
 const DashCard = ({ children, title, subtitle, actions }) => {
   return (
     <Card className='dashCard-container'>
-      <CardBody >
+      <CardBody className='py-0'>
         <div className="d-md-flex">
           <div>
             <CardTitle tag="h4">{title}</CardTitle>

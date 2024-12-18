@@ -11,9 +11,9 @@ const Home = Loadable(lazy(() => import("../screens/Home/Home")));
 const OrderList = Loadable(lazy(() => import("../screens/Order/OrderList")));
 const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
 const OnlineShop = Loadable(lazy(() => import("../screens/OnlineShop/OnlineShop")));
-const Payments = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
-const Customers = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
-const Plugins = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
+const Payments = Loadable(lazy(() => import("../screens/UserPayment/Payments")));
+const Customers = Loadable(lazy(() => import("../screens/Customer/Customer")));
+const Plugins = Loadable(lazy(() => import("../screens/UserPlugins/Plugins")));
 const Discounts = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
 const Settings = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
 

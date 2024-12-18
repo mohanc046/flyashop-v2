@@ -12,18 +12,15 @@ const ComponentCardTable = ({
   searchOnChange,
   searchValue,
   searchInputId,
-  searchInputName,
+  searchInputName
 }) => {
   return (
     <Card className="bg-white">
-      <CardTitle
-        tag="h4"
-        className={title ? "border-bottom py-3 mb-0" : ""}
-      >
+      <CardTitle tag="h4" className={title ? "border-bottom py-3 mb-0" : ""}>
         {title}
       </CardTitle>
       <Card className="bg-white">
-        <div className="d-flex justify-content-between align-items-center px-1 py-3 border-bottom">
+        <div className="d-flex justify-content-between align-items-center px-1 py-3 flex-wrap gap-3 border-bottom">
           <div className="me-3">
             <SearchInput
               placeholder={searchPlaceHolder}
@@ -34,18 +31,10 @@ const ComponentCardTable = ({
             />
           </div>
           <div className="d-flex gap-2">
-            <Button
-              color="secondary"
-              size="sm"
-              className="d-flex align-items-center gap-2"
-            >
+            <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
               <Icon.ChevronUp size={15} /> Sort
             </Button>
-            <Button
-              color="secondary"
-              size="sm"
-              className="d-flex align-items-center gap-2"
-            >
+            <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
               <Icon.Filter size={15} />
               Filter
             </Button>
@@ -54,9 +43,7 @@ const ComponentCardTable = ({
       </Card>
 
       <CardBody className="py-0 px-0 bg-white">
-        <CardSubtitle className="text-muted mb-3">
-          {subtitle || ""}
-        </CardSubtitle>
+        <CardSubtitle className="text-muted mb-3">{subtitle || ""}</CardSubtitle>
         <div className="bg-white">{children}</div>
       </CardBody>
     </Card>
@@ -71,7 +58,7 @@ ComponentCardTable.propTypes = {
   searchOnChange: PropTypes.func,
   searchValue: PropTypes.string,
   searchInputId: PropTypes.string,
-  searchInputName: PropTypes.string,
+  searchInputName: PropTypes.string
 };
 
 export default ComponentCardTable;

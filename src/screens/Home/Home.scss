@@ -27,12 +27,32 @@
   margin: 0;
 }
 
-.lnk-btn {
-
+.count-text {
+  font-size: 30px;
+  color: $black;
+  font-weight: 400;
+  margin: 0;
 }
 
-.DefaultMarginBottom {
-  margin-bottom: 5%;
+.card-title-text {
+  font-size: 15px;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.card-icon {
+  color: $primary;
+}
+
+.percentage-text {
+  font-size: 13px;
 }
 
 .welcomeUser {
@@ -44,325 +64,20 @@
   margin-right: 6px;
 }
 
-.description {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 19px;
-  letter-spacing: 0em;
-  text-align: left;
-}
-
-.whiteBgColor {
-  background-color: #ffffff;
-  min-height: 112vh;
-}
-
-.blackColorDash {
-  color: #484848;
-}
-
-.urlContainer {
-  flex: 1;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(179, 245, 191, 0.50);
-  align-items: center;
+.bottom-view {
   display: flex;
-  gap: 30px;
+  width: 100%;
 }
 
-.customize-container {
-  border-radius: 12px;
-  border: 2px solid rgba(179, 245, 191, 0.50);
-  background: var(--White, #FFF);
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 250px;
-  margin-left: 14px;
-  flex-direction: column;
-}
-
-.customize-container .line1 {
-  color: #040415;
-  font-size: 18px;
-  font-style: normal;
+.list-heading {
+  font-size: 20px;
   font-weight: 500;
-  line-height: 28px;
-}
-
-.customize-container .line2 {
-  color: #040415;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px;
-}
-
-.urlShopLabel {
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18.5px;
-}
-
-.visitButtonContainer {
-  padding: 5px;
-  margin: 4px;
-  border-radius: 300px;
-  background: #6E3BFF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  height: 48px;
-  padding: 0 18px;
-}
-
-.visitButtonContainer label {
-  font-size: 13px;
-  font-weight: 800;
-  margin-right: 4px;
-  cursor: pointer;
-  color: white;
-}
-
-.circle-layout-link {
-  display: flex;
-  justify-content: space-between;
-  width: 75%;
-  border: 1px solid #dfdfdf;
-  align-items: center;
-  padding: 0px;
-  padding-left: 23px;
-  background: #ffffff;
-  border-radius: 30px;
-  flex: 1;
-}
-
-.share-container {
-  color: #262626;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 38px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.share-container .icons {
-  display: flex;
-  gap: 21px;
-}
-
-.share-container .icons img {
-  width: 28px;
-  height: 28px;
-}
-
-.totalReceivedCardViewContainer {
-  height: 72px;
-  top: 255px;
-  padding: 16px;
-  border-radius: 40px;
-  gap: 12px;
-  background: #E1EBF3;
-  margin: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.totalOrderReceivedLabelContainer {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #000000;
-}
-
-.totalOrderReceivedDescriptionLabelContainer {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #6E3BFF;
-}
-
-.totalReceivedLeftViewCard {
-  width: 15%;
-}
-
-.totalReceivedRightViewCard {
-  width: 80%;
-}
-
-.progressViewContainer {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  justify-items: center;
-}
-
-.progressPercentViewLabel {
-  margin-bottom: 8px;
-}
-
-.totalItemsSoldCardViewContainer {
-  top: 113px;
-  padding: 12px 16px 12px 16px;
-  border-radius: 14px;
-  gap: 8px;
-  border: 1px solid #EAECF0;
-  background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(0deg, #EAECF0, #EAECF0);
-  margin: 15px;
-}
-
-.totalItemSoldTopViewContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.totalSalesLabel {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #040415;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.totalItemsLeftContainer {
-  width: 10%;
-}
-
-.totalItemsCenterContainer {
-  width: 60%;
-}
-
-.totalItemsRightContainer {
-  width: 30%;
-}
-
-.totalSalesInDaysLabel {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #000000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-.totalSalesCostLabel {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0px;
-  text-align: right;
-  color: #000000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.salesLineProgressContainer {
-  margin-top: 10px;
-}
-
-.stats-container {
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 12px;
-  margin-top: 17px;
-  border: 1px solid rgba(179, 245, 191, 0.50);
-}
-
-.stats-container .stats-card {
-  padding: 0 38px;
-}
-
-.stats-container .stats-card:first-child {
-  padding-left: 0;
-}
-
-.stats-container .stats-card:last-child {
-  padding-right: 0;
-}
-
-.stats-container .stats-card+.stats-card {
-  border-left: 1px solid rgba(179, 245, 191, 0.50);
-}
-
-.stats-container .stats-card .details .count {
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 42px;
-  margin-bottom: 0;
-}
-
-.stats-container .stats-card .details .label {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  margin-bottom: 0;
-}
-
-.stats-container .stats-card .img-container {
-  border-radius: 12px;
-  padding: 10px;
-  height: 44px;
-  width: 44px;
-  box-shadow: 0px 2px 10px 0px rgba(124, 141, 181, 0.12);
-}
-
-.stats-container .stats-card .bottom {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-}
-
-.stats-container .stats-card .bottom .icon {
-  height: 16px;
-  width: 16px;
-  margin-left: 4px;
-}
-
-.stats-container .stats-card .bottom .count {
-  color: #A8A8A8;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
-  margin-left: 10px;
-}
-
-.stats-container .stats-card .bottom .percentage {
-  color: #A8A8A8;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
-  margin-left: 12px;
 }
 
 .lists-container {
+  max-width: 50%;
   margin-top: 36px;
-  width: 48.5%;
+  width: 100%;
 }
 
 .lists-container .top {

@@ -9,14 +9,15 @@ import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import { useProductList } from "./_hooks/useProductList";
 import Button from "../../components/Button/Button";
 import "./ProductList.scss";
+import { productCategories } from "./ProductList.constants";
 
 const ProductList = () => {
-  const { categories, handleCategorySelect, columns, productData } = useProductList();
+  const { handleCategorySelect, columns, productData } = useProductList();
 
   return (
     <OutletCard>
       <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-white">
-        <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
+        <CategoryFilter categories={productCategories} onSelect={handleCategorySelect} />
 
         <div className="d-flex align-items-center gap-3 bg-white flex-wrap">
           <Button label="Report" icon={<Icon.Download size={15} />} />

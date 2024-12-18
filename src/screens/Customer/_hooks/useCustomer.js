@@ -8,8 +8,9 @@ import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import Switch from "../../../components/Switch/Switch";
 
-export const useProductList = () => {
+export const useCustomer = () => {
   const dispatch = useDispatch();
+  const categories = ["All"];
 
   const handleCategorySelect = (category) => {
     console.log("Selected Category:", category);
@@ -91,6 +92,7 @@ export const useProductList = () => {
   ];
 
   return {
+    categories,
     handleCategorySelect,
     productData,
     columns,
