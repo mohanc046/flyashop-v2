@@ -15,11 +15,11 @@ const ComponentCardTable = ({
   searchInputName
 }) => {
   return (
-    <Card className="bg-white">
+    <Card className="bg-light">
       <CardTitle tag="h4" className={title ? "border-bottom py-3 mb-0" : ""}>
         {title}
       </CardTitle>
-      <Card className="bg-white">
+      <Card className="bg-light">
         <div className="d-flex justify-content-between align-items-center px-1 py-3 flex-wrap gap-3 border-bottom">
           <div className="me-3">
             <SearchInput

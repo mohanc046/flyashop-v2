@@ -14,10 +14,10 @@ const OrderList = () => {
 
   return (
     <OutletCard>
-      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-white">
+      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-light">
         <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
 
-        <div className="d-flex align-items-center gap-3 bg-white">
+        <div className="d-flex align-items-center gap-3 bg-light">
           <Button label="Report" icon={<Icon.Download size={15} />} />
         </div>
       </Card>

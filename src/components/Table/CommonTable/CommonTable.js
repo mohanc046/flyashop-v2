@@ -5,7 +5,7 @@ import "./CommonTable.scss";
 
 const CommonTable = ({ title, columns, data }) => {
   return (
-    <div className="bg-white">
+    <div className="bg-white rounded p-3">
       {title && (
         <CardTitle tag="h4" className="border-bottom pb-3 mb-0">
           {title}
@@ -15,9 +15,7 @@ const CommonTable = ({ title, columns, data }) => {
         <thead>
           <tr>
             {columns.map((column) => (
-              <th key={column.key} className="">
-                {column.label}
-              </th>
+              <th key={column.key}>{column.label}</th>
             ))}
           </tr>
         </thead>
@@ -26,9 +24,7 @@ const CommonTable = ({ title, columns, data }) => {
             <tr key={rowIndex} className="border-top">
               {columns.map((column) => (
                 <td key={column.key}>
-                  {column.render
-                    ? column.render(row[column.key], row)
-                    : row[column.key]}
+                  {column.render ? column.render(row[column.key], row) : row[column.key]}
                 </td>
               ))}
             </tr>
@@ -45,10 +41,10 @@ CommonTable.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired, // Column header
       key: PropTypes.string.isRequired, // Key to map row data
-      render: PropTypes.func, // Optional custom render function
+      render: PropTypes.func // Optional custom render function
     })
   ).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default CommonTable;

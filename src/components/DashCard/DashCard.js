@@ -1,11 +1,10 @@
-import { Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-import PropTypes from 'prop-types';
-import "./DashCard.scss";
+import { Card, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import PropTypes from "prop-types";
 
 const DashCard = ({ children, title, subtitle, actions }) => {
   return (
-    <Card className='dashCard-container'>
-      <CardBody className='py-0'>
+    <Card className="bg-white rounded">
+      <CardBody>
         <div className="d-md-flex">
           <div>
             <CardTitle tag="h4">{title}</CardTitle>
@@ -23,7 +22,7 @@ DashCard.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  actions: PropTypes.node,
+  actions: PropTypes.node
 };
 
 export default DashCard;

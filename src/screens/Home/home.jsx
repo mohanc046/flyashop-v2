@@ -2,19 +2,17 @@ import React from "react";
 import "react-table-v6/react-table.css";
 import { Card, Col } from "reactstrap";
 import OutletCard from "../../components/OutletCard/OutletCard";
-import Button from "../../components/Button/Button";
 import { useHome } from "./_hooks/useHome";
-import { Eye } from "react-feather";
 import AnalyticsCard from "./components/AnalyticsCard";
-import VisitCard from "./components/VisitCard";
+import CommonTable from "../../components/Table/CommonTable/CommonTable";
 
 const Home = () => {
-  const {} = useHome();
+  const { columns, orderData } = useHome();
 
   return (
     <OutletCard>
       <Card
-        className="d-flex flex-column gap-4 bg-white p-0"
+        className="d-flex flex-column gap-4 bg-light p-0"
         style={{
           maxHeight: "100vh",
           overflowY: "auto",
@@ -30,7 +28,7 @@ const Home = () => {
 
         <div className="d-flex flex-wrap justify-content-between align-items-start">
           <Col lg={12} md={12}>
-            <VisitCard />
+            <CommonTable columns={columns} data={orderData} title={"Orders"} />
           </Col>
         </div>
       </Card>
