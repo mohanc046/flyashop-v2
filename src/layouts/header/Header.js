@@ -36,9 +36,9 @@ const Header = () => {
         >
           <Icon.Menu size={22} />
         </Button>
-        <div href="/" className="d-sm-flex d-lg-none">
+        {/* <div href="/" className="d-sm-flex d-lg-none">
           <Logo />
-        </div>
+        </div> */}
         <Button
           color={topbarColor}
           className="d-sm-block d-lg-none"

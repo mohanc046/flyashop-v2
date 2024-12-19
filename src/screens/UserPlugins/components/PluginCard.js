@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, CardBody, CardTitle } from "reactstrap";
 
-const PluginCard = ({ details = [] }) => {
+const PluginCard = ({ details = [], toggle }) => {
   return (
     <Card className="w-100 bg-white shadow-sm border rounded">
       <CardBody className="d-flex align-items-center">
@@ -15,7 +15,13 @@ const PluginCard = ({ details = [] }) => {
           </div>
         </div>
         <div className="ms-auto p-3">
-          <Button color="primary">Install</Button>
+          <Button
+            color="primary"
+            onClick={() => {
+              toggle(details.title);
+            }}>
+            Install
+          </Button>
         </div>
       </CardBody>
     </Card>

@@ -1,15 +1,18 @@
 import React from "react";
 import "react-table-v6/react-table.css";
-import { Card, Col, Row } from "reactstrap";
+import { Card, Col, Modal, ModalHeader, Row } from "reactstrap";
 import OutletCard from "../../components/OutletCard/OutletCard";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import "./Plugins.scss";
 import { usePlugins } from "./_hooks/usePlugins";
 import { pluginDetails, pluginsCategories } from "./Plugins.constants";
 import PluginCard from "./components/PluginCard";
+import TawkModal from "./components/TawkModal";
+import GoogleAnalyticsModal from "./components/GoogleAnalyticsModal";
+import WhatsAppModal from "./components/WhatsAppModal";
 
 const Plugins = () => {
-  const { handleCategorySelect } = usePlugins();
+  const { handleCategorySelect, toggle, currentPlugin, modal } = usePlugins();
 
   return (
     <OutletCard>
@@ -18,11 +21,21 @@ const Plugins = () => {
         <Row className="d-flex flex-wrap mt-4">
           {pluginDetails.map((plugin, index) => (
             <Col ls="4" key={index}>
-              <PluginCard details={plugin} />
+              <PluginCard details={plugin} toggle={toggle} />
             </Col>
           ))}
         </Row>
       </Card>
+      <Modal isOpen={modal} toggle={toggle} size="md">
+        <ModalHeader toggle={toggle}>{currentPlugin.toString()}</ModalHeader>
+        {currentPlugin === "Tawk.To : Live Chat" ? (
+          <TawkModal />
+        ) : currentPlugin === "Google Analytics" ? (
+          <GoogleAnalyticsModal />
+        ) : currentPlugin === "WhatsApp" ? (
+          <WhatsAppModal />
+        ) : null}
+      </Modal>
     </OutletCard>
   );
 };

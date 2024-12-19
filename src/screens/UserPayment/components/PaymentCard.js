@@ -1,7 +1,21 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Button, Card, CardBody, CardTitle } from "reactstrap";
+import { showToast } from "../../../store/reducers/toasterSlice";
 
 const PaymentCard = ({ details = [] }) => {
+  const dispatch = useDispatch();
+
+  const handleShowToast = () => {
+    dispatch(
+      showToast({
+        type: "success",
+        title: "Success",
+        message: "This is a success message!"
+      })
+    );
+  };
+
   return (
     <Card className="w-100 bg-white shadow-sm border rounded">
       <CardBody className="d-flex align-items-center">
@@ -15,7 +29,9 @@ const PaymentCard = ({ details = [] }) => {
           </div>
         </div>
         <div className="ms-auto p-3">
-          <Button color="primary">Setup</Button>
+          <Button color="primary" onClick={handleShowToast}>
+            Setup
+          </Button>
         </div>
       </CardBody>
     </Card>
