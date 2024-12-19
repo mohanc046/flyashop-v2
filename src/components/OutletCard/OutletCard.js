@@ -5,7 +5,7 @@ import "./OutletCard.scss";
 const OutletCard = ({ children, title, subtitle }) => {
   return (
     <Card className="bg-white outlet-container">
-      <CardTitle tag="h4" className={title ? "border-bottom px-4 py-3 mb-0" : ""}>
+      <CardTitle tag="h4" className={title ? "border-bottom px-4 py-0 mb-0" : ""}>
         {title}
       </CardTitle>
 

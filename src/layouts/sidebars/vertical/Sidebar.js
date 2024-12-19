@@ -8,9 +8,8 @@ import Logo from "../../logo/Logo";
 import { ToggleMobileSidebar } from "../../../store/customizer/CustomizerSlice";
 import NavItemContainer from "./NavItemContainer";
 import NavSubMenu from "./NavSubMenu";
-import { isMobileView } from "../../../utils/utils";
 
-const Sidebar = () => {
+const Sidebar = ({ showMobileSidebar }) => {
   const location = useLocation();
   const currentURL = location.pathname.split("/").slice(0, -1).join("/");
 
@@ -28,8 +27,8 @@ const Sidebar = () => {
       <SimpleBar style={{ height: "100%" }}>
         {/********Logo*******/}
         <div className="d-flex p-3 align-items-center">
-          {isMobileView ? <Logo /> : null}
-          {isMobileView ? (
+          <Logo />
+          {window.innerWidth <= 768 ? (
             <Button
               close
               size="sm"

@@ -25,7 +25,7 @@ const FullLayout = () => {
           ""
         ) : (
           <aside className={`sidebarArea ${showMobileSidebar ? "showSidebar" : ""}`}>
-            <Sidebar />
+            <Sidebar showMobileSidebar={showMobileSidebar} />
           </aside>
         )}
         {/********Content Area**********/}
