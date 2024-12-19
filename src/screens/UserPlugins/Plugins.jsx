@@ -16,7 +16,7 @@ const Plugins = () => {
 
   return (
     <OutletCard>
-      <Card className="d-flex justify-content-between flex-column flex-wrap bg-white">
+      <Card className="d-flex justify-content-between flex-column flex-wrap bg-light">
         <CategoryFilter categories={pluginsCategories} onSelect={handleCategorySelect} />
         <Row className="d-flex flex-wrap mt-4">
           {pluginDetails.map((plugin, index) => (

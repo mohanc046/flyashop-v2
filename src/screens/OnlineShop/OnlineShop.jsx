@@ -13,10 +13,10 @@ const OnlineShop = () => {
 
   return (
     <OutletCard>
-      <Card className="d-flex flex-column justify-content-between flex-row flex-wrap gap-3 bg-white">
+      <Card className="d-flex flex-column justify-content-between flex-row flex-wrap gap-3 bg-light">
         <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
 
-        <div className="d-flex flex-column gap-3 bg-white mt-3">
+        <div className="d-flex flex-column gap-3 bg-light mt-3">
           <div className="heading-container">
             <h3>Promotional Banners</h3>
             <Switch

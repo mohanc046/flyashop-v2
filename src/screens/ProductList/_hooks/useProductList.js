@@ -7,9 +7,11 @@ import productImage5 from "../../../assets/images/users/user5.jpg";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import Switch from "../../../components/Switch/Switch";
+import { useNavigate } from "react-router-dom";
 
 export const useProductList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleCategorySelect = (category) => {
     console.log("Selected Category:", category);
@@ -90,10 +92,15 @@ export const useProductList = () => {
     }
   ];
 
+  const handleNavigateAddproduct = () => {
+    navigate("/product-list/add-product");
+  };
+
   return {
     handleCategorySelect,
     productData,
     columns,
-    dispatch
+    dispatch,
+    handleNavigateAddproduct
   };
 };

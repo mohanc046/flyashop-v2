@@ -12,7 +12,7 @@ const Plugins = () => {
 
   return (
     <OutletCard>
-      <Card className="d-flex justify-content-between flex-column flex-wrap gap-3 bg-white">
+      <Card className="d-flex justify-content-between flex-column flex-wrap gap-3 bg-light">
         <CardTitle tag="h4" className="mb-0">
           Payments
         </CardTitle>

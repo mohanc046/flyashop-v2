@@ -12,16 +12,20 @@ import "./ProductList.scss";
 import { productCategories } from "./ProductList.constants";
 
 const ProductList = () => {
-  const { handleCategorySelect, columns, productData } = useProductList();
+  const { handleCategorySelect, columns, productData, handleNavigateAddproduct } = useProductList();
 
   return (
     <OutletCard>
-      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-white">
+      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-light">
         <CategoryFilter categories={productCategories} onSelect={handleCategorySelect} />
 
-        <div className="d-flex align-items-center gap-3 bg-white flex-wrap">
+        <div className="d-flex align-items-center gap-3 bg-light flex-wrap">
           <Button label="Report" icon={<Icon.Download size={15} />} />
-          <Button label="Add New Product" icon={<Icon.PlusCircle size={15} />} />
+          <Button
+            label="Add New Product"
+            icon={<Icon.PlusCircle size={15} />}
+            onClick={handleNavigateAddproduct}
+          />
         </div>
       </Card>
 
