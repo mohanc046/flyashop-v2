@@ -15,7 +15,7 @@ const Payments = Loadable(lazy(() => import("../screens/UserPayment/Payments")))
 const Customers = Loadable(lazy(() => import("../screens/Customer/Customer")));
 const Plugins = Loadable(lazy(() => import("../screens/UserPlugins/Plugins")));
 const Discounts = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
-const Settings = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
+const Settings = Loadable(lazy(() => import("../screens/Settings/Settings")));
 
 const Minimal = Loadable(lazy(() => import("../views/dashboards/Minimal")));
 const Analytical = Loadable(lazy(() => import("../views/dashboards/Analytical")));

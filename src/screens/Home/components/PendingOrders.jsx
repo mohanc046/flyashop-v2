@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Button, Card } from "reactstrap";
-import "../Home.scss";
 
 const pendingOrders = [
   { id: 1, name: "sample", days: 49 },
@@ -11,32 +10,26 @@ const pendingOrders = [
 
 const PendingOrders = () => {
   return (
-    <div className="lists-container">
-      <Col md={10} className="list shadow-sm rounded">
-        <h4 className="list-heading">Pending Orders({pendingOrders.length})</h4>
-        <Card className="p-3 bg-white">
+    <div className="container py-4">
+      <Col md={10} className="mx-auto">
+        <h4 className="mb-4">Pending Orders ({pendingOrders.length})</h4>
+        <Card className="p-3 bg-white shadow-sm rounded">
           {pendingOrders.map((order) => (
-            <Row
-              key={order.id}
-              className="d-flex align-items-center mb-3 border-bottom pb-3 list-card">
-              <Col xs={2}>
+            <Row key={order.id} className="d-flex align-items-center mb-3 border-bottom pb-3">
+              <Col xs={2} className="d-flex justify-content-center">
                 <div
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    backgroundColor: "#ddd"
-                  }}></div>
+                  className="rounded-circle bg-secondary"
+                  style={{ width: "40px", height: "40px" }}></div>
               </Col>
               <Col xs={6}>
                 <strong>{order.name}</strong>
-                <div style={{ fontSize: "12px", color: "#777" }}>{order.days} days ago</div>
+                <div className="text-muted small">{order.days} days ago</div>
               </Col>
               <Col xs={4} className="d-flex justify-content-end">
-                <Button variant="link" className="text-dark">
+                <Button color="link" className="text-decoration-none">
                   Reject
                 </Button>
-                <Button variant="primary" className="ms-2">
+                <Button color="primary" className="ms-2">
                   Accept
                 </Button>
               </Col>
