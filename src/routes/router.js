@@ -7,6 +7,7 @@ const FullLayout = Loadable(lazy(() => import("../layouts/FullLayout")));
 const BlankLayout = Loadable(lazy(() => import("../layouts/BlankLayout")));
 /***** Pages ****/
 
+const Landing = Loadable(lazy(() => import("../screens/Statistics/Statistics")));
 const Home = Loadable(lazy(() => import("../screens/Home/Home")));
 const OrderList = Loadable(lazy(() => import("../screens/Order/OrderList")));
 const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
@@ -117,11 +118,16 @@ const ThemeRoutes = [
     path: "/",
     element: <FullLayout />,
     children: [
-      { path: "/", name: "Home", element: <Navigate to="/home" /> },
+      { path: "/", name: "Home", element: <Navigate to="/landing" /> },
       { path: "/home", name: "Order", exact: true, element: <Home /> },
       { path: "/order-list", name: "Order", exact: true, element: <OrderList /> },
       { path: "/product-list", name: "Product", exact: true, element: <ProductList /> },
-      { path: "/product-list/add-product", name: "AddProduct", exact: true, element: <AddProducts /> },
+      {
+        path: "/product-list/add-product",
+        name: "AddProduct",
+        exact: true,
+        element: <AddProducts />
+      },
       { path: "/online-shop", name: "Order", exact: true, element: <OnlineShop /> },
       { path: "/payments", name: "Order", exact: true, element: <Payments /> },
       { path: "/customers", name: "Order", exact: true, element: <Customers /> },
@@ -234,9 +240,10 @@ const ThemeRoutes = [
     ]
   },
   {
-    path: "/auth",
+    path: "/",
     element: <BlankLayout />,
     children: [
+      { path: "landing", element: <Landing /> },
       { path: "404", element: <Error /> },
       { path: "*", element: <Navigate to="/auth/404" /> },
       { path: "registerformik", element: <RegisterFormik /> },
