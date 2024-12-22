@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import axios from "axios";
 import _ from "lodash";
-import { getServiceURL, getTimeAgo, isImageUrl, isVideoUrl } from "../../../utils/utils";
+import { getServiceURL, isImageUrl } from "../../../utils/utils";
 import { getStoreInfo } from "../../../utils/_hooks";
 import ImgOrVideoRenderer from "../../../components/ImgOrVideoRenderer/ImgOrVideoRenderer";
 
@@ -16,17 +16,13 @@ export const useHome = () => {
     totalPages: 0
   });
 
-  const payload = {
+  const [payload, setPayload] = useState({
     storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",
     activeStatusTab: null
-  };
-
-  // useEffect(() => {
-  //   console.log(state.orderList);
-  // }, [state.orderList]);
+  });
 
   useEffect(() => {
     fetchOrders(payload);

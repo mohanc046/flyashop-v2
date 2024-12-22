@@ -12,7 +12,8 @@ import "./ProductList.scss";
 import { productCategories } from "./ProductList.constants";
 
 const ProductList = () => {
-  const { handleCategorySelect, columns, productData, handleNavigateAddproduct } = useProductList();
+  const { handleCategorySelect, columns, handleNavigateAddproduct, state, mapProductDataToTable } =
+    useProductList();
 
   return (
     <OutletCard>
@@ -30,7 +31,11 @@ const ProductList = () => {
       </Card>
 
       <ComponentCardTable title={"Manage Products"} searchPlaceHolder={"Search Product by Name..."}>
-        <CommonTable columns={columns} data={productData} />
+        <CommonTable
+          columns={columns}
+          data={mapProductDataToTable(state?.productsList)}
+          isLoading={state.loaderStatus}
+        />
       </ComponentCardTable>
     </OutletCard>
   );

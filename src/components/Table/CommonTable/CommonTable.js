@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CardTitle, Table } from "reactstrap";
+import { CardTitle, Table, Spinner } from "reactstrap";
 import "./CommonTable.scss";
 
-const CommonTable = ({ title, columns, data }) => {
+const CommonTable = ({ title, columns, data, isLoading }) => {
   return (
     <div className="bg-white rounded p-3">
       {title && (
@@ -11,26 +11,42 @@ const CommonTable = ({ title, columns, data }) => {
           {title}
         </CardTitle>
       )}
-      <Table className="no-wrap align-middle table-bg" responsive>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <th key={column.key}>{column.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="border-top">
+      {isLoading ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "200px" }}>
+          <Spinner color="primary" />
+        </div>
+      ) : (
+        <Table className="no-wrap align-middle table-bg" responsive>
+          <thead>
+            <tr>
               {columns.map((column) => (
-                <td key={column.key}>
-                  {column.render ? column.render(row[column.key], row) : row[column.key]}
-                </td>
+                <th key={column.key}>{column.label}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {data.length > 0 ? (
+              data.map((row, rowIndex) => (
+                <tr key={rowIndex} className="border-top">
+                  {columns.map((column) => (
+                    <td key={column.key}>
+                      {column.render ? column.render(row[column.key], row) : row[column.key]}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={columns.length} className="text-center">
+                  No data available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      )}
     </div>
   );
 };
@@ -44,7 +60,8 @@ CommonTable.propTypes = {
       render: PropTypes.func // Optional custom render function
     })
   ).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool.isRequired // Loading state
 };
 
 export default CommonTable;

@@ -34,6 +34,7 @@ const Home = () => {
               columns={columns}
               data={mapOrderDataToTable(state.orderList)}
               title="Orders"
+              isLoading={state.loaderStatus}
             />
           </Col>
         </div>

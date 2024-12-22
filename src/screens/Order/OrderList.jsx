@@ -10,7 +10,7 @@ import { useOrder } from "./_hooks/useOrderList";
 import Button from "../../components/Button/Button";
 
 const OrderList = () => {
-  const { categories, handleCategorySelect, columns, orderData } = useOrder();
+  const { categories, handleCategorySelect, columns, mapOrderDataToTable, state } = useOrder();
 
   return (
     <OutletCard>
@@ -23,7 +23,11 @@ const OrderList = () => {
       </Card>
 
       <ComponentCardTable title={"Manage Orders"} searchPlaceHolder={"Search Order ID, Name..."}>
-        <CommonTable columns={columns} data={orderData} />
+        <CommonTable
+          columns={columns}
+          data={mapOrderDataToTable(state.orderList)}
+          isLoading={state.loaderStatus}
+        />
       </ComponentCardTable>
     </OutletCard>
   );
