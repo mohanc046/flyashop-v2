@@ -43,7 +43,7 @@ class FormSteps extends Component {
     ];
 
     return (
-      <div className="p-5">
+      <div className="p-2 p-sm-3 p-md-4 p-lg-5">
         <ComponentCard>
           <Steps steps={steps} />
         </ComponentCard>

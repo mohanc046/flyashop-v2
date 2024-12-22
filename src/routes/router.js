@@ -13,7 +13,7 @@ const Login = Loadable(lazy(() => import("../screens/Login/Login")));
 const Home = Loadable(lazy(() => import("../screens/Home/Home")));
 const OrderList = Loadable(lazy(() => import("../screens/Order/OrderList")));
 const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductList")));
-const AddProducts = Loadable(lazy(() => import("../screens/AddProducts/AddProducts")));
+const AddProduct = Loadable(lazy(() => import("../screens/AddProduct/AddProduct")));
 const OnlineShop = Loadable(lazy(() => import("../screens/OnlineShop/OnlineShop")));
 const Payments = Loadable(lazy(() => import("../screens/UserPayment/Payments")));
 const Customers = Loadable(lazy(() => import("../screens/Customer/Customer")));
@@ -45,7 +45,7 @@ const ThemeRoutes = [
           {
             path: "/product-list/add-product",
             name: "Add Product",
-            element: <AddProducts />
+            element: <AddProduct />
           },
           { path: "/online-shop", name: "Online Shop", element: <OnlineShop /> },
           { path: "/payments", name: "Payments", element: <Payments /> },
