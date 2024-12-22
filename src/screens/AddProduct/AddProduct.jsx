@@ -13,7 +13,8 @@ class FormSteps extends Component {
 
     this.sampleStore = {
       email: "",
-      gender: ""
+      gender: "",
+      videoUploaded: false
     };
   }
 

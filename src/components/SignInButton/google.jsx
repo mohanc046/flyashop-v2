@@ -5,6 +5,7 @@ import { useGoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { config } from "../../config";
 import { authenticateGoogleLogin } from "../../screens/Login/login.service";
+import { getStoreInfo, getUserProfile } from "../../utils/_hooks";
 
 export const CustomButton = (props) => {
   const { onSuccess, onFailure } = props;
@@ -22,11 +23,20 @@ export const CustomButton = (props) => {
   );
 };
 
-function GoogleOAuthLogin() {
+function GoogleOAuthLogin({ changeState }) {
   const navigate = useNavigate();
 
   const navigateToDashboard = () => {
-    navigate("/home");
+    const storeInfo = getStoreInfo();
+    console.log("store:", storeInfo);
+    if (storeInfo?.store) {
+      navigate("/home");
+    } else {
+      changeState((prevState) => ({
+        ...prevState,
+        screen: "CREATE_STORE"
+      }));
+    }
   };
 
   const onSuccess = async (response) => {

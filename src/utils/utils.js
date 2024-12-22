@@ -1,4 +1,5 @@
 import _ from "lodash";
+import moment from "moment";
 
 // import jsPDF from "jspdf";
 
@@ -35,4 +36,35 @@ export const getServiceURL = () => {
   }
 
   return SERVICE_URL;
+};
+
+export function isImageUrl(url) {
+  return `${url}`?.match(/\.(jpeg|jpg|gif|png|avif|webp)/) != null;
+}
+
+export function isVideoUrl(url) {
+  return `${url}`?.match(/\.(mp4|webm|ogg|mov)$/i) != null;
+}
+
+export const getTimeAgo = (date) => {
+  const propsDate = moment(date);
+
+  const now = moment();
+
+  // Calculate the difference in minutes
+  const minutesDifference = now.diff(propsDate, "minutes");
+
+  // Calculate the difference in hours
+  const hoursDifference = now.diff(propsDate, "hours");
+
+  // Calculate the difference in days
+  const daysDifference = now.diff(propsDate, "days");
+
+  if (minutesDifference < 60) {
+    return `${minutesDifference} minute${minutesDifference > 1 ? "s" : ""} ago`;
+  } else if (hoursDifference < 24) {
+    return `${hoursDifference} hour${hoursDifference > 1 ? "s" : ""} ago`;
+  } else {
+    return `${daysDifference} day${daysDifference > 1 ? "s" : ""} ago`;
+  }
 };

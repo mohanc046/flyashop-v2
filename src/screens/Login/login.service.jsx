@@ -31,7 +31,8 @@ export const authenticateGoogleLogin = async ({ credential, navigateToDashboard 
       localStorage.setItem("storeInfo", JSON.stringify(_.get(existingStoreInfo, "[0]", {})));
 
       notification.open({ type: "success", description: message });
-      !_.isEmpty(existingStoreInfo) && navigateToDashboard();
+      //!_.isEmpty(existingStoreInfo) && navigateToDashboard();
+      navigateToDashboard();
 
       return;
     }

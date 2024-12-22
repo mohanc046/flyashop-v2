@@ -12,19 +12,8 @@ import "./login.css";
 import { CImage } from "@coreui/react";
 import { config } from "../../config.js";
 import OTPView from "./components/OTPView.jsx";
-import CreatestoreView from "./components/SetupStore/SetupStoreView.jsx";
-
-const INITIAL_STATE = {
-  email: "",
-  otp: "",
-  businessName: "",
-  businessType: "",
-  country: "",
-  isLoaderStatus: false,
-  isLoaderEnabled: false,
-  countryList: ["India", "USA", "China", "Australia", "United Kingdom", "Indonesia"],
-  currencyList: ["INR", "USD", "CNY", "AUD", "GBP", "IDR"]
-};
+import SetupStore from "./components/SetupStore/SetupStoreView.jsx";
+import { INITIAL_STATE } from "./login.constants.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,7 +37,7 @@ const Login = () => {
         <Row className="justify-content-center align-items-center h-100">
           {state.screen === "CREATE_STORE" ? (
             <Col lg="12">
-              <CreatestoreView state={state} />
+              <SetupStore state={state} />
             </Col>
           ) : (
             <Col lg="12" className="loginContainer">
@@ -102,10 +91,10 @@ const Login = () => {
                           <CImage align="center" src={config.APPLE} height={50} width={50} />
                         </span>
                         <span>
-                          <GoogleOAuthLogin />
+                          <GoogleOAuthLogin changeState={setState} />
                         </span>
                         <span>
-                          <FacebookOAuthLogin />
+                          <FacebookOAuthLogin changeState={setState} />
                         </span>
                       </div>
                     </div>

@@ -6,7 +6,7 @@ const Steps = ({ steps }) => {
   return (
     <div className="example">
       <div className="step-progress">
-        <StepZilla steps={steps} nextTextOnFinalActionStep="Save" />
+        <StepZilla steps={steps} nextTextOnFinalActionStep="Finish" />
       </div>
     </div>
   );

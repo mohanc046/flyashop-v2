@@ -1,17 +1,15 @@
-import React, { Component } from "react";
-import { Card, CardBody, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Col } from "reactstrap";
 
-class Step4 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const DoneStep = () => {
+  const navigate = useNavigate();
 
-  render() {
-    const {} = this.state;
+  useEffect(() => {
+    navigate("/home");
+  }, [navigate]);
 
-    return <Col md="12"></Col>;
-  }
-}
+  return <Col md="12"></Col>;
+};
 
-export default Step4;
+export default DoneStep;

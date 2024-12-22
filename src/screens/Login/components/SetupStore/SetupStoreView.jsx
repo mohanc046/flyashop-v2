@@ -21,6 +21,7 @@ class FormSteps extends Component {
   getStore = () => this.sampleStore;
 
   updateStore = (update) => {
+    console.log(update);
     this.sampleStore = {
       ...this.sampleStore,
       ...update
