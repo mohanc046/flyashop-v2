@@ -5,12 +5,12 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as LeftBg } from "../../assets/images/bg/login-bgleft.svg";
 import { ReactComponent as RightBg } from "../../assets/images/bg/login-bg-right.svg";
-import Logo from "../../layouts/logo/Logo";
-import GoogleOAuthLogin from "../../components/SignInButton/google";
-import FacebookOAuthLogin from "../../components/SignInButton/facebook";
+import Logo from "../../layouts/logo/Logo.js";
+import GoogleOAuthLogin from "../../components/SignInButton/google.jsx";
+import FacebookOAuthLogin from "../../components/SignInButton/facebook.jsx";
 import "./login.css";
 import { CImage } from "@coreui/react";
-import { config } from "../../config";
+import { config } from "../../config.js";
 import OTPView from "./components/OTPView.jsx";
 import CreatestoreView from "./components/SetupStore/SetupStoreView.jsx";
 
