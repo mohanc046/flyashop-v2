@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, CardBody, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
 
-class Step3 extends Component {
+class Step1 extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -14,4 +14,4 @@ class Step3 extends Component {
   }
 }
 
-export default Step3;
+export default Step1;

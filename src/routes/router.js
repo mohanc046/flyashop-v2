@@ -35,7 +35,7 @@ const authToken = getAuthToken();
 const ThemeRoutes = [
   {
     path: "/",
-    element: <FullLayout />,
+    element: authToken ? <FullLayout /> : <BlankLayout />,
     children: authToken
       ? [
           { path: "/", name: "Home", element: <Navigate to="/home" /> },
@@ -61,7 +61,7 @@ const ThemeRoutes = [
     element: <BlankLayout />,
     children: [
       { path: "landing", element: <Landing /> },
-      { path: "404", element: <Error /> },
+      { path: "/404", element: <Error /> },
       { path: "*", element: <Navigate to="/404" /> },
       { path: "registerformik", element: <RegisterFormik /> },
       { path: "login", element: <Login /> },
