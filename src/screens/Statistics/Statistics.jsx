@@ -66,7 +66,7 @@ const Statistics = (props) => {
             <button className="btn btn-no-bg" onClick={() => navigate("/pricing-list")}>
               Pricing
             </button>
-            <button className="btn btn-no-bg" onClick={() => navigate("/logout")}>
+            <button className="btn btn-no-bg" onClick={() => navigate("/login")}>
               Login
             </button>
             {/* <button className="btn btn-primary primary-color" onClick={() => navigate('/login')}>Get Started</button> */}

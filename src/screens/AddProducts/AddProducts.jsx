@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import StepZilla from "react-stepzilla";
-import "./steps.scss";
 
 import Step1 from "./components/UploadVideoStep";
 import Step2 from "./components/ProductDetailsStep";
 import Step3 from "./components/DoneStep";
 import ComponentCard from "../../components/ComponentsCard/ComponentCard";
+import Steps from "../../components/Steps/Steps";
 
 class FormSteps extends Component {
   constructor(props) {
@@ -46,11 +45,7 @@ class FormSteps extends Component {
     return (
       <div className="p-5">
         <ComponentCard>
-          <div className="example">
-            <div className="step-progress">
-              <StepZilla steps={steps} nextTextOnFinalActionStep="Save" />
-            </div>
-          </div>
+          <Steps steps={steps} />
         </ComponentCard>
       </div>
     );

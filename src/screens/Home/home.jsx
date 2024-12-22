@@ -5,9 +5,12 @@ import OutletCard from "../../components/OutletCard/OutletCard";
 import { useHome } from "./_hooks/useHome";
 import AnalyticsCard from "./components/AnalyticsCard";
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
+import { getUserProfile } from "../../utils/_hooks";
+import _ from "lodash";
 
 const Home = () => {
   const { columns, orderData } = useHome();
+  const userInfo = getUserProfile();
 
   return (
     <OutletCard>
@@ -19,7 +22,7 @@ const Home = () => {
           scrollbarWidth: "none",
           msOverflowStyle: "none"
         }}>
-        <h3 className="fw-semibold m-0">Hi, Althaf Hussain!</h3>
+        <h3 className="fw-semibold m-0">{`Hi, ${_.get(userInfo, "firstName", "")}`}</h3>
         <h4 className="text-muted">
           Your Store is Active Now. Customers can visit the following shop link and place their
           orders.

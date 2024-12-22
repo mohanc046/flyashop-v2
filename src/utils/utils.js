@@ -24,3 +24,15 @@ import _ from "lodash";
 export const isMobileView = () => {
   return window.innerWidth <= 768;
 };
+
+export const getServiceURL = () => {
+  let SERVICE_URL = "https://flyoapi.afras.in/v1";
+
+  let IS_LOCALHOST = `${window.location.hostname}`.includes("localhost");
+
+  if (!IS_LOCALHOST) {
+    SERVICE_URL = "https://flyoapi.afras.in/v1";
+  }
+
+  return SERVICE_URL;
+};
