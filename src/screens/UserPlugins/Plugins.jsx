@@ -5,21 +5,21 @@ import OutletCard from "../../components/OutletCard/OutletCard";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import "./Plugins.scss";
 import { usePlugins } from "./_hooks/usePlugins";
-import { pluginDetails, pluginsCategories } from "./Plugins.constants";
+import { pluginsCategories } from "./Plugins.constants";
 import PluginCard from "./components/PluginCard";
 import TawkModal from "./components/TawkModal";
 import GoogleAnalyticsModal from "./components/GoogleAnalyticsModal";
 import WhatsAppModal from "./components/WhatsAppModal";
 
 const Plugins = () => {
-  const { handleCategorySelect, toggle, currentPlugin, modal } = usePlugins();
+  const { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig } = usePlugins();
 
   return (
     <OutletCard>
       <Card className="d-flex justify-content-between flex-column flex-wrap bg-light">
         <CategoryFilter categories={pluginsCategories} onSelect={handleCategorySelect} />
         <Row className="d-flex flex-wrap mt-4">
-          {pluginDetails.map((plugin, index) => (
+          {PluginConfig.map((plugin, index) => (
             <Col ls="4" key={index}>
               <PluginCard details={plugin} toggle={toggle} />
             </Col>

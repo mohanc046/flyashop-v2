@@ -1,9 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CardTitle, Table, Spinner } from "reactstrap";
+import { CardTitle, Spinner, Card, Button, Table } from "reactstrap";
 import "./CommonTable.scss";
+import SearchInput from "../../SearchInput/SearchInput";
+import * as Icon from "react-feather";
 
-const CommonTable = ({ title, columns, data, isLoading }) => {
+const CommonTable = ({
+  title,
+  columns,
+  data,
+  isLoading,
+  searchPlaceHolder,
+  searchOnChange,
+  searchValue,
+  searchInputId,
+  searchInputName
+}) => {
   return (
     <div className="bg-white rounded p-3">
       {title && (
@@ -18,34 +30,56 @@ const CommonTable = ({ title, columns, data, isLoading }) => {
           <Spinner color="primary" />
         </div>
       ) : (
-        <Table className="no-wrap align-middle table-bg" responsive>
-          <thead>
-            <tr>
-              {columns.map((column) => (
-                <th key={column.key}>{column.label}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.length > 0 ? (
-              data.map((row, rowIndex) => (
-                <tr key={rowIndex} className="border-top">
-                  {columns.map((column) => (
-                    <td key={column.key}>
-                      {column.render ? column.render(row[column.key], row) : row[column.key]}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
+        <Card className="bg-white">
+          <div className="d-flex justify-content-between align-items-center px-1 py-3 flex-wrap gap-3 border-bottom">
+            <div className="me-3">
+              <SearchInput
+                placeholder={searchPlaceHolder}
+                onChange={searchOnChange}
+                value={searchValue}
+                inputId={searchInputId}
+                inputName={searchInputName}
+              />
+            </div>
+            <div className="d-flex gap-2">
+              <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
+                <Icon.ChevronUp size={15} /> Sort
+              </Button>
+              <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
+                <Icon.Filter size={15} />
+                Filter
+              </Button>
+            </div>
+          </div>
+          <Table className="no-wrap align-middle table-bg" responsive>
+            <thead>
               <tr>
-                <td colSpan={columns.length} className="text-center">
-                  No data available
-                </td>
+                {columns.map((column) => (
+                  <th key={column.key}>{column.label}</th>
+                ))}
               </tr>
-            )}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {data.length > 0 ? (
+                data.map((row, rowIndex) => (
+                  <tr key={rowIndex} className="border-top">
+                    {columns.map((column) => (
+                      <td key={column.key}>
+                        {column.render ? column.render(row[column.key], row) : row[column.key]}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={columns.length} className="text-center">
+                    No data available
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </Card>
       )}
     </div>
   );

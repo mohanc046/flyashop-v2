@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { Col, Row, Form, FormGroup, Label, Button, Input, ModalBody } from "reactstrap";
 import whatsAppLogo from "../../../assets/images/whatsapp-logo.svg";
+import { getServiceURL } from "../../../utils/utils";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { showToast } from "../../../store/reducers/toasterSlice";
+import { notification } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const WhatsAppModal = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     businessPhoneNumber: "",
     assistanceName: ""
@@ -16,15 +24,70 @@ const WhatsAppModal = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitted Form Values:", formValues);
+  const configurePlugin = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
 
-    // Add further processing logic here (e.g., API call)
+    try {
+      // Parse existing storeInfo from localStorage
+      const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
+      if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
+        throw new Error("Invalid store information.");
+      }
+
+      const storeName = storeInfo.store.businessName;
+
+      const requestPayload = {
+        pluginType: "WHATSAPP",
+        phoneNumber: formValues.businessPhoneNumber,
+        userName: formValues.assistanceName,
+        isActive: true
+      };
+
+      // Send the update request
+      const response = await axios.put(
+        `${getServiceURL()}/store/plugin/config/${storeName}`,
+        requestPayload
+      );
+
+      const { statusCode = 500, message = "Issue while updating plugin config!" } =
+        response.data || {};
+
+      if (statusCode === 200) {
+        // Update localStorage without deleting previous data
+        const updatedStoreInfo = {
+          ...storeInfo,
+          store: {
+            ...storeInfo.store,
+            pluginConfig: {
+              ...storeInfo.store.pluginConfig,
+              whatsApp: requestPayload // Add/Update the Tawk plugin configuration
+            }
+          }
+        };
+
+        localStorage.setItem("storeInfo", JSON.stringify(updatedStoreInfo));
+
+        dispatch(
+          showToast({
+            type: "success",
+            title: "Success",
+            message: "Plugin configured successfully!"
+          })
+        );
+        navigate("/home");
+      } else {
+        dispatch({ type: "warning", title: "Warning", message });
+      }
+    } catch (error) {
+      console.error("Error configuring plugin:", error.message || error);
+      dispatch(
+        showToast({ type: "error", title: "Error", message: "Issue while configuring plugin!" })
+      );
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={configurePlugin}>
       <ModalBody>
         <Row>
           <Col md={6} className="text-center">

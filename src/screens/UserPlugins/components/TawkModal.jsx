@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { Col, Row, Form, FormGroup, Label, Button, Input, ModalBody } from "reactstrap";
 import { config } from "../../../config";
+import { useDispatch } from "react-redux";
+import { showToast } from "../../../store/reducers/toasterSlice";
+import axios from "axios";
+import { getServiceURL } from "../../../utils/utils";
+import { useNavigate } from "react-router-dom";
+import { notification } from "antd";
 
 const TawkModal = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
     propertyId: "",
     widgetId: ""
@@ -16,15 +24,62 @@ const TawkModal = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitted Form Values:", formValues);
+  const configurePlugin = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
 
-    // Add further processing logic here (e.g., API call)
+    try {
+      // Parse existing storeInfo from localStorage
+      const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
+      if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
+        throw new Error("Invalid store information.");
+      }
+
+      const storeName = storeInfo.store.businessName;
+
+      const requestPayload = {
+        pluginType: "TAWK",
+        propertyId: formValues.propertyId,
+        widgetId: formValues.widgetId,
+        isActive: true
+      };
+
+      // Send the update request
+      const response = await axios.put(
+        `${getServiceURL()}/store/plugin/config/${storeName}`,
+        requestPayload
+      );
+
+      const { statusCode = 500, message = "Issue while updating plugin config!" } =
+        response.data || {};
+
+      if (statusCode === 200) {
+        // Update localStorage without deleting previous data
+        const updatedStoreInfo = {
+          ...storeInfo,
+          store: {
+            ...storeInfo.store,
+            pluginConfig: {
+              ...storeInfo.store.pluginConfig,
+              tawk: requestPayload // Add/Update the Tawk plugin configuration
+            }
+          }
+        };
+
+        localStorage.setItem("storeInfo", JSON.stringify(updatedStoreInfo));
+
+        dispatch(showToast({ type: "success", message: "Plugin configured successfully!" }));
+        navigate("/home");
+      } else {
+        notification.open({ type: "warning", message });
+      }
+    } catch (error) {
+      console.error("Error configuring plugin:", error.message || error);
+      dispatch(showToast({ type: "error", message: "Issue while configuring plugin!" }));
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={configurePlugin}>
       <ModalBody>
         <Row>
           <Col md={6} className="text-center">
@@ -67,22 +122,25 @@ const TawkModal = () => {
             <h3>Instructions:</h3>
             <p>To start using the Tawk.to plugin, you can follow these steps:</p>
             <ol>
-              <li>Create an account or login to tawk.to</li>
-              <li>Create a property and the widget for your online store</li>
-              <li>Click on settings icon at the bottom left of the page</li>
+              <li>Create an account or log in to tawk.to.</li>
+              <li>Create a property and the widget for your online store.</li>
+              <li>Click on the settings icon at the bottom left of the page.</li>
               <li>
-                Now, go to the Chat Widget section in the left sidebar (under channels heading)
+                Go to the <strong>Chat Widget</strong> section in the left sidebar (under the
+                Channels heading).
               </li>
               <li>
-                From this page, you'll find a section called Direct Chat Link. Copy the{" "}
+                Find the section called <strong>Direct Chat Link</strong>. Copy the{" "}
                 <code>&lt;PROPERTY_ID&gt;/&lt;WIDGET_ID&gt;</code> part from this link and paste it
-                in Dukaan plugin's settings page. For example, if you're direct link is{" "}
-                <code>https://tawk.to/chat/62c7e3667b967b1179989d99/1g7ed0iph</code>, then the code
-                to be copied would be <code>62c7e3667b967b1179989d99/1g7ed0iph</code>
+                in Dukaan plugin's settings page.
+                <br />
+                For example, if your direct link is{" "}
+                <code>https://tawk.to/chat/62c7e3667b967b1179989d99/1g7ed0iph</code>, then copy{" "}
+                <code>62c7e3667b967b1179989d99/1g7ed0iph</code>.
               </li>
               <li>
-                The chat widget should be visible on your site now. You can reach out to Dukaan's
-                support team for help with the integration
+                The chat widget should now be visible on your site. Contact Dukaan's support team
+                for integration help.
               </li>
             </ol>
           </div>

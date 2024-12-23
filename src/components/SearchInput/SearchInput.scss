@@ -1,7 +1,10 @@
+@import "../../assets/scss/variables";
+
 .search-container {
     border-radius: 10px;
     width: 400px;
     height: 40px;
+    background-color: $gray-200;
 }
 
 @media (max-width: 768px) {

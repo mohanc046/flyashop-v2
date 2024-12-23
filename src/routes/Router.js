@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Loadable from "../layouts/loader/Loadable.js";
 import { getAuthToken } from "../utils/_hooks/index.jsx";
+import Logout from "../screens/Logout.jsx";
 
 /***** Layouts *****/
 const FullLayout = Loadable(lazy(() => import("../layouts/FullLayout.js")));
@@ -52,7 +53,8 @@ const ThemeRoutes = [
           { path: "/customers", name: "Customers", element: <Customers /> },
           { path: "/plugins", name: "Plugins", element: <Plugins /> },
           { path: "/discounts", name: "Discounts", element: <Discounts /> },
-          { path: "/settings", name: "Settings", element: <Settings /> }
+          { path: "/settings", name: "Settings", element: <Settings /> },
+          { path: "/sign-out", name: "Sign Out", element: <Logout /> }
         ]
       : [{ path: "/", name: "Landing", element: <Navigate to="/landing" /> }]
   },

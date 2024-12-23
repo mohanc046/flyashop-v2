@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { Col, Row, Form, FormGroup, Label, Button, Input, ModalBody } from "reactstrap";
 import { config } from "../../../config";
+import { getServiceURL } from "../../../utils/utils";
+import axios from "axios";
+import { notification } from "antd";
+import { useDispatch } from "react-redux";
+import { showToast } from "../../../store/reducers/toasterSlice";
+import { useNavigate } from "react-router-dom";
 
 const GoogleAnalyticsModal = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState({
-    propertyId: "",
-    widgetId: ""
+    propertyId: ""
   });
 
   const handleChange = (e) => {
@@ -16,15 +23,66 @@ const GoogleAnalyticsModal = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const configurePlugin = async (e) => {
     e.preventDefault();
-    console.log("Submitted Form Values:", formValues);
 
-    // Add further processing logic here (e.g., API call)
+    try {
+      const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
+      if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
+        throw new Error("Invalid store information.");
+      }
+
+      const storeName = storeInfo.store.businessName;
+
+      const requestPayload = {
+        pluginType: "GOOGLE_ANALYTICS",
+        propertyId: formValues.propertyId,
+        isActive: true
+      };
+
+      const response = await axios.put(
+        `${getServiceURL()}/store/plugin/config/${storeName}`,
+        requestPayload
+      );
+
+      const { statusCode = 500, message = "Issue while updating plugin config!" } =
+        response.data || {};
+
+      if (statusCode === 200) {
+        const updatedStoreInfo = {
+          ...storeInfo,
+          store: {
+            ...storeInfo.store,
+            pluginConfig: {
+              ...storeInfo.store.pluginConfig,
+              googleAnalytics: requestPayload
+            }
+          }
+        };
+
+        localStorage.setItem("storeInfo", JSON.stringify(updatedStoreInfo));
+
+        dispatch(
+          showToast({
+            type: "success",
+            title: "Success",
+            message: "Plugin configured successfully!"
+          })
+        );
+        navigate("/home");
+      } else {
+        dispatch(showToast({ type: "warning", title: "Warning", message }));
+      }
+    } catch (error) {
+      console.error("Error configuring plugin:", error.message || error);
+      dispatch(
+        showToast({ type: "error", title: "Error", message: "Issue while configuring plugin!" })
+      );
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={configurePlugin}>
       <ModalBody>
         <Row>
           <Col md={6} className="text-center">
