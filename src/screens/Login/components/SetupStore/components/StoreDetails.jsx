@@ -6,6 +6,7 @@ import { notification } from "antd";
 import { getServiceURL } from "../../../../../utils/utils";
 import axios from "axios";
 import { FIXED_VALUES } from "../../../../../utils/constants";
+import { getAuthToken } from "../../../../../utils/_hooks";
 const {
   statusCode: { SUCCESS }
 } = FIXED_VALUES;
@@ -51,20 +52,35 @@ class StoreDetails extends Component {
     const { businessName, country, businessType } = this.state;
 
     try {
-      const URL = this.getServiceURL();
+      const URL = getServiceURL();
 
-      const loginResponse = await axios.post(`${URL}/store/create`, {
-        location: country,
-        businessName,
-        businessType: [businessType],
-        currency
+      const response = await fetch(`${URL}/store/create`, {
+        method: "POST",
+        body: JSON.stringify({
+          location: country,
+          businessName,
+          businessType: [businessType],
+          currency
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getAuthToken()}`
+        }
       });
 
-      const {
-        data: { statusCode = "500", message = "Issue while creating store" }
-      } = loginResponse;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-      if (statusCode === SUCCESS) {
+      // Parse the JSON response
+      const responseData = await response.json();
+
+      // Safely extract data properties
+      const { data } = responseData || {};
+      const { message = "Store creation successfull!" } = data || {};
+
+      if (response.status === 200) {
+        console.log(response);
         notification.open({ type: "success", description: message });
 
         // Store data in localStorage as a string
@@ -80,15 +96,14 @@ class StoreDetails extends Component {
         );
 
         return true;
+      } else {
+        notification.open({ type: "warning", description: message });
+        return false;
       }
-
-      notification.open({ type: "warning", description: message });
-      return false;
     } catch (error) {
       console.error("Error creating store:", error);
       notification.open({ type: "error", description: "Error while creating the store." });
-      return true;
-      // return false;
+      return false; // Ensure the correct return value in case of failure
     }
   };
 

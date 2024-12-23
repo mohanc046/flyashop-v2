@@ -7,6 +7,7 @@ import Sidebar from "./sidebars/vertical/Sidebar";
 import HorizontalHeader from "./header/HorizontalHeader";
 import HorizontalSidebar from "./sidebars/horizontal/HorizontalSidebar";
 import Toaster from "../components/Toaster/Toaster";
+import Spinner from "../components/Spinner/Spinner";
 
 const FullLayout = () => {
   const customizerToggle = useSelector((state) => state.customizer.customizerSidebar);
@@ -39,6 +40,7 @@ const FullLayout = () => {
             <div>
               <Outlet />
               <Toaster />
+              <Spinner />
             </div>
             {/* <Customizer className={customizerToggle ? "showCustomizer" : ""} /> */}
             {showMobileSidebar || customizerToggle ? <div className="sidebarOverlay" /> : ""}

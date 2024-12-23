@@ -7,6 +7,8 @@ import EmailReducer from "./apps/email/EmailSlice";
 import TicketReducer from "./apps/ticket/TicketSlice";
 import headerTitleReducer from "./reducers/headerTitleSlice";
 import toasterReducer from "./reducers/toasterSlice";
+import spinnerReducer from "./reducers/spinnerSlice";
+
 export const store = configureStore({
   reducer: {
     customizer: CustomizerReducer,
@@ -16,7 +18,8 @@ export const store = configureStore({
     emailReducer: EmailReducer,
     ticketReducer: TicketReducer,
     headerTitle: headerTitleReducer,
-    toaster: toasterReducer
+    toaster: toasterReducer,
+    spinner: spinnerReducer
   }
 });
 

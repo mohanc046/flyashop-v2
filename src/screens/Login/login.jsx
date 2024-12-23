@@ -14,6 +14,8 @@ import { config } from "../../config.js";
 import OTPView from "./components/OTPView.jsx";
 import SetupStore from "./components/SetupStore/SetupStoreView.jsx";
 import { INITIAL_STATE } from "./login.constants.js";
+import { initiateLoginWithEmail, verifyLoginOTP } from "./login.service.jsx";
+import { getStoreInfo } from "../../utils/_hooks/index.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,6 +30,19 @@ const Login = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Email is invalid").required("Email is required")
   });
+
+  const navigateToDashboard = () => {
+    const storeInfo = getStoreInfo();
+    console.log("store:", storeInfo);
+    if (storeInfo?.store) {
+      navigate("/home");
+    } else {
+      setState((prevState) => ({
+        ...prevState,
+        screen: "CREATE_STORE"
+      }));
+    }
+  };
 
   return (
     <div className="loginBox">
@@ -51,13 +66,12 @@ const Login = () => {
                     <Formik
                       initialValues={INITIAL_STATE}
                       validationSchema={validationSchema}
-                      onSubmit={(fields) => {
-                        setState({
-                          title: "Enter your verification code",
-                          screen: "OTP",
-                          email: fields.email
-                        });
-                      }}
+                      onSubmit={(fields) =>
+                        initiateLoginWithEmail({
+                          email: fields.email,
+                          setState
+                        })
+                      }
                       render={({ errors, touched }) => (
                         <Form>
                           <FormGroup>
@@ -77,7 +91,7 @@ const Login = () => {
                           </FormGroup>
                           <FormGroup>
                             <Button type="submit" color="primary" className="me-2">
-                              Login
+                              Get Started
                             </Button>
                           </FormGroup>
                         </Form>
@@ -87,13 +101,13 @@ const Login = () => {
                       <h5 class="mb-2">Or</h5>
                       <h5 class="mb-3">Get started with</h5>
                       <div class="d-flex justify-content-center gap-3">
-                        <span>
+                        <span className="cursor-pointer">
                           <CImage align="center" src={config.APPLE} height={50} width={50} />
                         </span>
-                        <span>
+                        <span className="cursor-pointer">
                           <GoogleOAuthLogin changeState={setState} />
                         </span>
-                        <span>
+                        <span className="cursor-pointer">
                           <FacebookOAuthLogin changeState={setState} />
                         </span>
                       </div>
@@ -101,7 +115,14 @@ const Login = () => {
                   </CardBody>
                 )}
 
-                {state.screen === "OTP" && <OTPView state={state} />}
+                {state.screen === "OTP" && (
+                  <OTPView
+                    state={state}
+                    verifyOTP={verifyLoginOTP}
+                    navigateToDashboard={navigateToDashboard}
+                    setState={setState}
+                  />
+                )}
               </Card>
             </Col>
           )}
