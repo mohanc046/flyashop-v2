@@ -14,11 +14,12 @@ import { config } from "../../config.js";
 import OTPView from "./components/OTPView.jsx";
 import SetupStore from "./components/SetupStore/SetupStoreView.jsx";
 import { INITIAL_STATE } from "./login.constants.js";
-import { initiateLoginWithEmail, verifyLoginOTP } from "./login.service.jsx";
+import { LoginService } from "./login.service.jsx";
 import { getStoreInfo } from "../../utils/_hooks/index.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { initiateLoginWithEmail, verifyLoginOTP } = LoginService();
 
   const [state, setState] = useState({
     screen: "LOGIN",

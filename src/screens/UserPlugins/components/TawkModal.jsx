@@ -7,6 +7,7 @@ import axios from "axios";
 import { getServiceURL } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
+import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 
 const TawkModal = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const TawkModal = () => {
     e.preventDefault(); // Prevent default form submission behavior
 
     try {
-      // Parse existing storeInfo from localStorage
+      dispatch(showSpinner());
       const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
       if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
         throw new Error("Invalid store information.");
@@ -43,7 +44,6 @@ const TawkModal = () => {
         isActive: true
       };
 
-      // Send the update request
       const response = await axios.put(
         `${getServiceURL()}/store/plugin/config/${storeName}`,
         requestPayload
@@ -53,28 +53,37 @@ const TawkModal = () => {
         response.data || {};
 
       if (statusCode === 200) {
-        // Update localStorage without deleting previous data
         const updatedStoreInfo = {
           ...storeInfo,
           store: {
             ...storeInfo.store,
             pluginConfig: {
               ...storeInfo.store.pluginConfig,
-              tawk: requestPayload // Add/Update the Tawk plugin configuration
+              tawk: requestPayload
             }
           }
         };
 
         localStorage.setItem("storeInfo", JSON.stringify(updatedStoreInfo));
-
-        dispatch(showToast({ type: "success", message: "Plugin configured successfully!" }));
+        dispatch(
+          showToast({
+            type: "success",
+            title: "Success",
+            message: "Plugin configured successfully!"
+          })
+        );
+        dispatch(hideSpinner());
         navigate("/home");
       } else {
+        dispatch(hideSpinner());
         notification.open({ type: "warning", message });
       }
     } catch (error) {
       console.error("Error configuring plugin:", error.message || error);
-      dispatch(showToast({ type: "error", message: "Issue while configuring plugin!" }));
+      dispatch(
+        showToast({ type: "error", title: "Error", message: "Issue while configuring plugin!" })
+      );
+      dispatch(hideSpinner());
     }
   };
 

@@ -4,8 +4,8 @@ import { CImage } from "@coreui/react";
 import { useGoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { config } from "../../config";
-import { authenticateGoogleLogin } from "../../screens/Login/login.service";
-import { getStoreInfo, getUserProfile } from "../../utils/_hooks";
+import { getStoreInfo } from "../../utils/_hooks";
+import { LoginService } from "../../screens/Login/login.service";
 
 export const CustomButton = (props) => {
   const { onSuccess, onFailure } = props;
@@ -25,6 +25,7 @@ export const CustomButton = (props) => {
 
 function GoogleOAuthLogin({ changeState }) {
   const navigate = useNavigate();
+  const { authenticateGoogleLogin } = LoginService();
 
   const navigateToDashboard = () => {
     const storeInfo = getStoreInfo();

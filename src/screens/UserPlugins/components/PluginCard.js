@@ -2,6 +2,13 @@ import React from "react";
 import { Button, Card, CardBody, CardTitle } from "reactstrap";
 
 const PluginCard = ({ details = [], toggle }) => {
+  const handleClick = (isActive) => {
+    if (isActive) {
+      details.uninstallAction();
+    } else {
+      toggle(details.title);
+    }
+  };
   return (
     <Card className="w-100 bg-white shadow-sm border rounded">
       <CardBody className="d-flex align-items-center">
@@ -18,9 +25,9 @@ const PluginCard = ({ details = [], toggle }) => {
           <Button
             color="primary"
             onClick={() => {
-              toggle(details.title);
+              handleClick(details.isActive);
             }}>
-            Install
+            {details.isActive ? "Uninstall" : "Install"}
           </Button>
         </div>
       </CardBody>

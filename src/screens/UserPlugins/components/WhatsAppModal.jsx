@@ -5,8 +5,8 @@ import { getServiceURL } from "../../../utils/utils";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../store/reducers/toasterSlice";
-import { notification } from "antd";
 import { useNavigate } from "react-router-dom";
+import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 
 const WhatsAppModal = () => {
   const navigate = useNavigate();
@@ -25,10 +25,10 @@ const WhatsAppModal = () => {
   };
 
   const configurePlugin = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
 
     try {
-      // Parse existing storeInfo from localStorage
+      dispatch(showSpinner());
       const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
       if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
         throw new Error("Invalid store information.");
@@ -53,14 +53,13 @@ const WhatsAppModal = () => {
         response.data || {};
 
       if (statusCode === 200) {
-        // Update localStorage without deleting previous data
         const updatedStoreInfo = {
           ...storeInfo,
           store: {
             ...storeInfo.store,
             pluginConfig: {
               ...storeInfo.store.pluginConfig,
-              whatsApp: requestPayload // Add/Update the Tawk plugin configuration
+              whatsApp: requestPayload
             }
           }
         };
@@ -74,15 +73,18 @@ const WhatsAppModal = () => {
             message: "Plugin configured successfully!"
           })
         );
+        dispatch(hideSpinner());
         navigate("/home");
       } else {
         dispatch({ type: "warning", title: "Warning", message });
+        dispatch(hideSpinner());
       }
     } catch (error) {
       console.error("Error configuring plugin:", error.message || error);
       dispatch(
         showToast({ type: "error", title: "Error", message: "Issue while configuring plugin!" })
       );
+      dispatch(hideSpinner());
     }
   };
 

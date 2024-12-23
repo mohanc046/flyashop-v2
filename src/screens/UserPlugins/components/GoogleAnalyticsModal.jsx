@@ -7,6 +7,7 @@ import { notification } from "antd";
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../store/reducers/toasterSlice";
 import { useNavigate } from "react-router-dom";
+import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 
 const GoogleAnalyticsModal = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const GoogleAnalyticsModal = () => {
     e.preventDefault();
 
     try {
+      dispatch(showSpinner());
       const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
       if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
         throw new Error("Invalid store information.");
@@ -69,15 +71,17 @@ const GoogleAnalyticsModal = () => {
             message: "Plugin configured successfully!"
           })
         );
+        dispatch(hideSpinner());
         navigate("/home");
       } else {
         dispatch(showToast({ type: "warning", title: "Warning", message }));
+        dispatch(hideSpinner());
       }
     } catch (error) {
-      console.error("Error configuring plugin:", error.message || error);
       dispatch(
         showToast({ type: "error", title: "Error", message: "Issue while configuring plugin!" })
       );
+      dispatch(hideSpinner());
     }
   };
 

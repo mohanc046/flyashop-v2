@@ -5,10 +5,11 @@ import FacebookLogin from "react-facebook-login";
 import { config } from "../../config";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
-import { authenticateFaceBookLogin } from "../../screens/Login/login.service";
+import { LoginService } from "../../screens/Login/login.service";
 
 function FacebookOAuthLogin() {
   const navigate = useNavigate();
+  const { authenticateFaceBookLogin } = LoginService();
 
   const navigateToDashboard = () => {
     navigate("/home");
