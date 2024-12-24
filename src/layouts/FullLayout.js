@@ -1,8 +1,7 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Container } from "reactstrap";
 import Header from "./header/Header";
-import Customizer from "./customizer/Customizer";
 import Sidebar from "./sidebars/vertical/Sidebar";
 import HorizontalHeader from "./header/HorizontalHeader";
 import HorizontalSidebar from "./sidebars/horizontal/HorizontalSidebar";
@@ -15,7 +14,6 @@ const FullLayout = () => {
   const showMobileSidebar = useSelector((state) => state.customizer.isMobileSidebar);
   const topbarFixed = useSelector((state) => state.customizer.isTopbarFixed);
   const LayoutHorizontal = useSelector((state) => state.customizer.isLayoutHorizontal);
-  const isFixedSidebar = useSelector((state) => state.customizer.isSidebarFixed);
 
   return (
     <main>

@@ -10,12 +10,25 @@ import { useOrder } from "./_hooks/useOrderList";
 import Button from "../../components/Button/Button";
 
 const OrderList = () => {
-  const { categories, handleCategorySelect, columns, mapOrderDataToTable, state } = useOrder();
+  const {
+    categories,
+    payload,
+    handleCategorySelect,
+    columns,
+    mapOrderDataToTable,
+    state,
+    onClearFilterChange,
+    onApplySortFilter
+  } = useOrder();
 
   return (
     <OutletCard>
       <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-light">
-        <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
+        <CategoryFilter
+          categories={categories}
+          onSelect={handleCategorySelect}
+          currentCategory={payload.categoryType}
+        />
 
         <div className="d-flex align-items-center gap-3 bg-light">
           <Button label="Report" icon={<Icon.Download size={15} />} />
@@ -27,6 +40,9 @@ const OrderList = () => {
           columns={columns}
           data={mapOrderDataToTable(state.orderList)}
           isLoading={state.loaderStatus}
+          sortCallback={onApplySortFilter}
+          filterCallback={onClearFilterChange}
+          sort={payload.sort}
         />
       </ComponentCardTable>
     </OutletCard>

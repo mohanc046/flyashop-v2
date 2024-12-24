@@ -17,7 +17,7 @@ const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductLi
 const AddProduct = Loadable(lazy(() => import("../screens/AddProduct/AddProduct.jsx")));
 const OnlineShop = Loadable(lazy(() => import("../screens/OnlineShop/OnlineShop.jsx")));
 const Payments = Loadable(lazy(() => import("../screens/UserPayment/Payments.jsx")));
-const Customers = Loadable(lazy(() => import("../screens/Customer/Customer.jsx")));
+const Customers = Loadable(lazy(() => import("../screens/Customers/Customers.jsx")));
 const Plugins = Loadable(lazy(() => import("../screens/UserPlugins/Plugins.jsx")));
 const Discounts = Loadable(lazy(() => import("../screens/ProductList/ProductList.jsx")));
 const Settings = Loadable(lazy(() => import("../screens/Settings/Settings.jsx")));
@@ -64,7 +64,7 @@ const ThemeRoutes = [
     children: [
       { path: "landing", element: <Landing /> },
       { path: "/404", element: <Error /> },
-      { path: "*", element: <Navigate to="/404" /> },
+      { path: "*", element: <Navigate to="/landing" /> },
       { path: "registerformik", element: <RegisterFormik /> },
       { path: "login", element: <Login /> },
       { path: "maintenance", element: <Maintenance /> },

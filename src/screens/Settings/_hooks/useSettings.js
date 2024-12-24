@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../store/reducers/headerTitleSlice";
+import "../Settings.scss";
+import { setTitle } from "../../../store/reducers/headerTitleSlice";
 
 export const useSettings = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export const useSettings = () => {
       label: "Status",
       key: "status",
       render: (value, row) => (
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center live">
           <h5 className="mb-0">{value}</h5>
         </div>
       )

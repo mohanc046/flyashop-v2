@@ -7,14 +7,19 @@ import { useOnlineShop } from "./_hooks/useOnlineShop";
 import "./OnlineShop.scss";
 import Switch from "../../components/Switch/Switch";
 import Button from "../../components/Button/Button";
+import { onlineShopCategories } from "./OnlineShop.constants";
 
 const OnlineShop = () => {
-  const { categories, handleCategorySelect } = useOnlineShop();
+  const { handleCategorySelect } = useOnlineShop();
 
   return (
     <OutletCard>
       <Card className="d-flex flex-column justify-content-between flex-row flex-wrap gap-3 bg-light">
-        <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
+        <CategoryFilter
+          categories={onlineShopCategories}
+          onSelect={handleCategorySelect}
+          currentCategory={"Banners"}
+        />
 
         <div className="d-flex flex-column gap-3 bg-light mt-3">
           <div className="heading-container">

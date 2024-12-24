@@ -10,57 +10,57 @@ import Switch from "../../../components/Switch/Switch";
 
 export const useCustomer = () => {
   const dispatch = useDispatch();
-  const categories = ["All"];
+  const categories = [{ label: "All", value: "ALL" }];
 
   const handleCategorySelect = (category) => {
     console.log("Selected Category:", category);
   };
 
   useEffect(() => {
-    dispatch(setTitle("All Products"));
+    dispatch(setTitle("All Customers"));
   }, []);
 
   const productData = [
     {
       item_image: productImage1,
-      item_name: "Product 1",
-      inventory: "7",
-      amount: "₹799",
-      status: "active" // Status should be "active" or "hidden"
+      item_name: "Customer 1",
+      inventory: "city name",
+      amount: "840248293",
+      status: "-" // Status should be "active" or "hidden"
     },
     {
       item_image: productImage2,
-      item_name: "Product 2",
-      inventory: "3",
-      amount: "₹199",
-      status: "active"
+      item_name: "Customer 2",
+      inventory: "city name",
+      amount: "840248293",
+      status: "-"
     },
     {
       item_image: productImage3,
-      item_name: "Product 3",
-      inventory: "5",
-      amount: "₹1,499",
-      status: "hidden" // Status should be "active" or "hidden"
+      item_name: "Customer 3",
+      inventory: "city name",
+      amount: "840248293",
+      status: "-" // Status should be "active" or "hidden"
     },
     {
       item_image: productImage4,
-      item_name: "Product 4",
-      inventory: "20",
-      amount: "₹120",
-      status: "hidden"
+      item_name: "Customer 4",
+      inventory: "city name",
+      amount: "840248293",
+      status: "-"
     },
     {
       item_image: productImage5,
-      item_name: "Product 5",
-      inventory: "2",
-      amount: "₹299",
-      status: "active"
+      item_name: "Customer 5",
+      inventory: "city name",
+      amount: "840248293",
+      status: "-"
     }
   ];
 
   const columns = [
     {
-      label: "Item",
+      label: "Customer Name",
       key: "item_image",
       render: (value, row) => (
         <div className="d-flex align-items-center">
@@ -75,19 +75,11 @@ export const useCustomer = () => {
         </div>
       )
     },
-    { label: "Amount", key: "amount" },
-    { label: "Inventory", key: "inventory" },
+    { label: "Mobile Number", key: "amount" },
+    { label: "City", key: "inventory" },
     {
-      label: "Status",
-      key: "status",
-      render: (value, row) => (
-        <Switch
-          initialStatus={value} // Ensure value is a string like "active" or "hidden"
-          activeText="Active"
-          hiddenText="Hidden"
-          onToggle={(newStatus) => console.log("New Status: ", newStatus)} // Handle status toggle
-        />
-      )
+      label: "Total Sales",
+      key: "status"
     }
   ];
 

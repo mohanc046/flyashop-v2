@@ -4,7 +4,6 @@ import { setTitle } from "../../../store/reducers/headerTitleSlice";
 
 export const useOnlineShop = () => {
   const dispatch = useDispatch();
-  const categories = ["Header & Favicon", "Banners", "Pages", "Fonts", "Advanced"];
 
   useEffect(() => {
     dispatch(setTitle("Customize Online Shop"));
@@ -15,7 +14,6 @@ export const useOnlineShop = () => {
   };
 
   return {
-    categories,
     handleCategorySelect
   };
 };

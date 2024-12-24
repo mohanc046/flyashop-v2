@@ -8,7 +8,15 @@ import axios from "axios";
 
 export const useOrder = () => {
   const dispatch = useDispatch();
-  const categories = ["All", "Pending", "Accepted", "Rejected", "Shipped", "Delivered"];
+  const categories = [
+    { label: "All", value: "ALL" },
+    { label: "Pending", value: "PENDING" },
+    { label: "Accepted", value: "ACCEPTED" },
+    { label: "Rejected", value: "REJECTED" },
+    { label: "Shipped", value: "SHIPPED" },
+    { label: "Delivered", value: "DELIVERED" }
+  ];
+
   const [state, setState] = useState({
     loaderStatus: false,
     orderList: [],
@@ -21,26 +29,44 @@ export const useOrder = () => {
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",
-    activeStatusTab: null
+    activeStatusTab: null,
+    sort: -1
   });
 
-  const handleCategorySelect = (category) => {
-    console.log("Selected Category:", category);
-  };
+  useEffect(() => {
+    dispatch(setTitle("All Orders"));
+  }, []);
 
   useEffect(() => {
     fetchOrders(payload);
-    dispatch(setTitle("All Orders"));
-  }, []);
+  }, [payload]);
+
+  const onApplySortFilter = (sort) => {
+    const updatedSortValue = sort > 0 ? -1 : 1;
+    setPayload((prevState) => ({ ...prevState, sort: updatedSortValue }));
+  };
+
+  const onClearFilterChange = () => {
+    setPayload((prevState) => ({
+      ...prevState,
+      currentPage: 1,
+      categoryType: "ALL",
+      activeStatusTab: null
+    }));
+  };
+
+  const handleCategorySelect = (category) => {
+    setPayload((prevState) => ({ ...prevState, categoryType: category }));
+  };
 
   const fetchOrders = async (payload) => {
     try {
       setState((prevState) => ({ ...prevState, loaderStatus: true }));
 
-      const { storeName, currentPage, itemPerPage, categoryType, activeStatusTab } = payload;
+      const { storeName, currentPage, itemPerPage, categoryType, sort, activeStatusTab } = payload;
       const URL = getServiceURL();
       const response = await axios.get(
-        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}`
+        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}&sort=${sort}`
       );
 
       const {
@@ -153,6 +179,9 @@ export const useOrder = () => {
     columns,
     state,
     dispatch,
-    mapOrderDataToTable
+    mapOrderDataToTable,
+    payload,
+    onApplySortFilter,
+    onClearFilterChange
   };
 };

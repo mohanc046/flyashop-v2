@@ -11,11 +11,11 @@ const Logo = () => {
     <Link to="/" className="d-flex align-items-center gap-2">
       {isDarkMode || activeSidebarBg !== "white" ? (
         <>
-          <LogoWhiteIcon width={150} />
+          <LogoWhiteIcon width={130} />
         </>
       ) : (
         <>
-          <LogoDarkIcon width={150} />
+          <LogoDarkIcon width={130} />
         </>
       )}
     </Link>

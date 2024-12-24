@@ -23,19 +23,37 @@ export const useProductList = () => {
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",
-    activeStatusTab: null
+    activeStatusTab: null,
+    sort: -1
   });
 
-  const handleCategorySelect = (category) => {
-    console.log("Selected Category:", category);
-  };
-
   useEffect(() => {
-    loadProducts();
     dispatch(setTitle("All Products"));
   }, []);
 
-  const loadProducts = async () => {
+  useEffect(() => {
+    loadProducts(payload);
+  }, [payload]);
+
+  const onApplySortFilter = (sort) => {
+    const updatedSortValue = sort > 0 ? -1 : 1;
+    setPayload((prevState) => ({ ...prevState, sort: updatedSortValue }));
+  };
+
+  const onClearFilterChange = () => {
+    setPayload((prevState) => ({
+      ...prevState,
+      currentPage: 1,
+      categoryType: "ALL",
+      activeStatusTab: null
+    }));
+  };
+
+  const handleCategorySelect = (category) => {
+    setPayload((prevState) => ({ ...prevState, categoryType: category }));
+  };
+
+  const loadProducts = async (payload) => {
     try {
       setState((prevState) => ({ ...prevState, loaderStatus: true }));
 
@@ -104,8 +122,11 @@ export const useProductList = () => {
     handleCategorySelect,
     columns,
     state,
+    payload,
     mapProductDataToTable,
     dispatch,
-    handleNavigateAddproduct
+    handleNavigateAddproduct,
+    onApplySortFilter,
+    onClearFilterChange
   };
 };

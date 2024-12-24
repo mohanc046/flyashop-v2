@@ -12,12 +12,17 @@ import GoogleAnalyticsModal from "./components/GoogleAnalyticsModal";
 import WhatsAppModal from "./components/WhatsAppModal";
 
 const Plugins = () => {
-  const { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig } = usePlugins();
+  const { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig, selectedCategory } =
+    usePlugins();
 
   return (
     <OutletCard>
       <Card className="d-flex justify-content-between flex-column flex-wrap bg-light">
-        <CategoryFilter categories={pluginsCategories} onSelect={handleCategorySelect} />
+        <CategoryFilter
+          categories={pluginsCategories}
+          onSelect={handleCategorySelect}
+          currentCategory={selectedCategory}
+        />
         <Row className="d-flex flex-wrap mt-4">
           {PluginConfig.map((plugin, index) => (
             <Col ls="4" key={index}>

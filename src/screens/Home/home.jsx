@@ -9,7 +9,8 @@ import { getUserProfile } from "../../utils/_hooks";
 import _ from "lodash";
 
 const Home = () => {
-  const { columns, state, mapOrderDataToTable } = useHome();
+  const { columns, state, payload, mapOrderDataToTable, onApplySortFilter, onClearFilterChange } =
+    useHome();
   const userInfo = getUserProfile();
 
   return (
@@ -35,6 +36,9 @@ const Home = () => {
               data={mapOrderDataToTable(state.orderList)}
               title="Orders"
               isLoading={state.loaderStatus}
+              filterCallback={onClearFilterChange}
+              sortCallback={onApplySortFilter}
+              sort={payload.sort}
             />
           </Col>
         </div>

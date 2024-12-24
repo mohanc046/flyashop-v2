@@ -14,8 +14,22 @@ const CommonTable = ({
   searchOnChange,
   searchValue,
   searchInputId,
-  searchInputName
+  searchInputName,
+  hideSearch = false,
+  hidePagination = false,
+  filterCallback,
+  sortCallback,
+  sort,
+  currentPage,
+  rowsPerPage,
+  totalItems,
+  onPageChange,
+  onRowsPerPageChange
 }) => {
+  // Ensure rowsPerPage is valid
+  const validRowsPerPage = rowsPerPage > 0 ? rowsPerPage : 1;
+  const totalPages = Math.ceil(totalItems / validRowsPerPage);
+
   return (
     <div className="bg-white rounded p-3">
       {title && (
@@ -23,13 +37,7 @@ const CommonTable = ({
           {title}
         </CardTitle>
       )}
-      {isLoading ? (
-        <div
-          className="d-flex justify-content-center align-items-center"
-          style={{ height: "200px" }}>
-          <Spinner color="primary" />
-        </div>
-      ) : (
+      {!hideSearch && (
         <Card className="bg-white">
           <div className="d-flex justify-content-between align-items-center px-1 py-3 flex-wrap gap-3 border-bottom">
             <div className="me-3">
@@ -42,15 +50,35 @@ const CommonTable = ({
               />
             </div>
             <div className="d-flex gap-2">
-              <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
-                <Icon.ChevronUp size={15} /> Sort
+              <Button
+                color="secondary"
+                size="sm"
+                className="d-flex align-items-center gap-2"
+                onClick={() => (sortCallback ? sortCallback(sort) : null)}>
+                {sort > 0 ? <Icon.ChevronDown size={15} /> : <Icon.ChevronUp size={15} />}
+                Sort
               </Button>
-              <Button color="secondary" size="sm" className="d-flex align-items-center gap-2">
+              <Button
+                color="secondary"
+                size="sm"
+                className="d-flex align-items-center gap-2"
+                onClick={filterCallback}>
                 <Icon.Filter size={15} />
                 Filter
               </Button>
             </div>
           </div>
+        </Card>
+      )}
+
+      {isLoading ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "200px" }}>
+          <Spinner color="primary" />
+        </div>
+      ) : (
+        <div className="table-container">
           <Table className="no-wrap align-middle table-bg" responsive>
             <thead>
               <tr>
@@ -79,7 +107,64 @@ const CommonTable = ({
               )}
             </tbody>
           </Table>
-        </Card>
+        </div>
+      )}
+
+      {!hidePagination && (
+        <div className="pagination-outer-container">
+          <div className="pagination-container flex-wrap gap-3">
+            <div className="rows-per-page">
+              <label htmlFor="rowsPerPage" className="rows-label">
+                Rows per page:
+              </label>
+              <select
+                id="rowsPerPage"
+                value={rowsPerPage}
+                onChange={(e) =>
+                  onRowsPerPageChange ? onRowsPerPageChange(Number(e.target.value)) : null
+                }
+                className="rows-select ms-2">
+                {[10, 20, 50].map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="custom-pagination">
+              <button
+                className={`pagination-btn first ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => currentPage > 1 && onPageChange(1)}>
+                &lt;&lt;
+              </button>
+              <button
+                className={`pagination-btn previous ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}>
+                &lt;
+              </button>
+
+              {[...Array(totalPages ? totalPages : [])].map((_, i) => (
+                <button
+                  key={i}
+                  className={`pagination-btn number ${currentPage === i + 1 ? "active" : ""}`}
+                  onClick={() => (onPageChange ? onPageChange(i + 1) : null)}>
+                  {i + 1}
+                </button>
+              ))}
+
+              <button
+                className={`pagination-btn next ${currentPage === totalPages ? "disabled" : ""}`}
+                onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}>
+                &gt;
+              </button>
+              <button
+                className={`pagination-btn last ${currentPage === totalPages ? "disabled" : ""}`}
+                onClick={() => currentPage < totalPages && onPageChange(totalPages)}>
+                &gt;&gt;
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
@@ -95,7 +180,20 @@ CommonTable.propTypes = {
     })
   ).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loading: PropTypes.bool.isRequired // Loading state
+  isLoading: PropTypes.bool.isRequired, // Loading state
+  searchPlaceHolder: PropTypes.string,
+  searchOnChange: PropTypes.func,
+  searchValue: PropTypes.string,
+  searchInputId: PropTypes.string,
+  searchInputName: PropTypes.string,
+  filterCallback: PropTypes.func,
+  sortCallback: PropTypes.func,
+  sort: PropTypes.number,
+  currentPage: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+  totalItems: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  onRowsPerPageChange: PropTypes.func.isRequired
 };
 
 export default CommonTable;

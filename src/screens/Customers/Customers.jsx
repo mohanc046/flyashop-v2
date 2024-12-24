@@ -5,7 +5,7 @@ import ComponentCardTable from "../../components/ComponentCardTable/ComponentCar
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
 import OutletCard from "../../components/OutletCard/OutletCard";
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
-import "./Customer.scss";
+import "./Customers.scss";
 import { useCustomer } from "./_hooks/useCustomer";
 
 const Customer = () => {
@@ -13,8 +13,12 @@ const Customer = () => {
 
   return (
     <OutletCard>
-      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-white">
-        <CategoryFilter categories={categories} onSelect={handleCategorySelect} />
+      <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-light">
+        <CategoryFilter
+          categories={categories}
+          onSelect={handleCategorySelect}
+          currentCategory={"ALL"}
+        />
       </Card>
 
       <ComponentCardTable title={"Manage Customers"} searchPlaceHolder={"Search by Name..."}>

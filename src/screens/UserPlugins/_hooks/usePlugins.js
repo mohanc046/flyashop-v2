@@ -16,6 +16,7 @@ export const usePlugins = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [currentPlugin, setCurrentPlugin] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
   const { tawk, googleAnalytics, whatsApp } = getStoreInfo().store.pluginConfig;
 
   const toggle = (plugin) => {
@@ -29,7 +30,7 @@ export const usePlugins = () => {
       description:
         "Offer 24/7 customer support and monitor site visitors with a live chat feature.",
       image: config.TAWK_TO_LOGO,
-      isActive: tawk.isActive,
+      isActive: tawk?.isActive,
       uninstallAction: () => uninstallChatPluginConfig()
     },
     {
@@ -37,7 +38,7 @@ export const usePlugins = () => {
       description:
         "Enable Instagram to set up a Business page where you can create and share your shop.",
       image: config.GOOGLE_ANALYTICS,
-      isActive: googleAnalytics.isActive,
+      isActive: googleAnalytics?.isActive,
       uninstallAction: () => uninstallGoogleAnalyticsPluginConfig()
     },
     {
@@ -45,7 +46,7 @@ export const usePlugins = () => {
       description:
         "Enable WhatsApp to set up a Business profile where you can create and share your shop.",
       image: whatsAppLogo,
-      isActive: whatsApp.isActive,
+      isActive: whatsApp?.isActive,
       uninstallAction: () => uninstallWhatsAppPluginConfig()
     }
   ];
@@ -222,7 +223,7 @@ export const usePlugins = () => {
   }, []);
 
   const handleCategorySelect = (category) => {
-    console.log("Selected Category:", category);
+    setSelectedCategory(category);
   };
-  return { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig };
+  return { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig, selectedCategory };
 };

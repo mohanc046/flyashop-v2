@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import "./CategoryFilter.scss"; // Add styles here
+import React, { useState, useEffect } from "react";
+import "./CategoryFilter.scss";
 
-const CategoryFilter = ({ categories, onSelect }) => {
-  const [selected, setSelected] = useState("All");
+const CategoryFilter = ({ categories, onSelect, currentCategory }) => {
+  const [selected, setSelected] = useState(currentCategory);
 
-  const handleClick = (category) => {
-    setSelected(category);
+  useEffect(() => {
+    setSelected(currentCategory);
+  }, [currentCategory]);
+
+  const handleClick = (categoryValue) => {
+    setSelected(categoryValue);
     if (onSelect) {
-      onSelect(category);
+      onSelect(categoryValue);
     }
   };
 
   return (
     <div className="category-filter">
-      {categories.map((category) => (
+      {categories.map(({ label, value }) => (
         <button
-          key={category}
-          className={`filter-btn ${selected === category ? "active" : ""}`}
-          onClick={() => handleClick(category)}
-        >
-          {category}
+          key={value}
+          className={`filter-btn ${selected === value ? "active" : ""}`}
+          onClick={() => handleClick(value)}>
+          {label}
         </button>
       ))}
     </div>

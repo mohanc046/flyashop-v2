@@ -1,6 +1,6 @@
 import React from "react";
 import OutletCard from "../../components/OutletCard/OutletCard";
-import { useSettings } from "./useSettings";
+import { useSettings } from "./_hooks/useSettings";
 import { Card, CardTitle } from "reactstrap";
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
 
@@ -16,7 +16,7 @@ const Settings = () => {
         <span className="text-muted fs-8 mb-3">
           Set up and personalize your store's web address.
         </span>
-        <CommonTable columns={columns} data={data} />
+        <CommonTable columns={columns} data={data} hidePagination hideSearch />
       </Card>
       <Card className="bg-white shadow-sm w-100 p-4">
         <CardTitle tag="h4" className="mb-3">

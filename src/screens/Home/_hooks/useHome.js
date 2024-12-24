@@ -21,22 +21,40 @@ export const useHome = () => {
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",
-    activeStatusTab: null
+    activeStatusTab: null,
+    sort: -1
   });
 
   useEffect(() => {
-    fetchOrders(payload);
     dispatch(setTitle("Home"));
   }, []);
+
+  useEffect(() => {
+    fetchOrders(payload);
+  }, [payload]);
+
+  const onApplySortFilter = (sort) => {
+    const updatedSortValue = sort > 0 ? -1 : 1;
+    setPayload((prevState) => ({ ...prevState, sort: updatedSortValue }));
+  };
+
+  const onClearFilterChange = () => {
+    setPayload((prevState) => ({
+      ...prevState,
+      currentPage: 1,
+      categoryType: "ALL",
+      activeStatusTab: null
+    }));
+  };
 
   const fetchOrders = async (payload) => {
     try {
       setState((prevState) => ({ ...prevState, loaderStatus: true }));
 
-      const { storeName, currentPage, itemPerPage, categoryType, activeStatusTab } = payload;
+      const { storeName, currentPage, itemPerPage, categoryType, sort, activeStatusTab } = payload;
       const URL = getServiceURL();
       const response = await axios.get(
-        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}`
+        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}&sort=${sort}`
       );
 
       const {
@@ -146,6 +164,9 @@ export const useHome = () => {
   return {
     columns,
     state,
-    mapOrderDataToTable
+    mapOrderDataToTable,
+    onApplySortFilter,
+    onClearFilterChange,
+    payload
   };
 };

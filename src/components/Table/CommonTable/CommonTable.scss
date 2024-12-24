@@ -1,4 +1,99 @@
-/* TableCustom.scss */
+@import "../../../assets/scss/variables";
+
+.table-container {
+  max-height: 500px; // Adjust as needed
+  overflow-y: auto;
+  border: 1px solid #ddd; // Optional border for scrollable container
+}
+
+.pagination-outer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.rows-per-page {
+  display: flex;
+  align-items: center;
+
+  .rows-label {
+    font-weight: 500;
+    margin-right: 10px;
+  }
+
+  .rows-select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+
+    &:hover {
+      border-color: #007bff;
+    }
+  }
+}
+
+.custom-pagination {
+  display: flex;
+  gap: 8px;
+
+  .pagination-btn {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      color: #aaa;
+      background-color: #e9ecef;
+      border-color: #ddd;
+    }
+
+    &.active {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+      font-weight: bold;
+    }
+
+    &.first,
+    &.last {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    &.number {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+  }
+}
+
+
 .table-bg {
     background-color: #f8f9fa !important;
     border-radius: 5px;
@@ -12,6 +107,7 @@
   .table-bg td {
     background-color: #fff !important; /* Cell background */
   }
+  
   
   /* Add other table customizations if necessary */
   

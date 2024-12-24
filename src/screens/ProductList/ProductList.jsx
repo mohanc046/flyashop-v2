@@ -12,13 +12,25 @@ import "./ProductList.scss";
 import { productCategories } from "./ProductList.constants";
 
 const ProductList = () => {
-  const { handleCategorySelect, columns, handleNavigateAddproduct, state, mapProductDataToTable } =
-    useProductList();
+  const {
+    handleCategorySelect,
+    columns,
+    handleNavigateAddproduct,
+    state,
+    mapProductDataToTable,
+    onClearFilterChange,
+    onApplySortFilter,
+    payload
+  } = useProductList();
 
   return (
     <OutletCard>
       <Card className="d-flex justify-content-between p-3 flex-row flex-wrap gap-3 bg-light">
-        <CategoryFilter categories={productCategories} onSelect={handleCategorySelect} />
+        <CategoryFilter
+          categories={productCategories}
+          onSelect={handleCategorySelect}
+          currentCategory={payload.categoryType}
+        />
 
         <div className="d-flex align-items-center gap-3 bg-light flex-wrap">
           <Button label="Report" icon={<Icon.Download size={15} />} />
@@ -35,6 +47,9 @@ const ProductList = () => {
           columns={columns}
           data={mapProductDataToTable(state?.productsList)}
           isLoading={state.loaderStatus}
+          sortCallback={onApplySortFilter}
+          filterCallback={onClearFilterChange}
+          sort={payload.sort}
         />
       </ComponentCardTable>
     </OutletCard>
