@@ -1,74 +1,57 @@
+import React, { useState } from "react";
 import { notification } from "antd";
 import axios from "axios";
-import React, { Component } from "react";
-import _ from "lodash";
 import VideoRecorder from "react-video-recorder";
+import _ from "lodash";
+import { useDispatch } from "react-redux";
 import { getServiceURL } from "../../../../../utils/utils";
 import { getAuthToken } from "../../../../../utils/_hooks";
 import { config } from "../../../../../config";
+import { hideSpinner, showSpinner } from "../../../../../store/reducers/spinnerSlice";
+import { showToast } from "../../../../../store/reducers/toasterSlice";
 import "../../../../AddProduct/AddProduct.scss";
 
 const MAX_VIDEO_SIZE_MB = 99; // Maximum size in MB
 
-class UploadProductVideoStep extends Component {
-  constructor(props) {
-    super(props);
+const UploadProductVideo = ({ updateStore, setActiveStep }) => {
+  const dispatch = useDispatch();
+  const [isUpload, setIsUpload] = useState(true);
 
-    this.state = {
-      videoUploaded: false,
-      isUpload: true,
-      productDescription: ""
-    };
-  }
-
-  blobToFile = (theBlob, fileName = "video.mp4") => {
-    if (!fileName.endsWith(".mp4")) {
-      fileName += ".mp4";
-    }
-
-    const videoSizeInBytes = theBlob.size;
-    const videoSizeInMB = videoSizeInBytes / (1024 * 1024);
-
-    console.log("Video Size:", videoSizeInBytes, "bytes");
-    console.log("Video Size:", videoSizeInMB.toFixed(2), "MB");
-
+  const blobToFile = (theBlob, fileName = "video.mp4") => {
     return new File([theBlob], fileName, {
       lastModified: new Date().getTime(),
       type: "video/mp4"
     });
   };
 
-  handleMaxFileLimitReached = (videoSizeInMB) => {
-    alert(`Video size exceeds the 10MB limit. Current size: ${videoSizeInMB.toFixed(2)} MB`);
+  const handleMaxFileLimitReached = (videoSizeInMB) => {
+    alert(
+      `Video size exceeds the ${MAX_VIDEO_SIZE_MB}MB limit. Current size: ${videoSizeInMB.toFixed(2)} MB`
+    );
   };
 
-  handleFileUpload = async (e) => {
-    e.preventDefault();
-
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     const fileSizeInMB = file.size / (1024 * 1024);
     if (fileSizeInMB > MAX_VIDEO_SIZE_MB) {
-      this.handleMaxFileLimitReached(fileSizeInMB);
+      handleMaxFileLimitReached(fileSizeInMB);
       return;
     }
 
     const formData = new FormData();
     formData.append("image", file);
-    await this.fileUpload(formData);
-  };
-  handleRecordedUpload = async (file) => {
-    const formData = new FormData();
-    formData.append("image", file);
-    try {
-      await this.fileUpload(formData);
-      console.log("File uploaded successfully");
-    } catch (error) {
-      console.error("Error uploading file:", error);
-    }
+    await fileUpload(formData);
   };
 
-  fileUpload = async (formData) => {
+  const handleRecordedUpload = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    await fileUpload(formData);
+  };
+
+  const fileUpload = async (formData) => {
     try {
+      dispatch(showSpinner());
       const URL = getServiceURL();
 
       const response = await fetch(`${URL}/fileupload`, {
@@ -84,37 +67,32 @@ class UploadProductVideoStep extends Component {
         const productImage = _.get(responseJSON, "imagePath");
 
         let transcript = "";
-        let status = false;
-        let message = "Extraction failed! Proceeding without transcript.";
 
         try {
           const videoResponse = await axios.post(`${URL}/fileupload/extract-video-text`, {
             videoUrl: productImage
           });
 
-          ({
-            message = "Extraction failed!",
-            transcript = "",
-            status = false
-          } = videoResponse?.data || {});
-        } catch (error) {
-          console.error("Error during video text extraction:", error);
+          transcript = videoResponse?.data?.transcript || ""; // Use empty string if no transcript is returned
+        } catch (extractionError) {
+          console.warn("Video extraction failed:", extractionError);
+          dispatch(
+            showToast({
+              type: "error",
+              title: "Error",
+              message: "Video extraction failed. Continuing with default values."
+            })
+          );
         }
 
-        notification.open({
-          type: status ? "success" : "warning",
-          message: message
+        updateStore({
+          productDescription: transcript,
+          productImage: productImage
         });
 
-        this.setState({ productDescription: transcript, videoUploaded: true }, () => {
-          if (this.isValidated()) {
-            notification.open({
-              type: "success",
-              message: "Product Video uploaded successfully!"
-            });
-            this.isValidated();
-          }
-        });
+        // Automatically move to the next step after upload
+        setActiveStep((prevStep) => prevStep + 1);
+        dispatch(hideSpinner());
       } else {
         notification.open({
           type: "warning",
@@ -122,65 +100,54 @@ class UploadProductVideoStep extends Component {
         });
       }
     } catch (error) {
+      dispatch(hideSpinner());
       console.error("Error uploading file:", error);
       notification.open({
         type: "error",
-        message: "Error occurred while uploading file."
+        message: "An error occurred while uploading the file."
       });
+    } finally {
+      dispatch(hideSpinner());
     }
   };
 
-  isValidated = () => {
-    const { videoUploaded } = this.state;
-
-    if (videoUploaded) {
-      this.props.updateStore(this.state);
-      return true;
-    }
-    return false;
-  };
-
-  render() {
-    const { isUpload } = this.state;
-
-    return (
-      <div className="d-flex flex-column align-items-center justify-content-center p-3">
-        <div className="addProductDraggerContainer">
-          <img className="upload-icon" src={config.UPLOAD_ICON} alt="icon" />
-          <label className="addProductDraggerLabel">Drag & Drop Files Here</label>
-          <label className="addProductDraggerLabel" style={{ marginTop: "-10px" }}>
-            Or
-          </label>
-          <div className="position-relative">
-            <button>Browse</button>
-            <input onChange={this.handleFileUpload} className="file-input" type="file" />
-          </div>
-
-          <div className="button-div" onClick={() => this.setState({ isUpload: false })}>
-            Record
-          </div>
+  return (
+    <div className="d-flex flex-column align-items-center justify-content-center p-3">
+      <div className="addProductDraggerContainer">
+        <img className="upload-icon" src={config.UPLOAD_ICON} alt="icon" />
+        <label className="addProductDraggerLabel">Drag & Drop Files Here</label>
+        <label className="addProductDraggerLabel" style={{ marginTop: "-10px" }}>
+          Or
+        </label>
+        <div className="position-relative">
+          <button>Browse</button>
+          <input onChange={handleFileUpload} className="file-input" type="file" />
         </div>
 
-        {!isUpload && (
-          <div>
-            <VideoRecorder
-              isFlipped={true}
-              showReplayControls={true}
-              type={"video/mp4"}
-              onRecordingComplete={(videoBlob) => {
-                const videoSizeInMB = videoBlob.size / (1024 * 1024);
-                if (videoSizeInMB > MAX_VIDEO_SIZE_MB) {
-                  this.handleMaxFileLimitReached(videoSizeInMB);
-                  return;
-                }
-                this.handleRecordedUpload(this.blobToFile(videoBlob));
-              }}
-            />
-          </div>
-        )}
+        <div className="button-div" onClick={() => setIsUpload(false)}>
+          Record
+        </div>
       </div>
-    );
-  }
-}
 
-export default UploadProductVideoStep;
+      {!isUpload && (
+        <div>
+          <VideoRecorder
+            isFlipped={true}
+            showReplayControls={true}
+            type={"video/mp4"}
+            onRecordingComplete={(videoBlob) => {
+              const videoSizeInMB = videoBlob.size / (1024 * 1024);
+              if (videoSizeInMB > MAX_VIDEO_SIZE_MB) {
+                handleMaxFileLimitReached(videoSizeInMB);
+                return;
+              }
+              handleRecordedUpload(blobToFile(videoBlob));
+            }}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default UploadProductVideo;

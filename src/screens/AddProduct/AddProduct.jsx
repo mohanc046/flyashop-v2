@@ -1,56 +1,47 @@
-import React, { Component } from "react";
-
-import Step1 from "./components/UploadVideoStep";
-import Step2 from "./components/ProductDetailsStep";
-import Step3 from "./components/DoneStep";
+import React from "react";
+import UploadVideo from "./components/UploadVideoStep";
+import ProductDetails from "./components/ProductDetailsStep";
+import Done from "./components/DoneStep";
 import ComponentCard from "../../components/ComponentsCard/ComponentCard";
 import Steps from "../../components/Steps/Steps";
+import { useAddProduct } from "./_hooks/useAddProduct";
 
-class FormSteps extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const AddProduct = () => {
+  const {
+    uploadStepValidation,
+    detailsStepValidation,
+    createProduct,
+    activeStep,
+    setActiveStep,
+    updateStore,
+    mainState
+  } = useAddProduct();
 
-    this.sampleStore = {
-      email: "",
-      gender: "",
-      videoUploaded: false
-    };
-  }
+  const steps = [
+    {
+      name: "Upload Video",
+      component: <UploadVideo updateStore={updateStore} setActiveStep={setActiveStep} />, // Pass setActiveStep
+      validate: () => uploadStepValidation() // Pass as a function reference
+    },
+    {
+      name: "Add Details",
+      component: <ProductDetails updateStore={updateStore} mainState={mainState} />,
+      validate: () => detailsStepValidation() // Pass as a function reference
+    },
+    {
+      name: "Done",
+      component: <Done createProduct={createProduct} />,
+      validate: () => null
+    }
+  ];
 
-  getStore = () => this.sampleStore;
+  return (
+    <div className="p-2 p-sm-3 p-md-4 p-lg-5">
+      <ComponentCard>
+        <Steps steps={steps} activeStep={activeStep} setActiveStep={setActiveStep} />
+      </ComponentCard>
+    </div>
+  );
+};
 
-  updateStore = (update) => {
-    this.sampleStore = {
-      ...this.sampleStore,
-      ...update
-    };
-  };
-
-  render() {
-    const steps = [
-      {
-        name: "Upload Video",
-        component: <Step1 getStore={this.getStore} updateStore={this.updateStore} />
-      },
-      {
-        name: "Add Details",
-        component: <Step2 getStore={this.getStore} updateStore={this.updateStore} />
-      },
-      {
-        name: "Done",
-        component: <Step3 getStore={this.getStore} updateStore={this.updateStore} />
-      }
-    ];
-
-    return (
-      <div className="p-2 p-sm-3 p-md-4 p-lg-5">
-        <ComponentCard>
-          <Steps steps={steps} />
-        </ComponentCard>
-      </div>
-    );
-  }
-}
-
-export default FormSteps;
+export default AddProduct;

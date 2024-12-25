@@ -1,17 +1,11 @@
-import React, { Component } from "react";
-import { Card, CardBody, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import React, { useEffect } from "react";
 
-class Step3 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const DoneStep = ({ createProduct }) => {
+  useEffect(() => {
+    createProduct();
+  }, [createProduct]);
 
-  render() {
-    const {} = this.state;
+  return null;
+};
 
-    return <Col md="12"></Col>;
-  }
-}
-
-export default Step3;
+export default DoneStep;
