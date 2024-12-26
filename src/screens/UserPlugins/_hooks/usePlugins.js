@@ -17,7 +17,9 @@ export const usePlugins = () => {
   const [modal, setModal] = useState(false);
   const [currentPlugin, setCurrentPlugin] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("ALL");
-  const { tawk, googleAnalytics, whatsApp } = getStoreInfo().store.pluginConfig;
+  const { store } = getStoreInfo() || {};
+  const { pluginConfig = {} } = store || {};
+  const { tawk, googleAnalytics, whatsApp } = pluginConfig;
 
   const toggle = (plugin) => {
     setModal(!modal);

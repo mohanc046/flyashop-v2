@@ -6,6 +6,9 @@ import { getServiceURL } from "../../../utils/utils";
 import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 import { getAuthToken } from "../../../utils/_hooks";
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
+import { INITIAL_STATE } from "../../Login/login.constants";
+import { message } from "antd";
 
 export const useAddProduct = () => {
   const navigate = useNavigate();
@@ -23,6 +26,107 @@ export const useAddProduct = () => {
   useEffect(() => {
     dispatch(setTitle("Add Product"));
   }, []);
+
+  const storeDetailsStepValidation = () => {
+    const fields = [
+      { field: mainState.country, message: "Country is required." },
+      { field: mainState.businessName, message: "Business Name is required." },
+      { field: mainState.businessType, message: "Business Type is required." }
+    ];
+
+    for (const { field, message } of fields) {
+      if (!field) {
+        dispatch(
+          showToast({
+            type: "error",
+            title: "Error",
+            message
+          })
+        );
+        return true;
+      }
+    }
+
+    initiateStoreCreation();
+    return false;
+  };
+
+  const createStore = async ({ currency }) => {
+    try {
+      dispatch(showSpinner());
+      const URL = getServiceURL();
+
+      const response = await fetch(`${URL}/store/create`, {
+        method: "POST",
+        body: JSON.stringify({
+          location: mainState.country,
+          businessName: mainState.businessName,
+          businessType: [mainState.businessType],
+          currency
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getAuthToken()}`
+        }
+      });
+
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      const responseData = await response.json();
+      const { data } = responseData || {};
+      const { message = "Store creation successful!" } = data || {};
+
+      if (response.status === 200) {
+        dispatch(showToast({ type: "success", title: "Success", message: message }));
+
+        localStorage.setItem(
+          "storeInfo",
+          JSON.stringify({
+            store: {
+              businessName: mainState.businessName,
+              businessType: [mainState.businessType],
+              location: mainState.country
+            }
+          })
+        );
+
+        dispatch(hideSpinner());
+        return true;
+      } else {
+        dispatch(hideSpinner());
+        dispatch(showToast({ type: "warning", title: "Success", message: message }));
+        return false;
+      }
+    } catch (error) {
+      dispatch(hideSpinner());
+      dispatch(
+        showToast({ type: "error", title: "Error", message: "Error while creating the store." })
+      );
+      return false;
+    } finally {
+      dispatch(hideSpinner());
+    }
+  };
+
+  const initiateStoreCreation = async () => {
+    if (![mainState.businessType, mainState.businessName, mainState.country].includes("")) {
+      const currencyIndex = _.findIndex(
+        INITIAL_STATE.countryList,
+        (countryName) => countryName === mainState.country
+      );
+
+      const currency = INITIAL_STATE.currencyList[currencyIndex];
+      return await createStore({ currency });
+    } else {
+      dispatch(
+        showToast({
+          type: "warning",
+          description: "Kindly provide all the required fields."
+        })
+      );
+      return false;
+    }
+  };
 
   const uploadStepValidation = () => {
     if (!mainState.productImage) {
@@ -126,6 +230,7 @@ export const useAddProduct = () => {
   };
 
   return {
+    storeDetailsStepValidation,
     uploadStepValidation,
     detailsStepValidation,
     createProduct,

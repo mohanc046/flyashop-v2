@@ -36,7 +36,7 @@ const authToken = getAuthToken();
 const ThemeRoutes = [
   {
     path: "/",
-    element: authToken ? <FullLayout /> : <BlankLayout />,
+    element: <FullLayout />,
     children: authToken
       ? [
           { path: "/", name: "Home", element: <Navigate to="/home" /> },

@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Col } from "reactstrap";
 
-const DoneStep = () => {
+const DoneStep = ({ createProduct }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/home");
-  }, [navigate]);
+    createProduct();
+  }, [navigate, createProduct]);
 
-  return <Col md="12"></Col>;
+  return null;
 };
 
 export default DoneStep;

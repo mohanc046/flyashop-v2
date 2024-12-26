@@ -51,7 +51,10 @@ const Steps = ({ steps, activeStep, setActiveStep }) => {
               {error && <Typography color="red">{error}</Typography>}
               <Typography>{steps[activeStep]?.component || "No content"}</Typography>
               <div className="step-actions">
-                <Button disabled={activeStep === 0} onClick={handleBack} variant="outlined">
+                <Button
+                  disabled={activeStep === 0 || steps[activeStep].hideBackButton}
+                  onClick={handleBack}
+                  variant="outlined">
                   Back
                 </Button>
                 <Button onClick={handleNext} variant="contained" color="primary">

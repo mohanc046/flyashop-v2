@@ -5,9 +5,11 @@ import Done from "./components/DoneStep";
 import { useAddProduct } from "../../../AddProduct/_hooks/useAddProduct";
 import ComponentCard from "../../../../components/ComponentsCard/ComponentCard";
 import Steps from "../../../../components/Steps/Steps";
+import StoreDetails from "./components/StoreDetails";
 
 const AddProduct = () => {
   const {
+    storeDetailsStepValidation,
     uploadStepValidation,
     detailsStepValidation,
     createProduct,
@@ -19,9 +21,15 @@ const AddProduct = () => {
 
   const steps = [
     {
+      name: "Store Setup",
+      component: <StoreDetails updateStore={updateStore} setActiveStep={setActiveStep} />, // Pass setActiveStep
+      validate: () => storeDetailsStepValidation() // Pass as a function reference
+    },
+    {
       name: "Upload Product Video",
       component: <UploadVideo updateStore={updateStore} setActiveStep={setActiveStep} />, // Pass setActiveStep
-      validate: () => uploadStepValidation() // Pass as a function reference
+      validate: () => uploadStepValidation(),
+      hideBackButton: true
     },
     {
       name: "Add Details",

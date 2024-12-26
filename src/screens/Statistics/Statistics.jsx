@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CIcon from "@coreui/icons-react";
 
@@ -20,11 +20,18 @@ import { isMobileView } from "../../utils/utils";
 
 import { Col, Form, Input, Menu, Row, Segmented } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import { getAuthToken } from "../../utils/_hooks";
 
 const Statistics = (props) => {
   const { TextArea } = Input;
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getAuthToken()) {
+      navigate("/home");
+    }
+  }, [localStorage]);
 
   const isMobileLayout = isMobileView();
   const [openMenu, setOpenMenu] = useState(false);
