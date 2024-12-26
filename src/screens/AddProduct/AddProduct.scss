@@ -57,6 +57,31 @@
     cursor: pointer;
 }
 
+.video-recorder-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 100%;
+    z-index: 9999;
+  }
+  
+  .video-recorder-container.hidden {
+    display: none;
+  }
+  
+  .video-recorder-container.visible {
+    display: flex;
+  }
+
+  .toggle-button {
+    background-color: white;
+    color: white;
+    border: none;
+  }
+  
+  
+
 @media (max-width: 1200px) {
     .addProductDraggerContainer button {
         width: 170px;
@@ -82,8 +107,18 @@
         border-radius: 30px;
     }
   }
+
+  @media (max-width: 768px) {
+    .addProductDraggerContainer {
+        width: 100%;
+    }
+
+  }
   
   @media (max-width: 450px) {
+    .addProductDraggerContainer {
+        width: 100%;
+    }
     .addProductDraggerContainer button {
         width: 170px;
         height: 44px;

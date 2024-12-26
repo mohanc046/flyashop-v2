@@ -16,6 +16,7 @@ const MAX_VIDEO_SIZE_MB = 99; // Maximum size in MB
 const UploadProductVideo = ({ updateStore, setActiveStep }) => {
   const dispatch = useDispatch();
   const [isUpload, setIsUpload] = useState(true);
+  const [showRecorder, setShowRecorder] = useState(false);
 
   const blobToFile = (theBlob, fileName = "video.mp4") => {
     return new File([theBlob], fileName, {
@@ -26,7 +27,9 @@ const UploadProductVideo = ({ updateStore, setActiveStep }) => {
 
   const handleMaxFileLimitReached = (videoSizeInMB) => {
     alert(
-      `Video size exceeds the ${MAX_VIDEO_SIZE_MB}MB limit. Current size: ${videoSizeInMB.toFixed(2)} MB`
+      `Video size exceeds the ${MAX_VIDEO_SIZE_MB}MB limit. Current size: ${videoSizeInMB.toFixed(
+        2
+      )} MB`
     );
   };
 
@@ -132,12 +135,17 @@ const UploadProductVideo = ({ updateStore, setActiveStep }) => {
           <input onChange={handleFileUpload} className="file-input" type="file" />
         </div>
 
-        <div className="button-div" onClick={() => setIsUpload(false)}>
+        <div
+          className="button-div"
+          onClick={() => {
+            setIsUpload(false);
+            setShowRecorder(true); // Ensure recorder is displayed
+          }}>
           Record
         </div>
       </div>
 
-      {!isUpload && (
+      {showRecorder && (
         <div>
           <VideoRecorder
             isFlipped={true}
@@ -150,6 +158,10 @@ const UploadProductVideo = ({ updateStore, setActiveStep }) => {
                 return;
               }
               handleRecordedUpload(blobToFile(videoBlob));
+            }}
+            onTurnOnCamera={() => {
+              // Ensure the recorder is visible after permissions are granted
+              setShowRecorder(true);
             }}
           />
         </div>

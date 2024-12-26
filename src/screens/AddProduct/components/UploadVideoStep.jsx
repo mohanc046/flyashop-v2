@@ -31,7 +31,7 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
         Bucket: BUCKET_NAME, // Replace with your S3 bucket name
         Key: `${Date.now()}-${file.name}`, // File name in S3
         Body: file,
-        ContentType: file.type,
+        ContentType: file.type
       };
       return new Promise((resolve, reject) => {
         s3.upload(params, (err, data) => {
@@ -151,19 +151,25 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
 
       {!isUpload && (
         <div>
-          <VideoRecorder
-            isFlipped={true}
-            showReplayControls={true}
-            type={"video/mp4"}
-            onRecordingComplete={(videoBlob) => {
-              const videoSizeInMB = videoBlob.size / (1024 * 1024);
-              if (videoSizeInMB > MAX_VIDEO_SIZE_MB) {
-                handleMaxFileLimitReached(videoSizeInMB);
-                return;
-              }
-              handleRecordedUpload(blobToFile(videoBlob));
-            }}
-          />
+          <button onClick={() => setIsUpload(!isUpload)} className="toggle-button">
+            Toggle Recorder
+          </button>
+
+          <div className="video-recorder-container">
+            <VideoRecorder
+              isFlipped={true}
+              showReplayControls={true}
+              type={"video/mp4"}
+              onRecordingComplete={(videoBlob) => {
+                const videoSizeInMB = videoBlob.size / (1024 * 1024);
+                if (videoSizeInMB > MAX_VIDEO_SIZE_MB) {
+                  handleMaxFileLimitReached(videoSizeInMB);
+                  return;
+                }
+                handleRecordedUpload(blobToFile(videoBlob));
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
