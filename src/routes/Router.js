@@ -10,8 +10,8 @@ const BlankLayout = Loadable(lazy(() => import("../layouts/BlankLayout.js")));
 
 /***** Pages *****/
 const Landing = Loadable(lazy(() => import("../screens/Statistics/Statistics.jsx")));
-const Login = Loadable(lazy(() => import("../screens/Login/Login.jsx")));
-const Home = Loadable(lazy(() => import("../screens/Home/Home.jsx")));
+const Login = Loadable(lazy(() => import("../screens/Login/login.jsx")));
+const Home = Loadable(lazy(() => import("../screens/Home/home.jsx")));
 const OrderList = Loadable(lazy(() => import("../screens/Order/OrderList.jsx")));
 const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductList.jsx")));
 const AddProduct = Loadable(lazy(() => import("../screens/AddProduct/AddProduct.jsx")));

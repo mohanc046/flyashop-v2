@@ -10,6 +10,7 @@ import "../AddProduct.scss";
 import { useDispatch } from "react-redux";
 import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 import { showToast } from "../../../store/reducers/toasterSlice";
+import { BUCKET_NAME, s3 } from "../../../utils/awsConfig";
 
 const MAX_VIDEO_SIZE_MB = 99; // Maximum size in MB
 
@@ -22,6 +23,31 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
       lastModified: new Date().getTime(),
       type: "video/mp4"
     });
+  };
+
+  const uploadToS3 = async (file) => {
+    try {
+      const params = {
+        Bucket: BUCKET_NAME, // Replace with your S3 bucket name
+        Key: `${Date.now()}-${file.name}`, // File name in S3
+        Body: file,
+        ContentType: file.type,
+      };
+      return new Promise((resolve, reject) => {
+        s3.upload(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data.Location); // Return the file's URL
+          }
+        });
+      });
+    } catch (error) {
+      notification.open({
+        type: "warning",
+        message: "Facing issue with image upload!"
+      });
+    }
   };
 
   const handleMaxFileLimitReached = (videoSizeInMB) => {
@@ -53,60 +79,46 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
     try {
       dispatch(showSpinner());
       const URL = getServiceURL();
+      // Extract the file from FormData
+      const file = formData.get("image");
+      // Upload to S3
+      const productImage = await uploadToS3(file);
 
-      const response = await fetch(`${URL}/fileupload`, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${getAuthToken()}`
-        }
+      let transcript = "";
+
+      try {
+        const videoResponse = await axios.post(
+          `${URL}/fileupload/extract-video-text`,
+          {
+            videoUrl: productImage
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${getAuthToken()}`
+            }
+          }
+        );
+
+        transcript = videoResponse?.data?.transcript || ""; // Use empty string if no transcript is returned
+      } catch (extractionError) {
+        console.warn("Video extraction failed:", extractionError);
+        dispatch(
+          showToast({
+            type: "error",
+            title: "Error",
+            message: "Video extraction failed. Continuing with default values."
+          })
+        );
+      }
+
+      updateStore({
+        productDescription: transcript,
+        productImage: productImage
       });
 
-      if (response.ok) {
-        const responseJSON = await response.json();
-        const productImage = _.get(responseJSON, "imagePath");
-
-        let transcript = "";
-
-        try {
-          const videoResponse = await axios.post(
-            `${URL}/fileupload/extract-video-text`,
-            {
-              videoUrl: productImage
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${getAuthToken()}`
-              }
-            }
-          );
-
-          transcript = videoResponse?.data?.transcript || ""; // Use empty string if no transcript is returned
-        } catch (extractionError) {
-          console.warn("Video extraction failed:", extractionError);
-          dispatch(
-            showToast({
-              type: "error",
-              title: "Error",
-              message: "Video extraction failed. Continuing with default values."
-            })
-          );
-        }
-
-        updateStore({
-          productDescription: transcript,
-          productImage: productImage
-        });
-
-        // Automatically move to the next step after upload
-        setActiveStep((prevStep) => prevStep + 1);
-        dispatch(hideSpinner());
-      } else {
-        notification.open({
-          type: "warning",
-          message: "Facing issue with image upload!"
-        });
-      }
+      // Automatically move to the next step after upload
+      setActiveStep((prevStep) => prevStep + 1);
+      dispatch(hideSpinner());
     } catch (error) {
       dispatch(hideSpinner());
       console.error("Error uploading file:", error);
