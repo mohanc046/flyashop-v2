@@ -69,9 +69,17 @@ const UploadProductVideo = ({ updateStore, setActiveStep }) => {
         let transcript = "";
 
         try {
-          const videoResponse = await axios.post(`${URL}/fileupload/extract-video-text`, {
-            videoUrl: productImage
-          });
+          const videoResponse = await axios.post(
+            `${URL}/fileupload/extract-video-text`,
+            {
+              videoUrl: productImage
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${getAuthToken()}`
+              }
+            }
+          );
 
           transcript = videoResponse?.data?.transcript || ""; // Use empty string if no transcript is returned
         } catch (extractionError) {

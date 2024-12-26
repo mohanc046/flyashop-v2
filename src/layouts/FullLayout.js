@@ -10,6 +10,7 @@ import Spinner from "../components/Spinner/Spinner";
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 import { getStoreInfo } from "../utils/_hooks";
+import _ from "lodash";
 
 const FullLayout = () => {
   const customizerToggle = useSelector((state) => state.customizer.customizerSidebar);
@@ -31,6 +32,8 @@ const FullLayout = () => {
     isActive: isWhatsAppActive = false,
     userName = ""
   } = pluginConfig.whatsApp || {};
+
+  const isNotAdmin = !_.isEmpty(shopInformation.store);
 
   return (
     <main>
@@ -63,12 +66,12 @@ const FullLayout = () => {
         </div>
 
         <div className="position-absolute">
-          {isTawkActive && propertyId && widgetId && (
+          {isNotAdmin && isTawkActive && propertyId && widgetId && (
             <TawkMessengerReact propertyId={propertyId} widgetId={widgetId} />
           )}
 
           {/* Floating WhatsApp Integration */}
-          {isWhatsAppActive && phoneNumber && userName && (
+          {isNotAdmin && isWhatsAppActive && phoneNumber && userName && (
             <FloatingWhatsApp phoneNumber={phoneNumber} accountName={userName} />
           )}
         </div>
