@@ -170,6 +170,26 @@ export const useOrder = () => {
           <span>{value}</span>
         </div>
       )
+    },
+    {
+      label: "",
+      key: "actions",
+      render: (value) => (
+        <div className="d-flex gap-2 align-items-center">
+          <span
+            className={`p-2 ${
+              value === "PENDING"
+                ? "bg-danger"
+                : value === "Delivered"
+                  ? "bg-success"
+                  : value === "ACCEPTED"
+                    ? "bg-warning"
+                    : ""
+            } rounded-circle`}
+          />
+          <span>{value}</span>
+        </div>
+      )
     }
   ];
 

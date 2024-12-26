@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
 import Header from "./header/Header";
 import Sidebar from "./sidebars/vertical/Sidebar";
@@ -11,8 +11,10 @@ import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 import { getStoreInfo } from "../utils/_hooks";
 import _ from "lodash";
+import { ToggleMobileSidebar } from "../store/customizer/CustomizerSlice";
 
 const FullLayout = () => {
+  const dispatch = useDispatch();
   const customizerToggle = useSelector((state) => state.customizer.customizerSidebar);
   const toggleMiniSidebar = useSelector((state) => state.customizer.isMiniSidebar);
   const showMobileSidebar = useSelector((state) => state.customizer.isMobileSidebar);
@@ -38,7 +40,10 @@ const FullLayout = () => {
   return (
     <main>
       <div
-        className={`pageWrapper d-md-block d-lg-flex ${toggleMiniSidebar ? "isMiniSidebar" : ""}`}>
+        className={`pageWrapper d-md-block d-lg-flex ${toggleMiniSidebar ? "isMiniSidebar" : ""}`}
+        onClick={() =>
+          window.innerWidth <= 768 && showMobileSidebar ? dispatch(ToggleMobileSidebar()) : ""
+        }>
         {/******** Sidebar **********/}
         {LayoutHorizontal ? (
           ""

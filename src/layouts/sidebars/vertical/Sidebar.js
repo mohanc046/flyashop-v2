@@ -28,16 +28,16 @@ const Sidebar = ({ showMobileSidebar }) => {
         {/********Logo*******/}
         <div className="d-flex p-3 align-items-center">
           <Logo />
-          {window.innerWidth <= 768 ? (
+          {/* {window.innerWidth <= 768 ? (
             <Button
               close
               size="sm"
               className="ms-auto d-sm-block d-lg-none"
               onClick={() => dispatch(ToggleMobileSidebar())}
             />
-          ) : null}
+          ) : null} */}
         </div>
-        <div>
+        <div className="">
           <Nav vertical className={activeBg === "white" ? "" : "lightText"}>
             {SidebarData.map((navi) => {
               if (navi.caption) {
