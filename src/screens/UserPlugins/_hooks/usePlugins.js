@@ -79,7 +79,7 @@ export const usePlugins = () => {
           store: {
             ...storeInfo.store,
             pluginConfig: {
-              ...storeInfo.store.pluginConfig,
+              ...storeInfo.store?.pluginConfig,
               tawk: requestPayload
             }
           }

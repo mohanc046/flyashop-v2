@@ -5,17 +5,21 @@ import { getStoreInfo } from "../../../utils/_hooks";
 import ImgOrVideoRenderer from "../../../components/ImgOrVideoRenderer/ImgOrVideoRenderer";
 import { getServiceURL, isImageUrl } from "../../../utils/utils";
 import axios from "axios";
+import { statusActions, statusColors } from "../OrderList.constants";
+import { Button } from "reactstrap";
+import { showToast } from "../../../store/reducers/toasterSlice";
 
 export const useOrder = () => {
   const dispatch = useDispatch();
-  const categories = [
-    { label: "All", value: "ALL" },
-    { label: "Pending", value: "PENDING" },
-    { label: "Accepted", value: "ACCEPTED" },
-    { label: "Rejected", value: "REJECTED" },
-    { label: "Shipped", value: "SHIPPED" },
-    { label: "Delivered", value: "DELIVERED" }
-  ];
+
+  const [modalData, setModalData] = useState({ title: "", action: "", row: null });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    console.log(isModalOpen);
+  }, [isModalOpen]);
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const [state, setState] = useState({
     loaderStatus: false,
@@ -130,6 +134,54 @@ export const useOrder = () => {
       status: order.status
     }));
 
+  const renderButtons = (status, row) => {
+    const actions = statusActions[status] || [];
+    return actions.map(({ label, action }) => (
+      <Button
+        key={action}
+        color="primary"
+        size="sm"
+        className="me-2"
+        onClick={() => handleButtonClick(action, row)}>
+        {label}
+      </Button>
+    ));
+  };
+
+  const handleButtonClick = (action, row) => {
+    const titles = {
+      Reject: "Do you want to reject the order?",
+      Accept: "Do you want to accept the order?",
+      Cancel: "Do you want to cancel the order?",
+      Ship: "Do you want to cancel the order?",
+      Deliver: "Do you want to delivery the order?",
+      Track: "Do you want to add the tracking code?",
+      Activity: "Application Timeline:"
+    };
+
+    setModalData({
+      title: titles[action] || "Action",
+      action,
+      row
+    });
+    toggleModal();
+  };
+
+  const handleSubmit = () => {
+    dispatch(showToast({ type: "success", title: "Success", message: "Updated Successfully" }));
+    console.log("Action submitted:", modalData.action, modalData.row);
+
+    const payload = {
+      orderId: "",
+      decision: "",
+      remarks: "",
+      status: "",
+      trackingId: ""
+    };
+
+    toggleModal();
+  };
+
   const columns = [
     {
       label: "Item",
@@ -157,44 +209,21 @@ export const useOrder = () => {
       render: (value) => (
         <div className="d-flex gap-2 align-items-center">
           <span
-            className={`p-2 ${
-              value === "PENDING"
-                ? "bg-danger"
-                : value === "Delivered"
-                  ? "bg-success"
-                  : value === "ACCEPTED"
-                    ? "bg-warning"
-                    : ""
-            } rounded-circle`}
+            className="p-2 rounded-circle"
+            style={{ backgroundColor: statusColors[value] || "#333" }}
           />
           <span>{value}</span>
         </div>
       )
     },
     {
-      label: "",
+      label: "Actions",
       key: "actions",
-      render: (value) => (
-        <div className="d-flex gap-2 align-items-center">
-          <span
-            className={`p-2 ${
-              value === "PENDING"
-                ? "bg-danger"
-                : value === "Delivered"
-                  ? "bg-success"
-                  : value === "ACCEPTED"
-                    ? "bg-warning"
-                    : ""
-            } rounded-circle`}
-          />
-          <span>{value}</span>
-        </div>
-      )
+      render: (value, row) => renderButtons(row.status, row)
     }
   ];
 
   return {
-    categories,
     handleCategorySelect,
     columns,
     state,
@@ -202,6 +231,10 @@ export const useOrder = () => {
     mapOrderDataToTable,
     payload,
     onApplySortFilter,
-    onClearFilterChange
+    onClearFilterChange,
+    isModalOpen,
+    setIsModalOpen,
+    modalData,
+    handleSubmit
   };
 };

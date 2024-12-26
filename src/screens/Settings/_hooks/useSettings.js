@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "../Settings.scss";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
+import { getStoreInfo } from "../../../utils/_hooks";
 
 export const useSettings = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ export const useSettings = () => {
   const data = [
     {
       key: "1",
-      domainName: `https://flyashop.com/store/${"businessName"}`,
+      domainName: `https://flyashop.com/store/${getStoreInfo()?.store?.businessName}`,
       addedAt: "Feb 27, 2024",
       status: ["LIVE"],
       provider: "Godaddy"

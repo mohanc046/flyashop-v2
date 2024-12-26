@@ -23,19 +23,20 @@ const FullLayout = () => {
 
   const shopInformation = getStoreInfo();
 
-  const { pluginConfig = {} } = shopInformation.store;
+  const pluginConfig = shopInformation?.store?.pluginConfig || {};
   const {
     propertyId = null,
     widgetId = null,
     isActive: isTawkActive = false
   } = pluginConfig.tawk || {};
+
   const {
     phoneNumber = null,
     isActive: isWhatsAppActive = false,
     userName = ""
   } = pluginConfig.whatsApp || {};
 
-  const isNotAdmin = !_.isEmpty(shopInformation.store);
+  const isNotAdmin = !_.isEmpty(shopInformation?.store);
 
   return (
     <main>
