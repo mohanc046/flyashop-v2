@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import axios from "axios";
@@ -6,6 +6,9 @@ import _ from "lodash";
 import { getServiceURL, isImageUrl } from "../../../utils/utils";
 import { getStoreInfo } from "../../../utils/_hooks";
 import ImgOrVideoRenderer from "../../../components/ImgOrVideoRenderer/ImgOrVideoRenderer";
+import "../Home.scss";
+import Button from "../../../components/Button/Button.jsx";
+import * as Icon from "react-feather";
 
 export const useHome = () => {
   const dispatch = useDispatch();
@@ -161,12 +164,52 @@ export const useHome = () => {
     }
   ];
 
+  const visitStoreColumns = [
+    {
+      label: "Shop Link",
+      key: "shopLink"
+    },
+    {
+      label: "Status",
+      key: "status",
+      render: (value, row) => (
+        <div className="d-flex align-items-center">
+          <h5 className="mb-0 live">{value}</h5> {/* Ensure `value` is a valid string */}
+        </div>
+      )
+    },
+    {
+      label: "Actions",
+      key: "action",
+      render: (value, row) => (
+        <div>
+          <Button
+            label={"Visit"}
+            icon={<Icon.Eye size={15} />}
+            onClick={() => window.open(row.shopLink, "_blank")}
+            className="visit-button"
+          />
+        </div>
+      )
+    }
+  ];
+
+  const visitStoreData = [
+    {
+      shopLink: `${window.location?.origin}/store/${getStoreInfo()?.store.businessName}`,
+      status: "LIVE",
+      action: "Visit"
+    }
+  ];
+
   return {
     columns,
     state,
     mapOrderDataToTable,
     onApplySortFilter,
     onClearFilterChange,
-    payload
+    payload,
+    visitStoreColumns,
+    visitStoreData
   };
 };

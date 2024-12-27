@@ -9,8 +9,16 @@ import { getUserProfile } from "../../utils/_hooks";
 import _ from "lodash";
 
 const Home = () => {
-  const { columns, state, payload, mapOrderDataToTable, onApplySortFilter, onClearFilterChange } =
-    useHome();
+  const {
+    columns,
+    state,
+    payload,
+    mapOrderDataToTable,
+    onApplySortFilter,
+    onClearFilterChange,
+    visitStoreColumns,
+    visitStoreData
+  } = useHome();
   const userInfo = getUserProfile();
 
   return (
@@ -28,6 +36,7 @@ const Home = () => {
           Your Store is Active Now. Customers can visit the following shop link and place their
           orders.
         </h4>
+        <CommonTable columns={visitStoreColumns} data={visitStoreData} hidePagination hideSearch />
         <AnalyticsCard />
         <div className="d-flex flex-wrap justify-content-between align-items-start">
           <Col lg={12} md={12}>

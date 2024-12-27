@@ -1,3 +1,5 @@
+@import "../../assets/scss/variables";
+
 .heading-container {
     width: fit-content;
     align-items: center;
@@ -20,42 +22,57 @@
     font-size: 17px;
 }
 
-.bannerBox {
-    height: 170px;
-    width: 170px;
-    border: 4px dashed #dfdfdf;
-    text-align: center;
+.banners-grid {
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // Adjust columns as needed
+    gap: 1rem;
+  }
+  
+  .banner-card {
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
-    flex-direction: column;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    width: 150px;
+    height: 150px;
     cursor: pointer;
-    border-radius: 30px;
-    margin: 10px;
-}
+    background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+  
+    &:hover {
+      border-color: $primary;
 
-.bannerBoxImage {
-    height: 170px;
-    width: 170px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    border-radius: 30px;
-    margin: 10px;
-}
+      .add-banner-content {
+        color: $primary;
+      }
 
-.bannerPlus {
-    font-size: 25px;
-}
-.userBannerLayout {
-    width: 50%;
-    margin-left: 22%;
-    align-items: center;
-    margin-top: 2%;
-}
+    }
+  
+    .add-banner-content {
+      text-align: center;
+      color: #6c757d;
+  
+      i {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+  
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+  
+    .banner-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
 
 @media only screen and (min-width : 320px) {
     .userBannerLayout {

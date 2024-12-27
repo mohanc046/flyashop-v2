@@ -12,7 +12,7 @@ import GoogleAnalyticsModal from "./components/GoogleAnalyticsModal";
 import WhatsAppModal from "./components/WhatsAppModal";
 
 const Plugins = () => {
-  const { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig, selectedCategory } =
+  const { handleCategorySelect, toggle, currentPlugin, modal, filteredPlugins, selectedCategory } =
     usePlugins();
 
   return (
@@ -24,11 +24,17 @@ const Plugins = () => {
           currentCategory={selectedCategory}
         />
         <Row className="d-flex flex-wrap mt-4">
-          {PluginConfig.map((plugin, index) => (
-            <Col ls="4" key={index}>
-              <PluginCard details={plugin} toggle={toggle} />
+          {filteredPlugins.length > 0 ? (
+            filteredPlugins.map((plugin, index) => (
+              <Col xs="12" md="4" key={index}>
+                <PluginCard details={plugin} />
+              </Col>
+            ))
+          ) : (
+            <Col xs="12">
+              <p className="text-center">No plugins found for this category.</p>
             </Col>
-          ))}
+          )}
         </Row>
       </Card>
       <Modal isOpen={modal} toggle={toggle} size="md">

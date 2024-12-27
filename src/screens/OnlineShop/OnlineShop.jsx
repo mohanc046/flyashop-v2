@@ -8,9 +8,10 @@ import "./OnlineShop.scss";
 import Switch from "../../components/Switch/Switch";
 import Button from "../../components/Button/Button";
 import { onlineShopCategories } from "./OnlineShop.constants";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const OnlineShop = () => {
-  const { handleCategorySelect } = useOnlineShop();
+  const { handleCategorySelect, banners, fileUpload } = useOnlineShop();
 
   return (
     <OutletCard>
@@ -18,25 +19,51 @@ const OnlineShop = () => {
         <CategoryFilter
           categories={onlineShopCategories}
           onSelect={handleCategorySelect}
-          currentCategory={"Banners"}
+          currentCategory="Banners"
         />
 
         <div className="d-flex flex-column gap-3 bg-light mt-3">
           <div className="heading-container">
             <h3>Promotional Banners</h3>
             <Switch
-              initialStatus={"hidden"}
+              initialStatus="hidden"
               activeText="Active"
               hiddenText="Hidden"
               onToggle={(newStatus) => console.log("New Status: ", newStatus)} // Handle status toggle
             />
           </div>
           <h4 className="description">
-            Make more attention of your customers by promotional banners displayed on top of your
-            home page
+            Attract more attention from your customers with promotional banners displayed on the top
+            of your homepage.
           </h4>
-          <h3 className="banners-count-title">Banners (0/6)</h3>
-          <Button label="Save" onClick={() => console.log("Button Clicked!")} />
+          <h3 className="banners-count-title">Banners ({banners.filter(Boolean).length}/6)</h3>
+
+          <div className="banners-grid">
+            {banners.map((banner, index) => (
+              <div
+                key={index}
+                className="banner-card"
+                onClick={() => document.getElementById(`banner-upload-${index}`).click()}>
+                {banner ? (
+                  <img src={banner} alt={`Banner ${index + 1}`} className="banner-image" />
+                ) : (
+                  <div className="add-banner-content">
+                    <PlusCircleOutlined />
+                    <p>Add Banner</p>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  id={`banner-upload-${index}`}
+                  accept="image/*"
+                  style={{ display: "none" }}
+                  onChange={(event) => fileUpload(event, index)}
+                />
+              </div>
+            ))}
+          </div>
+
+          <Button label="Save" onClick={() => console.log("Save Button Clicked!")} />
         </div>
       </Card>
     </OutletCard>

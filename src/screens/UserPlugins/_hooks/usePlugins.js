@@ -21,11 +21,6 @@ export const usePlugins = () => {
   const { pluginConfig = {} } = store || {};
   const { tawk, googleAnalytics, whatsApp } = pluginConfig;
 
-  const toggle = (plugin) => {
-    setModal(!modal);
-    setCurrentPlugin(plugin);
-  };
-
   const PluginConfig = [
     {
       title: "Tawk.To : Live Chat",
@@ -33,7 +28,8 @@ export const usePlugins = () => {
         "Offer 24/7 customer support and monitor site visitors with a live chat feature.",
       image: config.TAWK_TO_LOGO,
       isActive: tawk?.isActive,
-      uninstallAction: () => uninstallChatPluginConfig()
+      uninstallAction: () => uninstallChatPluginConfig(),
+      category: ["Customer Support"]
     },
     {
       title: "Google Analytics",
@@ -41,7 +37,8 @@ export const usePlugins = () => {
         "Enable Instagram to set up a Business page where you can create and share your shop.",
       image: config.GOOGLE_ANALYTICS,
       isActive: googleAnalytics?.isActive,
-      uninstallAction: () => uninstallGoogleAnalyticsPluginConfig()
+      uninstallAction: () => uninstallGoogleAnalyticsPluginConfig(),
+      category: ["Marketing"]
     },
     {
       title: "WhatsApp",
@@ -49,9 +46,20 @@ export const usePlugins = () => {
         "Enable WhatsApp to set up a Business profile where you can create and share your shop.",
       image: whatsAppLogo,
       isActive: whatsApp?.isActive,
-      uninstallAction: () => uninstallWhatsAppPluginConfig()
+      uninstallAction: () => uninstallWhatsAppPluginConfig(),
+      category: ["Customer Support"]
     }
   ];
+
+  const filteredPlugins =
+    selectedCategory === "ALL"
+      ? PluginConfig
+      : PluginConfig.filter((plugin) => plugin.category?.includes(selectedCategory));
+
+  const toggle = (plugin) => {
+    setModal(!modal);
+    setCurrentPlugin(plugin);
+  };
 
   const uninstallChatPluginConfig = async () => {
     try {
@@ -227,5 +235,14 @@ export const usePlugins = () => {
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
   };
-  return { handleCategorySelect, toggle, currentPlugin, modal, PluginConfig, selectedCategory };
+
+  return {
+    handleCategorySelect,
+    toggle,
+    currentPlugin,
+    modal,
+    PluginConfig,
+    selectedCategory,
+    filteredPlugins
+  };
 };

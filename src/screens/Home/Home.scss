@@ -1,31 +1,28 @@
 @import "../../assets/scss/variables";
 
-.store-lnk-container {
-  border-width: 0.2px;
-  border-radius: 10px;
-  width: 70vw;
-  justify-content: center;
-  padding: 20px;
-  background-color: $white;
+.live {
+  position: relative; // To properly position the pseudo-element
+  background-color: white;
+  overflow: hidden;
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+
+  // Add the red dot before the text
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 12px; // Size of the dot
+    height: 12px; // Size of the dot
+    background-color: red; // Color of the dot
+    border-radius: 50%; // Makes it a circle
+    margin-right: 5px; // Spacing between the dot and the text
+    margin-bottom: 3px;
+    vertical-align: middle; // Aligns the dot with the text
+  }
 }
 
-.lnk-container {
-  border-width: 0.2px;
-  border-radius: 50px;
-  padding: 10px;
-  background-color: $white;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  flex-direction: row;
-  width: 60vw;
-  justify-content: space-between;
-}
-
-.lnk-text {
-  font-size: 18px;
-  margin: 0;
-}
 
 .count-text {
   font-size: 30px;
