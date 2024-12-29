@@ -9,7 +9,21 @@ import "./Customers.scss";
 import { useCustomer } from "./_hooks/useCustomer";
 
 const Customer = () => {
-  const { categories, handleCategorySelect, columns, productData } = useCustomer();
+  const {
+    categories,
+    handleCategorySelect,
+    columns,
+    state,
+    payload,
+    onApplySortFilter,
+    onClearFilterChange,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage
+  } = useCustomer();
 
   return (
     <OutletCard>
@@ -22,7 +36,20 @@ const Customer = () => {
       </Card>
 
       <ComponentCardTable title={"Manage Customers"} searchPlaceHolder={"Search by Name..."}>
-        <CommonTable columns={columns} data={productData} />
+        <CommonTable
+          columns={columns}
+          data={state.customersList}
+          isLoading={state.loaderStatus}
+          sortCallback={onApplySortFilter}
+          filterCallback={onClearFilterChange}
+          sort={payload.sort}
+          searchOnChange={handleSearch}
+          onRowsPerPageChange={handlePerPageRowsChange}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+          totalItems={totalItems}
+          rowsPerPage={rowsPerPage}
+        />
       </ComponentCardTable>
     </OutletCard>
   );

@@ -1,16 +1,34 @@
-import { useEffect } from "react";
-import productImage1 from "../../../assets/images/users/user1.jpg";
-import productImage2 from "../../../assets/images/users/user2.jpg";
-import productImage3 from "../../../assets/images/users/user3.jpg";
-import productImage4 from "../../../assets/images/users/user4.jpg";
-import productImage5 from "../../../assets/images/users/user5.jpg";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
-import Switch from "../../../components/Switch/Switch";
+import { getCustomersByUserId } from "../../../utils/api.service";
+import { getStoreInfo } from "../../../utils/_hooks";
+import _ from "lodash";
 
 export const useCustomer = () => {
   const dispatch = useDispatch();
   const categories = [{ label: "All", value: "ALL" }];
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(null);
+  const debounceRef = useRef(null);
+
+  const [state, setState] = useState({
+    loaderStatus: false,
+    customersList: [],
+    currentPage: 1,
+    totalPages: 0
+  });
+
+  const [payload, setPayload] = useState({
+    storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
+    currentPage: 1,
+    limit: 10,
+    categoryType: "ALL",
+    searchText: "",
+    activeStatusTab: null,
+    sort: -1
+  });
 
   const handleCategorySelect = (category) => {
     console.log("Selected Category:", category);
@@ -20,74 +38,99 @@ export const useCustomer = () => {
     dispatch(setTitle("All Customers"));
   }, []);
 
-  const productData = [
-    {
-      item_image: productImage1,
-      item_name: "Customer 1",
-      inventory: "city name",
-      amount: "840248293",
-      status: "-" // Status should be "active" or "hidden"
-    },
-    {
-      item_image: productImage2,
-      item_name: "Customer 2",
-      inventory: "city name",
-      amount: "840248293",
-      status: "-"
-    },
-    {
-      item_image: productImage3,
-      item_name: "Customer 3",
-      inventory: "city name",
-      amount: "840248293",
-      status: "-" // Status should be "active" or "hidden"
-    },
-    {
-      item_image: productImage4,
-      item_name: "Customer 4",
-      inventory: "city name",
-      amount: "840248293",
-      status: "-"
-    },
-    {
-      item_image: productImage5,
-      item_name: "Customer 5",
-      inventory: "city name",
-      amount: "840248293",
-      status: "-"
+  useEffect(() => {
+    loadCustomers(payload);
+  }, [payload]);
+
+  const loadCustomers = async (payload) => {
+    try {
+      setState((prevState) => ({ ...prevState, loaderStatus: true }));
+
+      let listOfCustomers = [];
+      const response = await getCustomersByUserId(payload);
+      if (_.get(response, "statusCode") === 200) {
+        listOfCustomers = response?.orders?.map((item) => ({
+          name: _.get(item, "userId.email"),
+          mobile: _.get(item, "mobile") || "-",
+          city: _.get(item, "shippingAddress.state"),
+          pinCode: _.get(item, "shippingAddress.pinCode"),
+          orderCount: _.get(item, "totalOrderCost"),
+          salesCount: "-"
+        }));
+      }
+
+      setState((prevState) => ({ ...prevState, customersList: listOfCustomers }));
+      setTotalItems(response?.orders?.length);
+    } catch (error) {
+      console.error("Error fetching customers:", error);
+    } finally {
+      setState((prevState) => ({ ...prevState, loaderStatus: false }));
     }
-  ];
+  };
 
   const columns = [
     {
       label: "Customer Name",
-      key: "item_image",
-      render: (value, row) => (
-        <div className="d-flex align-items-center">
-          <img
-            src={value}
-            alt="product"
-            width="45"
-            height="45"
-            className="rounded-circle me-3" // Add some margin to the right of the image
-          />
-          <h5 className="mb-0">{row.item_name}</h5> {/* Render item name alongside the image */}
-        </div>
-      )
+      key: "name"
     },
-    { label: "Mobile Number", key: "amount" },
-    { label: "City", key: "inventory" },
+    { label: "Mobile Number", key: "mobile" },
+    { label: "City", key: "city" },
     {
       label: "Total Sales",
       key: "status"
     }
   ];
 
+  const onApplySortFilter = (sort) => {
+    const updatedSortValue = sort > 0 ? -1 : 1;
+    setPayload((prevState) => ({ ...prevState, sort: updatedSortValue }));
+  };
+
+  const onClearFilterChange = () => {
+    setPayload((prevState) => ({
+      ...prevState,
+      currentPage: 1,
+      categoryType: "ALL",
+      activeStatusTab: null
+    }));
+  };
+
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      setPayload((prevState) => ({ ...prevState, searchText: searchQuery }));
+    }, 500);
+  };
+
+  const handlePerPageRowsChange = (rows) => {
+    setRowsPerPage(rows);
+    setPayload((prevState) => ({ ...prevState, limit: rows }));
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    setPayload((prevState) => ({ ...prevState, currentPage: page }));
+  };
+
   return {
     categories,
     handleCategorySelect,
-    productData,
     columns,
-    dispatch
+    dispatch,
+    state,
+    payload,
+    onApplySortFilter,
+    onClearFilterChange,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage
   };
 };

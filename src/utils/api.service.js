@@ -41,7 +41,7 @@ export const getCustomersByUserId = async ({
 }) => {
   // &category=${category}&searchText=${searchText}&sort=${sort}
   const response = await axios.get(
-    `${getServiceURL()}/order/getCustomersByUserId/${storeName}/?limit=${limit}&page=${page}`
+    `${getServiceURL()}/order/getCustomersByUserId/${storeName}/?limit=${limit}&page=${page}&category=${category}&searchText=${searchText}&sort=${sort}`
   );
   return response.data;
 };
