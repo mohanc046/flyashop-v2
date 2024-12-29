@@ -11,7 +11,7 @@ import { onlineShopCategories } from "./OnlineShop.constants";
 import { PlusCircleOutlined } from "@ant-design/icons";
 
 const OnlineShop = () => {
-  const { handleCategorySelect, banners, fileUpload } = useOnlineShop();
+  const { handleCategorySelect, banners, fileUpload, saveBanner } = useOnlineShop();
 
   return (
     <OutletCard>
@@ -63,7 +63,7 @@ const OnlineShop = () => {
             ))}
           </div>
 
-          <Button label="Save" onClick={() => console.log("Save Button Clicked!")} />
+          <Button label="Save" onClick={() => saveBanner()} />
         </div>
       </Card>
     </OutletCard>

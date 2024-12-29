@@ -20,7 +20,13 @@ const ProductList = () => {
     mapProductDataToTable,
     onClearFilterChange,
     onApplySortFilter,
-    payload
+    payload,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage
   } = useProductList();
 
   return (
@@ -50,6 +56,12 @@ const ProductList = () => {
           sortCallback={onApplySortFilter}
           filterCallback={onClearFilterChange}
           sort={payload.sort}
+          searchOnChange={handleSearch}
+          onRowsPerPageChange={handlePerPageRowsChange}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+          totalItems={totalItems}
+          rowsPerPage={rowsPerPage}
         />
       </ComponentCardTable>
     </OutletCard>

@@ -22,7 +22,7 @@ const Login = () => {
   const { initiateLoginWithEmail, verifyLoginOTP } = LoginService();
 
   const [state, setState] = useState({
-    screen: "LOGIN",
+    screen: "CREATE_STORE",
     title: "Get Started with Flayashop",
     email: "",
     otp: null
@@ -58,7 +58,7 @@ const Login = () => {
           ) : (
             <Col lg="12" className="loginContainer">
               <Card className="d-flex align-items-center p-3 bg-white rounded">
-                <div>
+                <div className="d-flex flex-column align-items-center">
                   <Logo />
                   <h4 className="mb-3 fw-semibold">{state.title}</h4>
                 </div>
@@ -80,7 +80,7 @@ const Login = () => {
                             <Field
                               name="email"
                               type="text"
-                              className={`form-control${
+                              className={`form-control input${
                                 errors.email && touched.email ? " is-invalid" : ""
                               }`}
                             />

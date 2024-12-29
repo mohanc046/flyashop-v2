@@ -134,12 +134,12 @@ const CommonTable = ({
             <div className="custom-pagination">
               <button
                 className={`pagination-btn first ${currentPage === 1 ? "disabled" : ""}`}
-                onClick={() => currentPage > 1 && onPageChange(1)}>
+                onClick={() => onPageChange && onPageChange(1)}>
                 &lt;&lt;
               </button>
               <button
                 className={`pagination-btn previous ${currentPage === 1 ? "disabled" : ""}`}
-                onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}>
+                onClick={() => onPageChange && onPageChange(currentPage - 1)}>
                 &lt;
               </button>
 
@@ -147,7 +147,7 @@ const CommonTable = ({
                 <button
                   key={i}
                   className={`pagination-btn number ${currentPage === i + 1 ? "active" : ""}`}
-                  onClick={() => (onPageChange ? onPageChange(i + 1) : null)}>
+                  onClick={() => onPageChange && onPageChange(i + 1)}>
                   {i + 1}
                 </button>
               ))}

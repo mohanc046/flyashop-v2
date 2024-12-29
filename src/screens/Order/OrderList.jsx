@@ -23,7 +23,13 @@ const OrderList = () => {
     isModalOpen,
     setIsModalOpen,
     modalData,
-    handleSubmit
+    handleSubmit,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage
   } = useOrder();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -54,6 +60,12 @@ const OrderList = () => {
           sortCallback={onApplySortFilter}
           filterCallback={onClearFilterChange}
           sort={payload.sort}
+          searchOnChange={handleSearch}
+          onRowsPerPageChange={handlePerPageRowsChange}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+          totalItems={totalItems}
+          rowsPerPage={rowsPerPage}
         />
       </ComponentCardTable>
 

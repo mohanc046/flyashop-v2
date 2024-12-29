@@ -22,19 +22,20 @@ const AddProduct = () => {
   const steps = [
     {
       name: "Store Setup",
-      component: <StoreDetails updateStore={updateStore} setActiveStep={setActiveStep} />, // Pass setActiveStep
-      validate: () => storeDetailsStepValidation() // Pass as a function reference
+      component: <StoreDetails updateStore={updateStore} setActiveStep={setActiveStep} />,
+      // validate: () => storeDetailsStepValidation()
+      validate: () => null
     },
     {
       name: "Upload Product Video",
-      component: <UploadVideo updateStore={updateStore} setActiveStep={setActiveStep} />, // Pass setActiveStep
+      component: <UploadVideo updateStore={updateStore} setActiveStep={setActiveStep} />,
       validate: () => uploadStepValidation(),
       hideBackButton: true
     },
     {
       name: "Add Details",
       component: <ProductDetails updateStore={updateStore} mainState={mainState} />,
-      validate: () => detailsStepValidation() // Pass as a function reference
+      validate: () => detailsStepValidation()
     },
     {
       name: "Done",

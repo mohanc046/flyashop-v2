@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import { getStoreInfo } from "../../../utils/_hooks";
@@ -11,9 +11,12 @@ import { showToast } from "../../../store/reducers/toasterSlice";
 
 export const useOrder = () => {
   const dispatch = useDispatch();
-
   const [modalData, setModalData] = useState({ title: "", action: "", row: null });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(null);
+  const debounceRef = useRef(null);
 
   useEffect(() => {
     console.log(isModalOpen);
@@ -33,6 +36,7 @@ export const useOrder = () => {
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",
+    searchText: "",
     activeStatusTab: null,
     sort: -1
   });
@@ -63,21 +67,53 @@ export const useOrder = () => {
     setPayload((prevState) => ({ ...prevState, categoryType: category }));
   };
 
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+
+    // Clear the previous timeout
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      setPayload((prevState) => ({ ...prevState, searchText: searchQuery }));
+    }, 500);
+  };
+
+  const handlePerPageRowsChange = (rows) => {
+    setRowsPerPage(rows);
+    setPayload((prevState) => ({ ...prevState, itemPerPage: rows }));
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    setPayload((prevState) => ({ ...prevState, currentPage: page }));
+  };
+
   const fetchOrders = async (payload) => {
     try {
       setState((prevState) => ({ ...prevState, loaderStatus: true }));
 
-      const { storeName, currentPage, itemPerPage, categoryType, sort, activeStatusTab } = payload;
+      const {
+        storeName,
+        currentPage,
+        itemPerPage,
+        categoryType,
+        sort,
+        activeStatusTab,
+        searchText
+      } = payload;
       const URL = getServiceURL();
       const response = await axios.get(
-        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}&sort=${sort}`
+        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}&searchText=${searchText}&sort=${sort}`
       );
 
       const {
-        data: { message, orderList = [], totalPages = 0 }
+        data: { message, orderList = [], totalPages = 0, totalOrderCount = 0 }
       } = response;
 
       if (response?.status === 200) {
+        setTotalItems(totalOrderCount);
         let filteredOrderList = [...orderList];
 
         if (activeStatusTab) {
@@ -235,6 +271,12 @@ export const useOrder = () => {
     isModalOpen,
     setIsModalOpen,
     modalData,
-    handleSubmit
+    handleSubmit,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage
   };
 };

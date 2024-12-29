@@ -6,6 +6,11 @@ import { getAuthToken, getStoreInfo } from "../../../utils/_hooks";
 import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 import { showToast } from "../../../store/reducers/toasterSlice";
 import _ from "lodash";
+import axios from "axios";
+import { FIXED_VALUES } from "../../../utils/constants";
+const {
+  statusCode: { SUCCESS }
+} = FIXED_VALUES;
 
 export const useOnlineShop = () => {
   const dispatch = useDispatch();
@@ -13,6 +18,10 @@ export const useOnlineShop = () => {
 
   useEffect(() => {
     fetchBannerDetails();
+  }, []);
+
+  useEffect(() => {
+    dispatch(setTitle("Customize Shop"));
   }, []);
 
   const fetchBannerDetails = async () => {
@@ -117,9 +126,41 @@ export const useOnlineShop = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(setTitle("Customize Online Shop"));
-  }, [dispatch]);
+  const saveBanner = async () => {
+    dispatch(showSpinner());
+    try {
+      const payload = {
+        bannerConfig: {
+          enable: false,
+          list: banners
+        },
+        businessName: getStoreInfo()?.store.businessName
+      };
+
+      const response = await fetch(`${getServiceURL()}/store/update/store`, {
+        method: "POST",
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${getAuthToken()}`
+        }
+      });
+
+      const {
+        data: { statusCode = "500", message = "Issue while creating store" }
+      } = response;
+
+      dispatch(
+        showToast({
+          type: statusCode === SUCCESS ? "success" : "error",
+          title: statusCode === SUCCESS ? "Success" : "Error",
+          message: statusCode === SUCCESS ? "Updated Successfully" : message
+        })
+      );
+    } catch (error) {
+    } finally {
+      dispatch(hideSpinner());
+    }
+  };
 
   const handleCategorySelect = (category) => {
     console.log("Selected Category:", category);
@@ -128,6 +169,7 @@ export const useOnlineShop = () => {
   return {
     handleCategorySelect,
     fileUpload,
-    banners
+    banners,
+    saveBanner
   };
 };

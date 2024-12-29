@@ -8,7 +8,7 @@ const Logo = () => {
   const isDarkMode = useSelector((state) => state.customizer.isDark);
   const activeSidebarBg = useSelector((state) => state.customizer.sidebarBg);
   return (
-    <Link to="/" className="d-flex align-items-center gap-2">
+    <Link className="d-flex align-items-center gap-2">
       {isDarkMode || activeSidebarBg !== "white" ? (
         <>
           <LogoWhiteIcon width={130} />

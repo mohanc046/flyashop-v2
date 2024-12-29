@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import Switch from "../../../components/Switch/Switch";
@@ -11,6 +11,10 @@ import { isImageUrl } from "../../../utils/utils";
 export const useProductList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(null);
+  const debounceRef = useRef(null);
   const [state, setState] = useState({
     loaderStatus: false,
     productsList: [],
@@ -21,8 +25,9 @@ export const useProductList = () => {
   const [payload, setPayload] = useState({
     storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
     currentPage: 1,
-    itemPerPage: 10,
+    limit: 10,
     categoryType: "ALL",
+    searchText: "",
     activeStatusTab: null,
     sort: -1
   });
@@ -53,12 +58,36 @@ export const useProductList = () => {
     setPayload((prevState) => ({ ...prevState, categoryType: category }));
   };
 
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+
+    // Clear the previous timeout
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      setPayload((prevState) => ({ ...prevState, searchText: searchQuery }));
+    }, 500);
+  };
+
+  const handlePerPageRowsChange = (rows) => {
+    setRowsPerPage(rows);
+    setPayload((prevState) => ({ ...prevState, limit: rows }));
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    setPayload((prevState) => ({ ...prevState, currentPage: page }));
+  };
+
   const loadProducts = async (payload) => {
     try {
       setState((prevState) => ({ ...prevState, loaderStatus: true }));
 
       const data = await fetchProducts(payload);
       if (data.statusCode === 200) {
+        setTotalItems(data?.products?.length);
         setState((prevState) => ({ ...prevState, productsList: data?.products }));
       }
     } catch (error) {
@@ -127,6 +156,12 @@ export const useProductList = () => {
     dispatch,
     handleNavigateAddproduct,
     onApplySortFilter,
-    onClearFilterChange
+    onClearFilterChange,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    rowsPerPage,
+    totalItems
   };
 };
