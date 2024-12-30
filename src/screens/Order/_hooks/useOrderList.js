@@ -8,8 +8,10 @@ import axios from "axios";
 import { statusActions, statusColors } from "../OrderList.constants";
 import { Button } from "reactstrap";
 import { showToast } from "../../../store/reducers/toasterSlice";
+import { useNavigate } from "react-router-dom";
 
 export const useOrder = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [modalData, setModalData] = useState({ title: "", action: "", row: null });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -135,6 +137,7 @@ export const useOrder = () => {
           const mediaType = isImageUrl(mediaUrl) ? "image" : "video";
 
           return {
+            _id: order._id,
             item_media: { url: mediaUrl, type: mediaType },
             item_name: product.productName || "N/A",
             orderId: order.orderId || "N/A",
@@ -162,6 +165,7 @@ export const useOrder = () => {
 
   const mapOrderDataToTable = (orders) =>
     orders.map((order) => ({
+      _id: order._id,
       item_media: order.item_media,
       item_name: order.item_name,
       orderId: order.orderId,
@@ -259,6 +263,14 @@ export const useOrder = () => {
     }
   ];
 
+  const handleNavigateOrderDetails = (rowData) => {
+    if (rowData?._id) {
+      navigate(`/order/${rowData._id}`);
+    } else {
+      console.error("Order ID is missing in rowData.");
+    }
+  };
+
   return {
     handleCategorySelect,
     columns,
@@ -277,6 +289,7 @@ export const useOrder = () => {
     handlePageChange,
     currentPage,
     totalItems,
-    rowsPerPage
+    rowsPerPage,
+    handleNavigateOrderDetails
   };
 };

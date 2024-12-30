@@ -232,7 +232,7 @@ const seriesSiteD = [
   }
 ];
 
-const RatingCard = () => {
+const RatingCard = ({ statsData }) => {
   return (
     <Row>
       <Col lg="3" md="6">
@@ -269,7 +269,8 @@ const RatingCard = () => {
             </Col>
             <Col xs="6" className="text-end">
               <h3>
-                <Icon.ArrowDown width={18} className="text-danger" /> 7469
+                <Icon.ArrowUp width={18} className="text-success" />
+                {statsData?.totalSalesInfo?.totalOrderCount}
               </h3>
             </Col>
           </Row>
@@ -289,7 +290,7 @@ const RatingCard = () => {
             </Col>
             <Col xs="6" className="text-end">
               <h3>
-                <Icon.ArrowUp width={18} className="text-success" /> 6011
+                <Icon.ArrowUp width={18} className="text-success" /> {statsData?.totalProductsCount}
               </h3>
             </Col>
           </Row>
@@ -309,7 +310,8 @@ const RatingCard = () => {
             </Col>
             <Col xs="6" className="text-end">
               <h3>
-                <Icon.ArrowDown width={18} className="text-danger" /> 18%
+                <Icon.ArrowUp width={18} className="text-success" />
+                {statsData?.totalSalesInfo?.totalSales}
               </h3>
             </Col>
           </Row>

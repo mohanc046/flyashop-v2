@@ -1,17 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import axios from "axios";
-import _ from "lodash";
 import { getServiceURL, isImageUrl } from "../../../utils/utils";
-import { getStoreInfo } from "../../../utils/_hooks";
+import { getStoreInfo, getUserProfile } from "../../../utils/_hooks";
 import ImgOrVideoRenderer from "../../../components/ImgOrVideoRenderer/ImgOrVideoRenderer";
 import "../Home.scss";
 import Button from "../../../components/Button/Button.jsx";
 import * as Icon from "react-feather";
+import { statusColors } from "../../Order/OrderList.constants.js";
+import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice.js";
+import { FIXED_VALUES } from "../../../utils/constants.js";
+import { showToast } from "../../../store/reducers/toasterSlice.js";
+const {
+  statusCode: { SUCCESS }
+} = FIXED_VALUES;
 
 export const useHome = () => {
+  const userInfo = getUserProfile();
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(null);
+  const debounceRef = useRef(null);
+  const [statsData, setStatsData] = useState({
+    totalSalesInfo: "",
+    totalOrderReceivedToday: "",
+    totalProductsCount: ""
+  });
+
   const [state, setState] = useState({
     loaderStatus: false,
     orderList: [],
@@ -21,6 +38,7 @@ export const useHome = () => {
 
   const [payload, setPayload] = useState({
     storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
+    searchText: "",
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",
@@ -30,11 +48,49 @@ export const useHome = () => {
 
   useEffect(() => {
     dispatch(setTitle("Home"));
+    fetchStatsData();
   }, []);
 
   useEffect(() => {
     fetchOrders(payload);
   }, [payload]);
+
+  const fetchStatsData = async () => {
+    try {
+      dispatch(showSpinner());
+
+      let orderSummaryResponse = await axios.get(
+        `${getServiceURL()}/order/analytics/${getStoreInfo()?.store?.businessName}`
+      );
+
+      const {
+        data: {
+          statusCode = "500",
+          message = "Issue while fetching order summary",
+          totalSalesInfo = {},
+          totalOrderReceivedToday = {},
+          totalProductsCount = 0
+        }
+      } = orderSummaryResponse;
+
+      if (statusCode === SUCCESS) {
+        setStatsData({
+          totalSalesInfo,
+          totalOrderReceivedToday,
+          totalProductsCount
+        });
+        console.log(totalSalesInfo);
+        console.log(totalOrderReceivedToday);
+        console.log(totalProductsCount);
+      } else {
+        dispatch(showToast({ type: "error", title: "Error", message: message }));
+      }
+    } catch (error) {
+      dispatch(hideSpinner());
+    } finally {
+      dispatch(hideSpinner());
+    }
+  };
 
   const onApplySortFilter = (sort) => {
     const updatedSortValue = sort > 0 ? -1 : 1;
@@ -50,21 +106,52 @@ export const useHome = () => {
     }));
   };
 
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      setPayload((prevState) => ({ ...prevState, searchText: searchQuery }));
+    }, 500);
+  };
+
+  const handlePerPageRowsChange = (rows) => {
+    setRowsPerPage(rows);
+    setPayload((prevState) => ({ ...prevState, itemPerPage: rows }));
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    setPayload((prevState) => ({ ...prevState, currentPage: page }));
+  };
+
   const fetchOrders = async (payload) => {
     try {
       setState((prevState) => ({ ...prevState, loaderStatus: true }));
 
-      const { storeName, currentPage, itemPerPage, categoryType, sort, activeStatusTab } = payload;
+      const {
+        storeName,
+        currentPage,
+        itemPerPage,
+        categoryType,
+        sort,
+        activeStatusTab,
+        searchText
+      } = payload;
       const URL = getServiceURL();
       const response = await axios.get(
-        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}&sort=${sort}`
+        `${URL}/order/store/${storeName}?page=${currentPage}&itemsPerPage=${itemPerPage}&category=${categoryType}&searchText=${searchText}&sort=${sort}`
       );
 
       const {
-        data: { message, orderList = [], totalPages = 0 }
+        data: { message, orderList = [], totalPages = 0, totalOrderCount = 0 }
       } = response;
 
       if (response?.status === 200) {
+        setTotalItems(totalOrderCount);
         let filteredOrderList = [...orderList];
 
         if (activeStatusTab) {
@@ -148,15 +235,8 @@ export const useHome = () => {
       render: (value) => (
         <div className="d-flex gap-2 align-items-center">
           <span
-            className={`p-2 ${
-              value === "PENDING"
-                ? "bg-danger"
-                : value === "Delivered"
-                  ? "bg-success"
-                  : value === "ACCEPTED"
-                    ? "bg-warning"
-                    : ""
-            } rounded-circle`}
+            className="p-2 rounded-circle"
+            style={{ backgroundColor: statusColors[value] || "#333" }}
           />
           <span>{value}</span>
         </div>
@@ -210,6 +290,14 @@ export const useHome = () => {
     onClearFilterChange,
     payload,
     visitStoreColumns,
-    visitStoreData
+    visitStoreData,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage,
+    userInfo,
+    statsData
   };
 };

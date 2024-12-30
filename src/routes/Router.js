@@ -13,7 +13,9 @@ const Landing = Loadable(lazy(() => import("../screens/Statistics/Statistics.jsx
 const Login = Loadable(lazy(() => import("../screens/Login/Login.jsx")));
 const Home = Loadable(lazy(() => import("../screens/Home/Home.jsx")));
 const OrderList = Loadable(lazy(() => import("../screens/Order/OrderList.jsx")));
+const OrderDetails = Loadable(lazy(() => import("../screens/OrderDetails/OrderDetails.jsx")));
 const ProductList = Loadable(lazy(() => import("../screens/ProductList/ProductList.jsx")));
+const ProductDetails = Loadable(lazy(() => import("../screens/ProductDetails/ProductDetails.jsx")));
 const AddProduct = Loadable(lazy(() => import("../screens/AddProduct/AddProduct.jsx")));
 const OnlineShop = Loadable(lazy(() => import("../screens/OnlineShop/OnlineShop.jsx")));
 const Payments = Loadable(lazy(() => import("../screens/UserPayment/Payments.jsx")));
@@ -42,7 +44,9 @@ const ThemeRoutes = [
           { path: "/", name: "Home", element: <Navigate to="/home" /> },
           { path: "/home", name: "Home", element: <Home /> },
           { path: "/order-list", name: "Order List", element: <OrderList /> },
+          { path: "/order/:id", name: "Order Details", element: <OrderDetails /> },
           { path: "/product-list", name: "Product List", element: <ProductList /> },
+          { path: "/product/:id", name: "Product Details", element: <ProductDetails /> },
           {
             path: "/product-list/add-product",
             name: "Add Product",

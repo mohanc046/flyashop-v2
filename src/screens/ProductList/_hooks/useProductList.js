@@ -99,6 +99,7 @@ export const useProductList = () => {
 
   const mapProductDataToTable = (products) =>
     products.map((product) => ({
+      _id: product._id,
       item_image: {
         url: product.images?.[0] || "",
         type: isImageUrl(product.images?.[0]) ? "image" : "video"
@@ -147,6 +148,15 @@ export const useProductList = () => {
     navigate("/product-list/add-product");
   };
 
+  const handleNavigateProductDetails = (rowData) => {
+    console.log(rowData);
+    if (rowData?._id) {
+      navigate(`/product/${rowData._id}`);
+    } else {
+      console.error("Product ID is missing in rowData.");
+    }
+  };
+
   return {
     handleCategorySelect,
     columns,
@@ -162,6 +172,7 @@ export const useProductList = () => {
     handlePageChange,
     currentPage,
     rowsPerPage,
-    totalItems
+    totalItems,
+    handleNavigateProductDetails
   };
 };

@@ -26,7 +26,8 @@ const ProductList = () => {
     handlePageChange,
     currentPage,
     totalItems,
-    rowsPerPage
+    rowsPerPage,
+    handleNavigateProductDetails
   } = useProductList();
 
   return (
@@ -62,6 +63,7 @@ const ProductList = () => {
           currentPage={currentPage}
           totalItems={totalItems}
           rowsPerPage={rowsPerPage}
+          handleRowClick={handleNavigateProductDetails}
         />
       </ComponentCardTable>
     </OutletCard>

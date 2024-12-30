@@ -29,7 +29,8 @@ const OrderList = () => {
     handlePageChange,
     currentPage,
     totalItems,
-    rowsPerPage
+    rowsPerPage,
+    handleNavigateOrderDetails
   } = useOrder();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -66,6 +67,7 @@ const OrderList = () => {
           currentPage={currentPage}
           totalItems={totalItems}
           rowsPerPage={rowsPerPage}
+          handleRowClick={handleNavigateOrderDetails}
         />
       </ComponentCardTable>
 

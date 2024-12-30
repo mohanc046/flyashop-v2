@@ -5,7 +5,6 @@ import OutletCard from "../../components/OutletCard/OutletCard";
 import { useHome } from "./_hooks/useHome";
 import AnalyticsCard from "./components/AnalyticsCard";
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
-import { getUserProfile } from "../../utils/_hooks";
 import _ from "lodash";
 
 const Home = () => {
@@ -17,9 +16,16 @@ const Home = () => {
     onApplySortFilter,
     onClearFilterChange,
     visitStoreColumns,
-    visitStoreData
+    visitStoreData,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage,
+    userInfo,
+    statsData
   } = useHome();
-  const userInfo = getUserProfile();
 
   return (
     <OutletCard>
@@ -37,7 +43,7 @@ const Home = () => {
           orders.
         </h4>
         <CommonTable columns={visitStoreColumns} data={visitStoreData} hidePagination hideSearch />
-        <AnalyticsCard />
+        <AnalyticsCard statsData={statsData} />
         <div className="d-flex flex-wrap justify-content-between align-items-start">
           <Col lg={12} md={12}>
             <CommonTable
@@ -48,6 +54,12 @@ const Home = () => {
               filterCallback={onClearFilterChange}
               sortCallback={onApplySortFilter}
               sort={payload.sort}
+              searchOnChange={handleSearch}
+              onRowsPerPageChange={handlePerPageRowsChange}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
+              totalItems={totalItems}
+              rowsPerPage={rowsPerPage}
             />
           </Col>
         </div>
