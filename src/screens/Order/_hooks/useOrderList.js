@@ -3,12 +3,23 @@ import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import { getStoreInfo } from "../../../utils/_hooks";
 import ImgOrVideoRenderer from "../../../components/ImgOrVideoRenderer/ImgOrVideoRenderer";
-import { getServiceURL, isImageUrl } from "../../../utils/utils";
+import {
+  generateXlsxReport,
+  getFormattedCurrency,
+  getServiceURL,
+  isImageUrl
+} from "../../../utils/utils";
 import axios from "axios";
 import { statusActions, statusColors } from "../OrderList.constants";
 import { Button } from "reactstrap";
 import { showToast } from "../../../store/reducers/toasterSlice";
 import { useNavigate } from "react-router-dom";
+import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
+import { FIXED_VALUES } from "../../../utils/constants";
+import _ from "lodash";
+const {
+  statusCode: { SUCCESS }
+} = FIXED_VALUES;
 
 export const useOrder = () => {
   const navigate = useNavigate();
@@ -271,6 +282,62 @@ export const useOrder = () => {
     }
   };
 
+  const downloadReport = async () => {
+    try {
+      dispatch(showSpinner());
+      const { storeName = "", searchText = "", sort = -1, category = "" } = payload;
+
+      let URL = getServiceURL();
+
+      let orderResponse = await axios.get(
+        `${URL}/order/store/download/${storeName}/?category=${category}&searchText=${searchText}&sort=${sort}`
+      );
+
+      const {
+        data: { statusCode = "500", message = "Issue while fetching orders", orderList = [] }
+      } = orderResponse;
+
+      let formattedOrderList = [];
+
+      if (statusCode === SUCCESS) {
+        formattedOrderList.push([
+          "Order Id",
+          "Product Name",
+          "Order Status",
+          "Order Total Cost",
+          "Location"
+        ]);
+
+        for (let index = 0; index < orderList.length; index++) {
+          const {
+            status,
+            totalOrderCost,
+            orderId,
+            products,
+            shippingAddress = {}
+          } = orderList[index];
+          const productName = _.get(products, "[0].product.productName");
+          const { state = "", pinCode = "" } = shippingAddress || {};
+          formattedOrderList.push([
+            orderId,
+            productName,
+            status,
+            getFormattedCurrency(totalOrderCost),
+            `${state}, ${pinCode}`
+          ]);
+        }
+
+        generateXlsxReport(formattedOrderList, "order-list");
+
+        dispatch(hideSpinner());
+      }
+    } catch (error) {
+      dispatch(hideSpinner());
+    } finally {
+      dispatch(hideSpinner());
+    }
+  };
+
   return {
     handleCategorySelect,
     columns,
@@ -290,6 +357,7 @@ export const useOrder = () => {
     currentPage,
     totalItems,
     rowsPerPage,
-    handleNavigateOrderDetails
+    handleNavigateOrderDetails,
+    downloadReport
   };
 };

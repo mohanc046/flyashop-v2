@@ -27,7 +27,11 @@ const ProductList = () => {
     currentPage,
     totalItems,
     rowsPerPage,
-    handleNavigateProductDetails
+    handleNavigateProductDetails,
+    fileInputRef,
+    handleButtonClick,
+    handleFileChange,
+    downloadReport
   } = useProductList();
 
   return (
@@ -40,7 +44,23 @@ const ProductList = () => {
         />
 
         <div className="d-flex align-items-center gap-3 bg-light flex-wrap">
-          <Button label="Report" icon={<Icon.Download size={15} />} />
+          <Button
+            label="Bulk Upload"
+            icon={<Icon.File size={15} />}
+            onClick={() => handleButtonClick()}
+          />
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={(event) => handleFileChange(event)}
+            style={{ display: "none" }}
+            accept=".csv"
+          />
+          <Button
+            label="Report"
+            icon={<Icon.Download size={15} />}
+            onClick={() => downloadReport()}
+          />
           <Button
             label="Add New Product"
             icon={<Icon.PlusCircle size={15} />}

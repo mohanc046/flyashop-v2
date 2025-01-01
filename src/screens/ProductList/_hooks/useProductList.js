@@ -6,7 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { getStoreInfo } from "../../../utils/_hooks";
 import { fetchProducts } from "../../../utils/api.service";
 import ImgOrVideoRenderer from "../../../components/ImgOrVideoRenderer/ImgOrVideoRenderer";
-import { isImageUrl } from "../../../utils/utils";
+import { generateXlsxReport, getServiceURL, isImageUrl } from "../../../utils/utils";
+import axios from "axios";
+import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
+import { showToast } from "../../../store/reducers/toasterSlice";
+import _ from "lodash";
+import { FIXED_VALUES } from "../../../utils/constants";
+const {
+  statusCode: { SUCCESS }
+} = FIXED_VALUES;
 
 export const useProductList = () => {
   const dispatch = useDispatch();
@@ -15,6 +23,7 @@ export const useProductList = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(null);
   const debounceRef = useRef(null);
+  const fileInputRef = useRef(null);
   const [state, setState] = useState({
     loaderStatus: false,
     productsList: [],
@@ -39,6 +48,110 @@ export const useProductList = () => {
   useEffect(() => {
     loadProducts(payload);
   }, [payload]);
+
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    dispatch(showSpinner());
+    // Prepare the form data for the API
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("storeName", getStoreInfo().store?.businessName);
+
+    try {
+      // Send the file to the backend API using getServiceURL()
+      const response = await axios.post(`${getServiceURL()}/product/bulk/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      // Handle response (for example, notify the user of success)
+      console.log("Upload successful", response.data);
+
+      const { statusCode = 500, message = "Issue while Bulk upload!" } = response.data || {};
+
+      if (statusCode === 200) {
+        dispatch(showToast({ type: "success", title: "Success", message: message }));
+        loadProducts(payload);
+      } else {
+        dispatch(showToast({ type: "error", title: "Error", message: message }));
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    } finally {
+      dispatch(hideSpinner());
+    }
+  };
+
+  const downloadReport = async () => {
+    try {
+      dispatch(showSpinner());
+
+      const { storeName = "", searchText = "", sort = -1, category = "" } = payload;
+
+      let URL = getServiceURL();
+
+      let productsResponse = await axios.get(
+        `${URL}/product/all/download/${storeName}/?category=${category}&searchText=${searchText}&sort=${sort}`
+      );
+
+      const {
+        data: { statusCode = "500", message = "Issue while fetching products", products = [] }
+      } = productsResponse;
+
+      let formattedProductList = [];
+
+      if (statusCode === SUCCESS) {
+        formattedProductList.push([
+          "Product Id",
+          "Product Name",
+          "Product Description",
+          "Category",
+          "Price",
+          "Discount Price",
+          "isActive"
+        ]);
+
+        _.forEach(products, (item) => {
+          const {
+            _id = "",
+            productName,
+            productDescription,
+            images,
+            categoryType,
+            price,
+            discountPrice,
+            isActive
+          } = item;
+
+          formattedProductList.push([
+            _id,
+            productName,
+            productDescription,
+            _.get(categoryType, "name", ""),
+            price,
+            discountPrice,
+            isActive
+          ]);
+        });
+
+        generateXlsxReport(formattedProductList, "products");
+        dispatch(hideSpinner());
+      }
+    } catch (error) {
+      dispatch(hideSpinner());
+    } finally {
+      dispatch(hideSpinner());
+    }
+  };
 
   const onApplySortFilter = (sort) => {
     const updatedSortValue = sort > 0 ? -1 : 1;
@@ -184,6 +297,10 @@ export const useProductList = () => {
     currentPage,
     rowsPerPage,
     totalItems,
-    handleNavigateProductDetails
+    handleNavigateProductDetails,
+    fileInputRef,
+    handleButtonClick,
+    handleFileChange,
+    downloadReport
   };
 };

@@ -74,11 +74,7 @@ export const useCustomer = () => {
       key: "name"
     },
     { label: "Mobile Number", key: "mobile" },
-    { label: "City", key: "city" },
-    {
-      label: "Total Sales",
-      key: "status"
-    }
+    { label: "City", key: "city" }
   ];
 
   const onApplySortFilter = (sort) => {

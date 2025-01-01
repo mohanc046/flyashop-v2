@@ -30,7 +30,8 @@ const OrderList = () => {
     currentPage,
     totalItems,
     rowsPerPage,
-    handleNavigateOrderDetails
+    handleNavigateOrderDetails,
+    downloadReport
   } = useOrder();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -49,7 +50,11 @@ const OrderList = () => {
         />
 
         <div className="d-flex align-items-center gap-3 bg-light">
-          <Button label="Report" icon={<Icon.Download size={15} />} />
+          <Button
+            label="Report"
+            icon={<Icon.Download size={15} />}
+            onClick={() => downloadReport()}
+          />
         </div>
       </Card>
 

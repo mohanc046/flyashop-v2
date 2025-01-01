@@ -21,7 +21,7 @@ export const useSettings = () => {
       label: "Status",
       key: "status",
       render: (value, row) => (
-        <div className="d-flex align-items-center live">
+        <div className="d-flex align-items-center settings-live">
           <h5 className="mb-0">{value}</h5>
         </div>
       )

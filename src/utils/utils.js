@@ -1,5 +1,8 @@
 import _ from "lodash";
 import moment from "moment";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+import currencyFormatter from "currency-formatter";
 
 export const getUserType = () => {
   let baseURL = window.location.pathname;
@@ -31,6 +34,10 @@ export function isVideoUrl(url) {
   return `${url}`?.match(/\.(mp4|webm|ogg|mov)$/i) != null;
 }
 
+export const getFormattedCurrency = (value) => {
+  return currencyFormatter.format(value, { code: "INR" });
+};
+
 export const getTimeAgo = (date) => {
   const propsDate = moment(date);
 
@@ -52,4 +59,26 @@ export const getTimeAgo = (date) => {
   } else {
     return `${daysDifference} day${daysDifference > 1 ? "s" : ""} ago`;
   }
+};
+
+export const generateXlsxReport = (data, fileName) => {
+  const wb = XLSX.utils.book_new();
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+
+  XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+  const wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
+
+  const buffer = new ArrayBuffer(wbout.length);
+
+  const view = new Uint8Array(buffer);
+
+  for (let i = 0; i < wbout.length; i++) {
+    view[i] = wbout.charCodeAt(i) & 0xff;
+  }
+
+  const blob = new Blob([buffer], { type: "application/octet-stream" });
+
+  saveAs(blob, `${fileName}.xlsx`);
 };
