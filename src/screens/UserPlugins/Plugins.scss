@@ -1,0 +1,19 @@
+.card-container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 1200px) { /* For small screens (e.g., mobile) */
+    .card-container {
+      flex-direction: column;
+    }
+   }
+   
+
+@media (max-width: 767px) { /* For small screens (e.g., mobile) */
+   .card-container {
+     flex-direction: column;
+   }
+  }
+  

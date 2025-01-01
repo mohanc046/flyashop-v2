@@ -104,9 +104,18 @@ export const useProductList = () => {
         url: product.images?.[0] || "",
         type: isImageUrl(product.images?.[0]) ? "image" : "video"
       },
-      item_name: product.productName || "N/A",
+      productName: product.productName || "N/A",
+      productDescription: product.productDescription || "N/A",
+      discountPrice: product.discountPrice || "",
+      productCategory: product.categoryType || "",
       amount: `₹${product.price || 0}`,
-      inventory: product.inventory?.quantity,
+      price: product.price,
+      quantity: product.inventory?.quantity,
+      sizes: product?.inventory?.sizes || "",
+      colors: product?.inventory?.colors || "",
+      shipmentWeight: product?.orderDetails?.shippingWeight || "",
+      barcode: product?.orderDetails?.barcode || "",
+      gstPercentage: product?.orderDetails?.gstPercentage || "",
       status: product.isActive ? "active" : "hidden"
     }));
 
@@ -124,12 +133,12 @@ export const useProductList = () => {
             description="product media"
             videoStyles={{ borderRadius: "50%" }}
           />
-          <h5 className="mb-0">{row.item_name}</h5>
+          <h5 className="mb-0">{row.productName}</h5>
         </div>
       )
     },
     { label: "Amount", key: "amount" },
-    { label: "Inventory", key: "inventory" },
+    { label: "Inventory", key: "quantity" },
     {
       label: "Status",
       key: "status",
@@ -151,7 +160,9 @@ export const useProductList = () => {
   const handleNavigateProductDetails = (rowData) => {
     console.log(rowData);
     if (rowData?._id) {
-      navigate(`/product/${rowData._id}`);
+      navigate(`/product/${rowData._id}`, {
+        state: rowData
+      });
     } else {
       console.error("Product ID is missing in rowData.");
     }

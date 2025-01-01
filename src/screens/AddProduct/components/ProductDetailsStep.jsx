@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { getServiceURL } from "../../../utils/utils";
+import { getAuthToken } from "../../../utils/_hooks";
+import _ from "lodash";
 
 const ProductDetails = ({ updateStore, mainState }) => {
   const [state, setState] = useState({
@@ -15,16 +18,7 @@ const ProductDetails = ({ updateStore, mainState }) => {
     barcode: "",
     gstPercentage: ""
   });
-
-  const categoryTypes = [
-    { label: "Game & Sports", value: "652b893019800f513d60cb2b" },
-    { label: "Home & Appliances", value: "652b893e19800f513d60cb2e" },
-    { label: "Electronics", value: "652b894719800f513d60cb31" },
-    { label: "Furniture", value: "652b894e19800f513d60cb34" },
-    { label: "Office Products", value: "652c22ab6a6577328937f6c0" },
-    { label: "Eye Glass", value: "652c22bb6a6577328937f6c3" },
-    { label: "Kitchen", value: "652c22c76a6577328937f6c6" }
-  ];
+  const [categoryList, setCategoryList] = useState([]);
 
   useEffect(() => {
     if (mainState) {
@@ -43,7 +37,27 @@ const ProductDetails = ({ updateStore, mainState }) => {
         gstPercentage: mainState.gstPercentage || ""
       }));
     }
+    getCategoryList();
   }, [mainState]);
+
+  const getCategoryList = async () => {
+    try {
+      const response = await fetch(`${getServiceURL()}/category`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${getAuthToken()}` }
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const categoryList = _.get(data, "categoryList", []);
+        const list = categoryList.map((e) => {
+          return { value: e.value, name: e.key };
+        });
+        setCategoryList(list);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -106,9 +120,9 @@ const ProductDetails = ({ updateStore, mainState }) => {
                     value={productCategory}
                     onChange={handleInputChange}>
                     <option value="">Select a category</option>
-                    {categoryTypes.map((category) => (
+                    {categoryList.map((category) => (
                       <option key={category.value} value={category.value}>
-                        {category.label}
+                        {category.name}
                       </option>
                     ))}
                   </Input>

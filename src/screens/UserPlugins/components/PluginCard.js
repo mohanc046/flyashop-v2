@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, CardBody, CardTitle } from "reactstrap";
+import "../Plugins.scss";
 
 const PluginCard = ({ details = [], toggle }) => {
   const handleClick = (isActive) => {
@@ -10,7 +11,7 @@ const PluginCard = ({ details = [], toggle }) => {
     }
   };
   return (
-    <Card className="w-100 bg-white shadow-sm border rounded">
+    <Card className="w-100 bg-white shadow-sm border rounded card-container">
       <CardBody className="d-flex align-items-center">
         <div className="d-flex align-items-center">
           <img src={details.image} alt="user" width={60} className="rounded mb-3" />

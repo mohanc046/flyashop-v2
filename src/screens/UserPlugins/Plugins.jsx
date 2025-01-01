@@ -23,10 +23,10 @@ const Plugins = () => {
           onSelect={handleCategorySelect}
           currentCategory={selectedCategory}
         />
-        <Row className="d-flex flex-wrap mt-4">
+        <Row className="d-flex flex-wrap mt-4 card-container">
           {filteredPlugins.length > 0 ? (
             filteredPlugins.map((plugin, index) => (
-              <Col xs="12" md="4" key={index}>
+              <Col key={index} style={{ marginBottom: "10px" }}>
                 <PluginCard details={plugin} />
               </Col>
             ))

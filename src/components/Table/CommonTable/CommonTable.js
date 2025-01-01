@@ -91,12 +91,7 @@ const CommonTable = ({
             <tbody>
               {data.length > 0 ? (
                 data.map((row, rowIndex) => (
-                  <tr
-                    key={rowIndex}
-                    className="border-top"
-                    onClick={() => {
-                      handleRowClick(row);
-                    }}>
+                  <tr key={rowIndex} className="border-top" onClick={() => handleRowClick?.(row)}>
                     {columns.map((column) => (
                       <td key={column.key}>
                         {column.render ? column.render(row[column.key], row) : row[column.key]}
