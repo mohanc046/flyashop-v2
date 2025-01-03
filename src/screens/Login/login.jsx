@@ -22,7 +22,7 @@ const Login = () => {
   const { initiateLoginWithEmail, verifyLoginOTP } = LoginService();
 
   const [state, setState] = useState({
-    screen: "CREATE_STORE",
+    screen: "LOGIN",
     title: "Get Started with Flayashop",
     email: "",
     otp: null

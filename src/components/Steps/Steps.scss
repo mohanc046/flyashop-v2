@@ -1,3 +1,4 @@
+@import "../../assets/scss/variables";
 .example {
   .step-progress {
     margin: 20px auto;
@@ -21,7 +22,7 @@
           }
 
           &.Mui-active {
-            color: #1976d2; // Active step color
+            color: $primary; // Active step color
           }
         }
 
@@ -33,7 +34,7 @@
           }
 
           &.Mui-active {
-            color: #1976d2; // Active step circle color
+            color: $primary; // Active step circle color
           }
         }
       }
@@ -58,6 +59,8 @@
         font-size: 0.9rem;
         text-transform: none;
         padding: 5px 20px;
+        background-color: $primary;
+        color: $white;
       }
     }
   }

@@ -8,9 +8,11 @@ import TicketReducer from "./apps/ticket/TicketSlice";
 import headerTitleReducer from "./reducers/headerTitleSlice";
 import toasterReducer from "./reducers/toasterSlice";
 import spinnerReducer from "./reducers/spinnerSlice";
+import tokenReducer from "./reducers/tokenSlice";
 
 export const store = configureStore({
   reducer: {
+    authToken: tokenReducer,
     customizer: CustomizerReducer,
     notesReducer: NotesReducer,
     chatReducer: ChatsReducer,

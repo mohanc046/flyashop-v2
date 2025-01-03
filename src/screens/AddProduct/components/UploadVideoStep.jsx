@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 import { showToast } from "../../../store/reducers/toasterSlice";
 import { BUCKET_NAME, s3 } from "../../../utils/awsConfig";
+import Button from "../../../components/Button/Button";
+import * as Icon from "react-feather";
 
 const MAX_VIDEO_SIZE_MB = 99; // Maximum size in MB
 
@@ -139,13 +141,13 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
         <label className="addProductDraggerLabel" style={{ marginTop: "-10px" }}>
           Or
         </label>
-        <div className="position-relative">
-          <button>Browse</button>
-          <input onChange={handleFileUpload} className="file-input" type="file" />
-        </div>
+        <div className="d-flex gap-3">
+          <div className="position-relative">
+            <Button label="Browse" />
+            <input onChange={handleFileUpload} className="file-input" type="file" />
+          </div>
 
-        <div className="button-div" onClick={() => setIsUpload(false)}>
-          Record
+          <Button label="Record" onClick={() => setIsUpload(false)} />
         </div>
       </div>
 

@@ -1,28 +1,13 @@
 .addProductDraggerContainer {
     display: flex;
     flex-direction: column;
-    border-radius: 30px;
     align-items: center;
-    padding: 43px 30px 33px;
     gap: 20px;
-    width: 30%;
-    border: 1px;
-    background-color: #E1EBF3 !important;
-    border: 1px solid #F5F9FC;
 }
 
 .addProductDraggerContainer .upload-icon {
     height: 36px;
     width: 36px;
-}
-
-.addProductDraggerContainer button {
-    width: 257px;
-    height: 54px;
-    padding: 8px;
-    border-radius: 30px;
-    border: 1px solid #000000;
-    background: transparent;
 }
 
 .button-div {
@@ -83,12 +68,6 @@
   
 
 @media (max-width: 1200px) {
-    .addProductDraggerContainer button {
-        width: 170px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
-    }
 
     .addProductDraggerContainer .paste-link {
         font-size: 16px;
@@ -98,13 +77,6 @@
         text-align: center;
         color: #757575;
         padding-bottom: 2px;
-    }
-
-    .button-div {
-        width: 170px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
     }
   }
 
@@ -118,18 +90,5 @@
   @media (max-width: 450px) {
     .addProductDraggerContainer {
         width: 100%;
-    }
-    .addProductDraggerContainer button {
-        width: 170px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
-    }
-
-    .button-div {
-        width: 180px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
     }
   }

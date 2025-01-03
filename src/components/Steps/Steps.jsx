@@ -57,7 +57,7 @@ const Steps = ({ steps, activeStep, setActiveStep }) => {
                   variant="outlined">
                   Back
                 </Button>
-                <Button onClick={handleNext} variant="contained" color="primary">
+                <Button onClick={handleNext} variant="contained">
                   {activeStep === steps.length - 1 ? "Finish" : "Next"}
                 </Button>
               </div>

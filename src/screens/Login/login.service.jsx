@@ -5,6 +5,7 @@ import { notification } from "antd";
 import _ from "lodash";
 import { useDispatch } from "react-redux";
 import { hideSpinner, showSpinner } from "../../store/reducers/spinnerSlice";
+import { setToken } from "../../store/reducers/tokenSlice";
 const {
   statusCode: { SUCCESS }
 } = FIXED_VALUES;
@@ -119,8 +120,9 @@ export const LoginService = () => {
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
         localStorage.setItem("storeInfo", JSON.stringify(_.get(existingStoreInfo, "[0]", {})));
 
+        dispatch(setToken(authToken));
+
         notification.open({ type: "success", description: message });
-        //!_.isEmpty(existingStoreInfo) && navigateToDashboard();
         navigateToDashboard();
         dispatch(hideSpinner());
         return;

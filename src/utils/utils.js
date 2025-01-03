@@ -61,6 +61,14 @@ export const getTimeAgo = (date) => {
   }
 };
 
+export function formatDateToDDMMYYYY(dateString) {
+  const date = new Date(dateString); // Convert string to Date object
+  const day = String(date.getDate()).padStart(2, "0"); // Get day with leading zero
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Get month with leading zero
+  const year = date.getFullYear(); // Get year
+  return `${day}-${month}-${year}`; // Return formatted string
+}
+
 export const generateXlsxReport = (data, fileName) => {
   const wb = XLSX.utils.book_new();
 

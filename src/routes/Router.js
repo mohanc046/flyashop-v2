@@ -1,8 +1,9 @@
 import { lazy } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import Loadable from "../layouts/loader/Loadable.js";
 import { getAuthToken } from "../utils/_hooks/index.jsx";
 import Logout from "../screens/Logout.jsx";
+import { useSelector } from "react-redux";
 
 /***** Layouts *****/
 const FullLayout = Loadable(lazy(() => import("../layouts/FullLayout.js")));
@@ -21,7 +22,7 @@ const OnlineShop = Loadable(lazy(() => import("../screens/OnlineShop/OnlineShop.
 const Payments = Loadable(lazy(() => import("../screens/UserPayment/Payments.jsx")));
 const Customers = Loadable(lazy(() => import("../screens/Customers/Customers.jsx")));
 const Plugins = Loadable(lazy(() => import("../screens/UserPlugins/Plugins.jsx")));
-const Discounts = Loadable(lazy(() => import("../screens/ProductList/ProductList.jsx")));
+const Discounts = Loadable(lazy(() => import("../screens/Discounts/Discounts.jsx")));
 const Settings = Loadable(lazy(() => import("../screens/Settings/Settings.jsx")));
 
 /***** Auth Pages *****/
@@ -31,51 +32,54 @@ const Maintenance = Loadable(lazy(() => import("../views/auth/Maintanance.js")))
 const LockScreen = Loadable(lazy(() => import("../views/auth/LockScreen.js")));
 const RecoverPassword = Loadable(lazy(() => import("../views/auth/RecoverPassword.js")));
 
-/***** Retrieve Auth Token *****/
-const authToken = getAuthToken();
+/***** Custom Hook to Get Token *****/
+const useAuthToken = () => {
+  const localToken = getAuthToken();
+  const reduxToken = useSelector((state) => state.authToken.token);
+  return localToken || reduxToken;
+};
 
-/***** Routes *****/
-const ThemeRoutes = [
-  {
-    path: "/",
-    element: <FullLayout />,
-    children: authToken
-      ? [
-          { path: "/", name: "Home", element: <Navigate to="/home" /> },
-          { path: "/home", name: "Home", element: <Home /> },
-          { path: "/order-list", name: "Order List", element: <OrderList /> },
-          { path: "/order/:id", name: "Order Details", element: <OrderDetails /> },
-          { path: "/product-list", name: "Product List", element: <ProductList /> },
-          { path: "/product/:id", name: "Product Details", element: <ProductDetails /> },
-          {
-            path: "/product-list/add-product",
-            name: "Add Product",
-            element: <AddProduct />
-          },
-          { path: "/online-shop", name: "Online Shop", element: <OnlineShop /> },
-          { path: "/payments", name: "Payments", element: <Payments /> },
-          { path: "/customers", name: "Customers", element: <Customers /> },
-          { path: "/plugins", name: "Plugins", element: <Plugins /> },
-          { path: "/discounts", name: "Discounts", element: <Discounts /> },
-          { path: "/settings", name: "Settings", element: <Settings /> },
-          { path: "/sign-out", name: "Sign Out", element: <Logout /> }
-        ]
-      : [{ path: "/", name: "Landing", element: <Navigate to="/landing" /> }]
-  },
-  {
-    path: "/",
-    element: <BlankLayout />,
-    children: [
-      { path: "landing", element: <Landing /> },
-      { path: "/404", element: <Error /> },
-      { path: "*", element: <Navigate to="/landing" /> },
-      { path: "registerformik", element: <RegisterFormik /> },
-      { path: "login", element: <Login /> },
-      { path: "maintenance", element: <Maintenance /> },
-      { path: "lockscreen", element: <LockScreen /> },
-      { path: "recoverpwd", element: <RecoverPassword /> }
-    ]
-  }
-];
+/***** Routes Component *****/
+const ThemeRoutes = () => {
+  const authToken = useAuthToken();
+
+  return [
+    {
+      path: "/",
+      element: authToken ? <FullLayout /> : <BlankLayout />,
+      children: authToken
+        ? [
+            { path: "/", element: <Navigate to="/home" /> },
+            { path: "/home", element: <Home /> },
+            { path: "/order-list", element: <OrderList /> },
+            { path: "/order/:id", element: <OrderDetails /> },
+            { path: "/product-list", element: <ProductList /> },
+            { path: "/product/:id", element: <ProductDetails /> },
+            { path: "/product-list/add-product", element: <AddProduct /> },
+            { path: "/online-shop", element: <OnlineShop /> },
+            { path: "/payments", element: <Payments /> },
+            { path: "/customers", element: <Customers /> },
+            { path: "/plugins", element: <Plugins /> },
+            { path: "/discounts", element: <Discounts /> },
+            { path: "/settings", element: <Settings /> },
+            { path: "/sign-out", element: <Logout /> }
+          ]
+        : [
+            { path: "/", element: <Navigate to="/landing" /> },
+            { path: "landing", element: <Landing /> },
+            { path: "login", element: <Login /> },
+            { path: "registerformik", element: <RegisterFormik /> },
+            { path: "maintenance", element: <Maintenance /> },
+            { path: "lockscreen", element: <LockScreen /> },
+            { path: "recoverpwd", element: <RecoverPassword /> },
+            { path: "*", element: <Navigate to="/landing" /> }
+          ]
+    },
+    {
+      path: "/404",
+      element: <Error />
+    }
+  ];
+};
 
 export default ThemeRoutes;

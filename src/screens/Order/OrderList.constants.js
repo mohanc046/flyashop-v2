@@ -7,6 +7,14 @@ export const orderListCategories = [
   { label: "Delivered", value: "DELIVERED" }
 ];
 
+export const statusMapping = (action) => {
+  if (action === "Reject") {
+    return `REJECTED:PENDING`;
+  } else if (action === "Accept") {
+    return `ACCEPTED:PENDING`;
+  }
+};
+
 export const statusColors = {
   PENDING: "#FFA500",
   ACCEPTED: "#008000",

@@ -31,7 +31,8 @@ const OrderList = () => {
     totalItems,
     rowsPerPage,
     handleNavigateOrderDetails,
-    downloadReport
+    downloadReport,
+    setRemarks
   } = useOrder();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -82,7 +83,7 @@ const OrderList = () => {
           <h6 className="fw-semibold">{modalData?.title}</h6>
           {modalData?.action && (
             <>
-              <div className="mb-4 mt-3">
+              <div className="mb-1 mt-3">
                 <input
                   type="checkbox"
                   id="confirmCheckbox"
@@ -93,11 +94,25 @@ const OrderList = () => {
                   Yes
                 </label>
               </div>
-              <div className="d-flex gap-3">
+              {modalData?.action === "Reject" && (
+                <div className="d-flex flex-column">
+                  <label htmlFor="remarks">Remarks</label>
+                  <input
+                    type="input"
+                    id="remarks"
+                    className="mt-1 mb-1 p-2"
+                    placeholder="Enter remarks here"
+                    onChange={(e) => {
+                      setRemarks(e.target.value);
+                    }}
+                  />
+                </div>
+              )}
+              <div className="d-flex gap-3 mt-3">
                 <Button label="Cancel" onClick={() => setIsModalOpen(false)} />
                 <Button
                   label={modalData?.action}
-                  onClick={() => handleSubmit()}
+                  onClick={() => handleSubmit(modalData)}
                   disabled={!isChecked}
                 />
               </div>

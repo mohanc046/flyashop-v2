@@ -10,7 +10,7 @@ import {
   isImageUrl
 } from "../../../utils/utils";
 import axios from "axios";
-import { statusActions, statusColors } from "../OrderList.constants";
+import { statusActions, statusColors, statusMapping } from "../OrderList.constants";
 import { Button } from "reactstrap";
 import { showToast } from "../../../store/reducers/toasterSlice";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +30,7 @@ export const useOrder = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(null);
   const debounceRef = useRef(null);
+  const [remarks, setRemarks] = useState(null);
 
   useEffect(() => {
     console.log(isModalOpen);
@@ -193,7 +194,10 @@ export const useOrder = () => {
         color="primary"
         size="sm"
         className="me-2"
-        onClick={() => handleButtonClick(action, row)}>
+        onClick={(event) => {
+          event.stopPropagation();
+          handleButtonClick(action, row);
+        }}>
         {label}
       </Button>
     ));
@@ -218,19 +222,37 @@ export const useOrder = () => {
     toggleModal();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (modalData) => {
     dispatch(showToast({ type: "success", title: "Success", message: "Updated Successfully" }));
-    console.log("Action submitted:", modalData.action, modalData.row);
 
-    const payload = {
-      orderId: "",
-      decision: "",
-      remarks: "",
-      status: "",
+    if (modalData.action === "Reject" && !remarks) {
+      dispatch(showToast({ type: "error", title: "Error", message: "Please enter remarks." }));
+      return;
+    }
+
+    const data = {
+      orderId: modalData.row?._id,
+      decision: statusMapping(modalData.action)?.split(":")[0],
+      remarks: modalData.action === "Reject" ? remarks : "",
+      status: statusMapping(modalData.action)?.split(":")[1],
       trackingId: ""
     };
+    console.log(data);
 
-    toggleModal();
+    dispatch(showSpinner());
+    let response = await axios.post(`${getServiceURL()}/order/updateOrderStatus`, { data });
+
+    const { statusCode, message } = response?.data || {};
+    if (statusCode === 200) {
+      dispatch(hideSpinner());
+      dispatch(showToast({ type: "success", title: "Success", message: "Updated Successfully" }));
+      toggleModal();
+      fetchOrders(payload);
+    } else {
+      toggleModal();
+      dispatch(hideSpinner());
+      dispatch(showToast({ type: "error", title: "Error", message: message }));
+    }
   };
 
   const columns = [
@@ -358,6 +380,7 @@ export const useOrder = () => {
     totalItems,
     rowsPerPage,
     handleNavigateOrderDetails,
-    downloadReport
+    downloadReport,
+    setRemarks
   };
 };
