@@ -240,7 +240,7 @@ export const useOrder = () => {
     console.log(data);
 
     dispatch(showSpinner());
-    let response = await axios.post(`${getServiceURL()}/order/updateOrderStatus`, { data });
+    let response = await axios.post(`${getServiceURL()}/order/updateOrderStatus`, { ...data });
 
     const { statusCode, message } = response?.data || {};
     if (statusCode === 200) {
