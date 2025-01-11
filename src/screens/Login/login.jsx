@@ -15,7 +15,7 @@ import OTPView from "./components/OTPView.jsx";
 import SetupStore from "./components/SetupStore/SetupStoreView.jsx";
 import { INITIAL_STATE } from "./login.constants.js";
 import { LoginService } from "./login.service.jsx";
-import { getStoreInfo } from "../../utils/_hooks/index.jsx";
+import { getStoreInfo } from "../../utils/_hooks/index.js";
 
 const Login = () => {
   const navigate = useNavigate();

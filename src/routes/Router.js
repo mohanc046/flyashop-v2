@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import Loadable from "../layouts/loader/Loadable.js";
-import { getAuthToken } from "../utils/_hooks/index.jsx";
+import { getAuthToken } from "../utils/_hooks/index.js";
 import Logout from "../screens/Logout.jsx";
 import { useSelector } from "react-redux";
 
