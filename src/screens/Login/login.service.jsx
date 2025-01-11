@@ -71,9 +71,10 @@ export const LoginService = () => {
 
         localStorage.setItem("token", authToken);
         localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        localStorage.setItem("storeInfo", JSON.stringify(_.get(existingStoreInfo, "[0]", {})));
 
         if (role.includes("BUYER")) {
-          localStorage.setItem("storeInfo", JSON.stringify(_.get(existingStoreInfo, "[0]", {})));
+          // localStorage.setItem("storeInfo", JSON.stringify(_.get(existingStoreInfo, "[0]", {})));
           navigateToDashboard();
           dispatch(hideSpinner());
           return;
