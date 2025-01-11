@@ -139,8 +139,9 @@ export const useOnlineShop = () => {
 
       const response = await fetch(`${getServiceURL()}/store/update/store`, {
         method: "POST",
-        body: payload,
+        body: JSON.stringify(payload),
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${getAuthToken()}`
         }
       });
