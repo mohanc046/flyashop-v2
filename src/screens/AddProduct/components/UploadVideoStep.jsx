@@ -143,10 +143,10 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
         </label>
         <div className="d-flex gap-3">
           <div className="position-relative">
-            <Button label="Browse" />
             <input onChange={handleFileUpload} className="file-input" type="file" />
-          </div>
+            <Button label="Browse" />
 
+          </div>
           <Button label="Record" onClick={() => setIsUpload(false)} />
         </div>
       </div>
