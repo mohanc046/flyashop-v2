@@ -27,15 +27,15 @@ export const useOnlineShop = () => {
   const fetchBannerDetails = async () => {
     dispatch(showSpinner());
     try {
-      const params = new URLSearchParams({
-        businessName: getStoreInfo()?.store.businessName || ""
-      });
-
-      const response = await fetch(`${getServiceURL()}/store/fetchStoreByBusinessName?${params}`, {
-        method: "GET",
+      const response = await fetch(`${getServiceURL()}/store/fetchStoreByBusinessName`, {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${getAuthToken()}`
-        }
+          Authorization: `Bearer ${getAuthToken()}`,
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          businessName: getStoreInfo()?.store.businessName || ""
+        })
       });
 
       if (!response.ok) {
@@ -146,9 +146,13 @@ export const useOnlineShop = () => {
         }
       });
 
-      const {
-        data: { statusCode = "500", message = "Issue while creating store" }
-      } = response;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const { statusCode = "500", message = "Issue while updating store" } = data || {};
 
       dispatch(
         showToast({

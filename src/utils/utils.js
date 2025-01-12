@@ -15,7 +15,7 @@ export const isMobileView = () => {
 };
 
 export const getServiceURL = () => {
-  let SERVICE_URL = "https://flyoapi.afras.in/v1";
+  let SERVICE_URL = "http://localhost:3005/v1";
 
   let IS_LOCALHOST = `${window.location.hostname}`.includes("localhost");
 
