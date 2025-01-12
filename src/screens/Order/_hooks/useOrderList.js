@@ -231,7 +231,8 @@ export const useOrder = () => {
     }
 
     const data = {
-      orderId: modalData.row?._id,
+      // orderId: modalData.row?._id, @REFERENCE : InValid Order ID Passed its fixed
+      orderId: modalData.row?.orderId,
       decision: statusMapping(modalData.action)?.split(":")[0],
       remarks: modalData.action === "Reject" ? remarks : "",
       status: statusMapping(modalData.action)?.split(":")[1],
