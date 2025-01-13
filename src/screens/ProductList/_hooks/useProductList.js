@@ -55,6 +55,28 @@ export const useProductList = () => {
     }
   };
 
+  const updateProduct = async ({ productId, isActive }) => {
+    try {
+      setState((prevState) => ({ ...prevState, loaderStatus: true }));
+      const response = await axios.post(`${getServiceURL()}/product/update`, {
+        payload: { isActive },
+        _id: productId
+      });
+      if (response?.data?.statusCode === 200) {
+        const updatedProductList = _.get(state, 'productsList', []).map(item =>
+          item._id === productId ? { ...item, isActive } : item
+        );
+        setState((prevState) => ({ ...prevState, productsList: updatedProductList }));
+        // Update the state immutably using setState and map
+        dispatch(showToast({ type: "success", message: "Product Updated successful!" }));
+      }
+    } catch (error) {
+      dispatch(showToast({ type: "error", message: "Issue while update products" }));
+    } finally {
+      setState((prevState) => ({ ...prevState, loaderStatus: false }));
+    }
+  }
+
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -255,12 +277,15 @@ export const useProductList = () => {
     {
       label: "Status",
       key: "status",
+      renderClickAction: false,
       render: (value, row) => (
         <Switch
           initialStatus={value} // Ensure value is a string like "active" or "hidden"
           activeText="Active"
-          hiddenText="Hidden"
-          onToggle={(newStatus) => console.log("New Status: ", newStatus)} // Handle status toggle
+          hiddenText="Inactive"
+          onToggle={(newStatus) => {
+            updateProduct({ productId: row?._id, isActive: newStatus === "active" ? true : false })
+          }}
         />
       )
     }

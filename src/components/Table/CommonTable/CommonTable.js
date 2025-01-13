@@ -4,7 +4,7 @@ import { CardTitle, Spinner, Card, Button, Table } from "reactstrap";
 import "./CommonTable.scss";
 import SearchInput from "../../SearchInput/SearchInput";
 import * as Icon from "react-feather";
-
+import _ from 'lodash';
 const CommonTable = ({
   title,
   columns,
@@ -91,10 +91,10 @@ const CommonTable = ({
             <tbody>
               {data.length > 0 ? (
                 data.map((row, rowIndex) => (
-                  <tr key={rowIndex} className="border-top" onClick={() => handleRowClick?.(row)}>
+                  <tr key={rowIndex} className="border-top">
                     {columns.map((column) => (
-                      <td key={column.key}>
-                        {column.render ? column.render(row[column.key], row) : row[column.key]}
+                      <td key={column.key} onClick={() => _.get(column, 'renderClickAction', true) ? handleRowClick?.(row) : {}}>
+                       {column.render ? column.render(row[column.key], row) : row[column.key]}
                       </td>
                     ))}
                   </tr>
