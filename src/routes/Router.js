@@ -65,13 +65,14 @@ const ThemeRoutes = () => {
             { path: "/sign-out", element: <Logout /> }
           ]
         : [
-            { path: "/", element: <Navigate to="/landing" /> },
+            { path: "/", element: <Login /> },
+            { path: "/home", element: <Navigate to="/landing" /> },
             { path: "landing", element: <Landing /> },
-            { path: "login", element: <Login /> },
             { path: "registerformik", element: <RegisterFormik /> },
             { path: "maintenance", element: <Maintenance /> },
             { path: "lockscreen", element: <LockScreen /> },
             { path: "recoverpwd", element: <RecoverPassword /> },
+            { path: "/login", element: <Navigate to="/" /> },
             { path: "*", element: <Navigate to="/landing" /> }
           ]
     },
