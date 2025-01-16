@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Label, FormGroup, Container, Row, Col, Card, CardBody } from "reactstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as LeftBg } from "../../assets/images/bg/login-bgleft.svg";
 import { ReactComponent as RightBg } from "../../assets/images/bg/login-bg-right.svg";
 import Logo from "../../layouts/logo/Logo.js";
@@ -16,9 +16,11 @@ import SetupStore from "./components/SetupStore/SetupStoreView.jsx";
 import { INITIAL_STATE } from "./login.constants.js";
 import { LoginService } from "./login.service.jsx";
 import { getStoreInfo } from "../../utils/_hooks/index.js";
+import _ from "lodash";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { action } = useLocation();
   const { initiateLoginWithEmail, verifyLoginOTP } = LoginService();
 
   const [state, setState] = useState({
@@ -34,14 +36,17 @@ const Login = () => {
 
   const navigateToDashboard = () => {
     const storeInfo = getStoreInfo();
-    console.log("store:", storeInfo);
-    if (storeInfo?.store) {
+
+    if (!_.isEmpty(storeInfo)) {
       navigate("/home");
+      console.log("navigation:", storeInfo);
     } else {
-      setState((prevState) => ({
-        ...prevState,
-        screen: "CREATE_STORE"
-      }));
+      setState((prevState) => {
+        return {
+          ...prevState,
+          screen: "CREATE_STORE"
+        };
+      });
     }
   };
 

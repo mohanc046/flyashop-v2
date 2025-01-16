@@ -29,14 +29,16 @@ function GoogleOAuthLogin({ changeState }) {
 
   const navigateToDashboard = () => {
     const storeInfo = getStoreInfo();
-    console.log("store:", storeInfo);
-    if (storeInfo?.store) {
+
+    if (!_.isEmpty(storeInfo)) {
       navigate("/home");
     } else {
-      changeState((prevState) => ({
-        ...prevState,
-        screen: "CREATE_STORE"
-      }));
+      changeState((prevState) => {
+        return {
+          ...prevState,
+          screen: "CREATE_STORE"
+        };
+      });
     }
   };
 

@@ -1,9 +1,10 @@
 import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 import Loadable from "../layouts/loader/Loadable.js";
-import { getAuthToken } from "../utils/_hooks/index.js";
+import { getAuthToken, getStoreInfo } from "../utils/_hooks/index.js";
 import Logout from "../screens/Logout.jsx";
 import { useSelector } from "react-redux";
+import _ from "lodash";
 
 /***** Layouts *****/
 const FullLayout = Loadable(lazy(() => import("../layouts/FullLayout.js")));
@@ -46,35 +47,36 @@ const ThemeRoutes = () => {
   return [
     {
       path: "/",
-      element: authToken ? <FullLayout /> : <BlankLayout />,
-      children: authToken
-        ? [
-            { path: "/", element: <Navigate to="/home" /> },
-            { path: "/home", element: <Home /> },
-            { path: "/order-list", element: <OrderList /> },
-            { path: "/order/:id", element: <OrderDetails /> },
-            { path: "/product-list", element: <ProductList /> },
-            { path: "/product/:id", element: <ProductDetails /> },
-            { path: "/product-list/add-product", element: <AddProduct /> },
-            { path: "/online-shop", element: <OnlineShop /> },
-            { path: "/payments", element: <Payments /> },
-            { path: "/customers", element: <Customers /> },
-            { path: "/plugins", element: <Plugins /> },
-            { path: "/discounts", element: <Discounts /> },
-            { path: "/settings", element: <Settings /> },
-            { path: "/sign-out", element: <Logout /> }
-          ]
-        : [
-            { path: "/", element: <Login /> },
-            { path: "/home", element: <Navigate to="/landing" /> },
-            { path: "landing", element: <Landing /> },
-            { path: "registerformik", element: <RegisterFormik /> },
-            { path: "maintenance", element: <Maintenance /> },
-            { path: "lockscreen", element: <LockScreen /> },
-            { path: "recoverpwd", element: <RecoverPassword /> },
-            { path: "/login", element: <Navigate to="/" /> },
-            { path: "*", element: <Navigate to="/landing" /> }
-          ]
+      element: authToken && !_.isEmpty(getStoreInfo()) ? <FullLayout /> : <BlankLayout />,
+      children:
+        authToken && !_.isEmpty(getStoreInfo())
+          ? [
+              // { path: "/", element: <Navigate to="/home" /> },
+              { path: "/home", element: <Home /> },
+              { path: "/order-list", element: <OrderList /> },
+              { path: "/order/:id", element: <OrderDetails /> },
+              { path: "/product-list", element: <ProductList /> },
+              { path: "/product/:id", element: <ProductDetails /> },
+              { path: "/product-list/add-product", element: <AddProduct /> },
+              { path: "/online-shop", element: <OnlineShop /> },
+              { path: "/payments", element: <Payments /> },
+              { path: "/customers", element: <Customers /> },
+              { path: "/plugins", element: <Plugins /> },
+              { path: "/discounts", element: <Discounts /> },
+              { path: "/settings", element: <Settings /> },
+              { path: "/sign-out", element: <Logout /> }
+            ]
+          : [
+              { path: "/", element: <Login /> },
+              { path: "/home", element: <Navigate to="/landing" /> },
+              { path: "landing", element: <Landing /> },
+              { path: "registerformik", element: <RegisterFormik /> },
+              { path: "maintenance", element: <Maintenance /> },
+              { path: "lockscreen", element: <LockScreen /> },
+              { path: "recoverpwd", element: <RecoverPassword /> },
+              { path: "/login", element: <Navigate to="/" /> },
+              { path: "*", element: <Navigate to="/landing" /> }
+            ]
     },
     {
       path: "/404",

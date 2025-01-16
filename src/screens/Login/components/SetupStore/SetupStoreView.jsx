@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UploadVideo from "./components/UploadProductVideo";
 import ProductDetails from "./components/ProductDetailsStep";
 import Done from "./components/DoneStep";
@@ -19,12 +19,15 @@ const AddProduct = () => {
     mainState
   } = useAddProduct();
 
+  useEffect(() => {
+    console.log("setup");
+  });
+
   const steps = [
     {
       name: "Store Setup",
       component: <StoreDetails updateStore={updateStore} setActiveStep={setActiveStep} />,
-      // validate: () => storeDetailsStepValidation()
-      validate: () => null
+      validate: () => storeDetailsStepValidation()
     },
     {
       name: "Upload Product Video",
