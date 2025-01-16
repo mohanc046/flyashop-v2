@@ -41,7 +41,7 @@ export const statusActions = {
   REJECTED: [],
   SHIPPED: [
     { label: "Deliver", action: "Deliver" },
-    { label: "Add Track", action: "Track" }
+    // { label: "Add Track", action: "Track" }
   ],
   DELIVERED: [{ label: "Activity", action: null }]
 };
