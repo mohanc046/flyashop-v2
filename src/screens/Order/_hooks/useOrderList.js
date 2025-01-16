@@ -208,7 +208,7 @@ export const useOrder = () => {
       Reject: "Do you want to reject the order?",
       Accept: "Do you want to accept the order?",
       Cancel: "Do you want to cancel the order?",
-      Ship: "Do you want to cancel the order?",
+      Ship: "Do you want to ship the order?",
       Deliver: "Do you want to delivery the order?",
       Track: "Do you want to add the tracking code?",
       Activity: "Application Timeline:"
@@ -233,9 +233,9 @@ export const useOrder = () => {
     const data = {
       // orderId: modalData.row?._id, @REFERENCE : InValid Order ID Passed its fixed
       orderId: modalData.row?.orderId,
-      decision: statusMapping(modalData.action)?.split(":")[0],
+      decision: statusMapping(modalData.action)?.split(":")[1],
       remarks: modalData.action === "Reject" ? remarks : "",
-      status: statusMapping(modalData.action)?.split(":")[1],
+      status: statusMapping(modalData.action)?.split(":")[0],
       trackingId: ""
     };
     console.log(data);

@@ -9,9 +9,15 @@ export const orderListCategories = [
 
 export const statusMapping = (action) => {
   if (action === "Reject") {
-    return `REJECTED:PENDING`;
+    return `PENDING:REJECTED`;
   } else if (action === "Accept") {
-    return `ACCEPTED:PENDING`;
+    return `PENDING:ACCEPTED`;
+  } else if (action === "Cancel") {
+    return `ACCEPTED:CANCELLED`;
+  } else if (action === "Ship") {
+    return `ACCEPTED:SHIPPED`;
+  } else if (action === "Deliver") {
+    return `SHIPPED:DELIVERED`;
   }
 };
 
