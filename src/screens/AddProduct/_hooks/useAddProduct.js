@@ -8,7 +8,6 @@ import { getAuthToken } from "../../../utils/_hooks";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { INITIAL_STATE } from "../../Login/login.constants";
-import { message } from "antd";
 
 export const useAddProduct = () => {
   const navigate = useNavigate();

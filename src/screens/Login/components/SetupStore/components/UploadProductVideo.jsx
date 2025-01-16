@@ -131,7 +131,7 @@ const UploadProductVideo = ({ updateStore, setActiveStep }) => {
           Or
         </label>
         <div className="position-relative">
-          <button>Browse</button>
+          <button className="button-div">Browse</button>
           <input onChange={handleFileUpload} className="file-input" type="file" />
         </div>
 
