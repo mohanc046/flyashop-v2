@@ -14,7 +14,19 @@ export const useSettings = () => {
   const columns = [
     {
       label: "Domain Name",
-      key: "domainName"
+      key: "domainName",
+      render: (value, row) => (
+        <div className="d-flex align-items-center">
+          <h5>{value}</h5>
+          <button
+            className="copy-button"
+            onClick={() => {
+              navigator.clipboard.writeText(value);
+            }}>
+            Copy
+          </button>
+        </div>
+      )
     },
     { label: "Date Added", key: "addedAt" },
     {

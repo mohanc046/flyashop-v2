@@ -1,8 +1,29 @@
+@import "../../assets/scss/variables";
+
 .settings-live {
-    border: 1px solid #17ed08;
     padding: 0 5px;
     color: #10ed08;
     background-color: #f3f8f2;
     overflow: hidden;
     width: fit-content;
 }
+
+/* Add this to your CSS file */
+.copy-button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: 1px solid $primary;
+    background-color: $white; 
+    color: $primary; 
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: $primary;
+        color: white;
+    }
+  }
+  

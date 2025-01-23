@@ -4,6 +4,8 @@ import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import { getCustomersByUserId } from "../../../utils/api.service";
 import { getStoreInfo } from "../../../utils/_hooks";
 import _ from "lodash";
+import { Image } from "react-bootstrap";
+import { CImage } from "@coreui/react";
 
 export const useCustomer = () => {
   const dispatch = useDispatch();
@@ -71,7 +73,13 @@ export const useCustomer = () => {
   const columns = [
     {
       label: "Customer Name",
-      key: "name"
+      key: "name",
+      render: (value, row) => (
+        <div className="d-flex align-items-center gap-3">
+          <CImage src={require("../../../assets/images/user.png")} width={40} height={40} />
+          <h5 className="mb-0">{row.name}</h5>
+        </div>
+      )
     },
     { label: "Mobile Number", key: "mobile" },
     { label: "City", key: "city" }

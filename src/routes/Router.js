@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Loadable from "../layouts/loader/Loadable.js";
 import { getAuthToken, getStoreInfo } from "../utils/_hooks/index.js";
 import Logout from "../screens/Logout.jsx";
