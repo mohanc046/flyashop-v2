@@ -276,7 +276,7 @@ export const useHome = () => {
 
   const visitStoreData = [
     {
-      shopLink: `https://flyashop-store.vercel.app/?store=${getStoreInfo()?.store?.businessName}`,
+      shopLink: `http://${getStoreInfo()?.store?.businessName}.afras.in`,
       status: "LIVE",
       action: "Visit"
     }
