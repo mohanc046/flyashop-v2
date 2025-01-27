@@ -1,415 +1,141 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardGroup,
-  CCol,
-  CContainer,
-  CForm,
-  CRow,
-  CImage
-} from '@coreui/react'
-import { useStoreActions, useStoreState } from '../../store/hooks';
-import { isValid } from '../../utils/validation';
-import { useNavigate } from "react-router-dom";
-import { config } from '../../config';
-import _ from 'lodash';
-import './login.css'
-import { renderInputBox, renderTitle, emptySpace, renderDropdown, MobileTabUI } from '../../utils/utilsUI';
-import GoogleOAuthLogin from '../../components/SignInButton/google';
-import FacebookOAuthLogin from '../../components/SignInButton/facebook';
-import { FIXED_VALUES } from '../../utils/constants';
-import OtpInput from 'react-otp-input';
-import { notification } from 'antd';
-
-
-const INITIAL_STATE = {
-  email: "",
-  otp: "",
-  businessName: "",
-  businessType: "",
-  country: "",
-  isLoaderStatus: false,
-  isLoaderEnabled: false,
-  countryList: ["India", "USA", "China", "Australia", "United Kingdom", "Indonesia"],
-  currencyList: ["INR", "USD" , "CNY" , "AUD" , "GBP", "IDR"]
-}
+import React, { useEffect, useState } from "react";
+import { Button, Label, FormGroup, Container, Row, Col, Card, CardBody } from "reactstrap";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ReactComponent as LeftBg } from "../../assets/images/bg/login-bgleft.svg";
+import { ReactComponent as RightBg } from "../../assets/images/bg/login-bg-right.svg";
+import Logo from "../../layouts/logo/Logo.js";
+import GoogleOAuthLogin from "../../components/SignInButton/google.jsx";
+import FacebookOAuthLogin from "../../components/SignInButton/facebook.jsx";
+import "./login.css";
+import { CImage } from "@coreui/react";
+import { config } from "../../config.js";
+import OTPView from "./components/OTPView.jsx";
+import SetupStore from "./components/SetupStore/SetupStoreView.jsx";
+import { INITIAL_STATE } from "./login.constants.js";
+import { LoginService } from "./login.service.jsx";
+import { getStoreInfo } from "../../utils/_hooks/index.js";
+import _ from "lodash";
 
 const Login = () => {
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-
-
-  let loginStoreDetails = useStoreState(state => state.login);
-
-  let userStoreDetails = useStoreState(state => state.user);
-
-  let shopDetails = useStoreState(state => state.shop);
-
-  const {
-    errorStatus, isLoaderEnabled, email = "",
-    otp = "", businessName, businessType, country, isOTPSent = false, isOTPVerified = false, 
-  } = loginStoreDetails.data;
-
-  const { isLoaderStatus = false } = shopDetails.data;
-
-
-  const { screenType = "" } = userStoreDetails.data;
-
-  let updateState = useStoreActions(action => action.login.updateStore);
-
-  let createStore = useStoreActions(action => action.shop.createStore);
-
-  let updateShopStore = useStoreActions(action => action.shop.updateStore);
-
-  let updateUserStore = useStoreActions(action => action.user.updateStore);
-
-  let initiateLoginWithEmail = useStoreActions(action => action.login.initiateLoginWithEmail);
-
-  let verifyLoginOTP = useStoreActions(action => action.login.verifyLoginOTP);
-
   const navigate = useNavigate();
-
-  const moveToNext = (data) => {
-
-    initiateLoginWithEmail(data)
-
-  }
-
-  const initiateStoreCreation = (data) => {
-
-    // currencyList
-    let { businessName = "", country = "", businessType = "" } = data;
-
-    if (_.isEmpty(businessType)) businessType = "";
-   
-    if (![businessType,businessName , country].includes("")) {
-      const currencyIndex = _.findIndex(INITIAL_STATE.countryList , (countyName) => countyName === country);
-      const currency = INITIAL_STATE.currencyList[currencyIndex];
-      createStore({
-        ...data, currency
-      })
-    } else {
-      notification.open({ type: "success", description: "Kindly Provide All the Required Fields" })
-    }
-
-  }
-
-  const navigateToDashboard = () =>{
-    navigate('/home')
-  }
-
-  const navigateToCart = () => {
-    navigate('/user-cart')
-  }
-
-  const navigateToProducts = () =>{
-    navigate('/products')
-  }
+  const { action } = useLocation();
+  const { initiateLoginWithEmail, verifyLoginOTP } = LoginService();
 
   const [state, setState] = useState({
-    screen: 'LOGIN',
-    title: 'Get Started with Flayashop',
-    tabName: "Setup",
-    subTitle: "",
-    loginMethod: {
-      name: 'Get Started',
-      onClick: moveToNext
-    }
+    screen: "LOGIN",
+    title: "Get Started with Flayashop",
+    email: "",
+    otp: null
   });
 
-  const loginBtnStyles = { height: state.screen === 'OTP' ? 54 : 64, borderRadius: 30, fontSize: 16, fontWeight: 600, lineHeight: '20px' };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Email is invalid").required("Email is required")
+  });
 
+  const navigateToDashboard = () => {
+    const storeInfo = getStoreInfo();
 
-  useEffect(() => {
-    if (isOTPSent) {
-      const loginMethod = {
-        name: 'Verify',
-        onClick: verifyOTP
-      }
-      setState({
-        ...state, title: 'Verify code',
-        screen: "OTP", subTitle: 'Enter the 4-digit code we have sent to',
-        loginMethod
+    if (!_.isEmpty(storeInfo)) {
+      navigate("/home");
+      console.log("navigation:", storeInfo);
+    } else {
+      setState((prevState) => {
+        return {
+          ...prevState,
+          screen: "CREATE_STORE"
+        };
       });
     }
-
-    if (isOTPVerified || screenType === "CREATE_STORE") {
-      const loginMethod = {
-        name: 'Create Store',
-        onClick: initiateStoreCreation
-      }
-      setState({ ...state, title: 'Set up your video store', screen: "CREATE_STORE", subTitle: '', loginMethod });
-
-    }
-
-  }, [isOTPSent, isOTPVerified, screenType])
-
-
-  const verifyOTP = (data) => {
-
-    verifyLoginOTP(data)
-
-  }
-
-  const updateAndValidateFormField = (event) => {
-
-    const { name, value } = event.target;
-
-    let validationResult = !isValid(name, value);
-
-    updateState({ [name]: value, errorStatus: { ...errorStatus, [name]: validationResult } })
-
-  }
-
-  useEffect(() => {
-    updateState(INITIAL_STATE);
-    return () => updateState(INITIAL_STATE);
-  }, [])  
-
-  const renderButton = (payload) => {
-    const { name, onClick, data, styles = {} } = payload;
-    return <CRow className=''>
-      <CCol xs={12}>
-        <CButton
-          className={`px-12 primary-color button loginButton ${state.screen === "OTP" ? "btn-at-bottom" : ""}`}
-          style={styles}
-          onClick={() => onClick(data)}>
-          {(isLoaderEnabled || isLoaderStatus) ?
-            <div class="spinner-border text-light" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-            :
-            <> {name}</>
-          }
-        </CButton>
-      </CCol>
-    </CRow>
-  }
-
-  const renderThirdParty = ({ title }) => {
-    return <Fragment>
-      <CRow className='textCenter'>
-        <span className='BOLD FORT12'>Or</span>
-        <span className='BOLD FORT12'>{title}</span>
-      </CRow>
-      <br></br>
-      <CRow className='textCenter'>
-        <div className='flexCenter'>
-          <span className='margin7Right'><CImage align="center" src={config.APPLE} height={50} width={50} /></span>
-          <span className='margin7Right'><GoogleOAuthLogin /></span> 
-          <span className='margin7Right'><FacebookOAuthLogin /></span> 
-        </div>
-      </CRow>
-      {emptySpace()}
-      {emptySpace()}
-      <CRow className='FORT12 textCenter'>
-        <span> By continuing, you agree to our <span className='underline'>Terms of Use</span> and <span className='underline'>Privacy Policy</span>.</span>
-      </CRow>
-    </Fragment>
-  }
-
-  const resentUI = () => {
-    return <CRow className='FORT12 gap-1'>
-      <span className='textCenter'> Didn't receive the code? </span>
-      <span className='underline BOLD textCenter' onClick={() => initiateLoginWithEmail({ email })}>Re-send code</span>
-    </CRow>
-  }
-
-  const renderDeskTopVersion = () => {
-    return <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={4}>
-            <CCardGroup>
-              <CCard className="p-4">
-                <CCardBody style={{ position: 'relative' }}>
-                  <CForm>
-                    <CImage align="center" src={config.LOGO_BLUE} height={75} />
-                    <br />
-                    {renderTitle(state.title)}
-
-                    {state.subTitle && <CRow className='FORT12'>
-                      <span> {state.subTitle}
-                        <br></br><span className='underline'>{email}</span></span>
-                      {emptySpace()}
-                      {emptySpace()}
-                    </CRow>}
-
-                    {state.screen === 'LOGIN' && renderInputBox({
-                      name: "email",
-                      value: email,
-                      placeholder: 'Enter Your Email',
-                      onChange: updateAndValidateFormField,
-                      errorStatus: _.get(errorStatus, 'email', false)
-                    })}
-
-                    {state.screen === 'OTP' &&
-                      <div className='otp-container d-flex justify-content-center'>
-                        <OtpInput
-                          value={otp}
-                          onChange={(value) => updateAndValidateFormField({ target: { name: 'otp', value } })}
-                          numInputs={4}
-                          renderSeparator={<span> </span>}
-                          renderInput={(props) => <input name='otp' {...props} />} />
-                      </div>
-                    }
-
-                    {state.screen === 'CREATE_STORE' && <Fragment>
-                      {renderDropdown({
-                        name: "country",
-                        value: country,
-                        list: INITIAL_STATE.countryList,
-                        placeholder: 'Select Your Country',
-                        onChange: updateAndValidateFormField
-                      })}
-                      {renderInputBox({
-                        name: "businessName",
-                        value: businessName,
-                        placeholder: 'Enter Your Business Name',
-                        onChange: updateAndValidateFormField
-                      })}
-                      {renderDropdown({
-                        name: "businessType",
-                        value: businessType,
-                        list: ["", ...FIXED_VALUES.BUSINESS_TYPE],
-                        placeholder: 'Select Your Business type',
-                        onChange: updateAndValidateFormField
-                      })}
-                    </Fragment>}
-
-                    {emptySpace()}
-                    {renderButton({ ...state.loginMethod, data: { email, otp, updateUserStore, businessName, businessType, country, navigateToDashboard, navigateToProducts, updateShopStore, navigateToCart }, styles: loginBtnStyles })}
-                    {emptySpace()}
-                    {state.screen === 'LOGIN' && renderThirdParty({ title: 'Get started with' })}
-                    {state.screen === 'OTP' && resentUI()}
-                  </CForm>
-                </CCardBody>
-              </CCard>
-            </CCardGroup>
-          </CCol>
-        </CRow>
-      </CContainer>
-    </div>
-  }
-
-  const renderRememberMeAndForgotPassword = () => {
-    return (
-      <CContainer className="remember-me-container">
-        <CRow className="d-flex flex-row justify-content-between">
-          <CCol xs={6} className='remember-me d-flex align-items-center gap-1'>
-            <CImage src={config.TICK} height={75} />
-            <span>Remember Me</span>
-          </CCol>
-          <CCol xs={6} className='forgot-password d-flex align-items-center justify-content-end'>
-            <span>Forgot Password?</span>
-          </CCol>
-        </CRow>
-      </CContainer>
-    )
-  }
-
-  const renderLoginMobileOne = () => {
-    let buttonLabel = state.screen === 'OTP' ? 'Verify': 'Sign In';
-    if (state.screen === 'CREATE_STORE') buttonLabel = 'Create Store'
-    return <Fragment>
-      {state.screen === 'LOGIN' && <Fragment>
-        <div className='textCenter loginHead'>Login here</div>
-        <div className='textCenter loginSubHead'>Welcome back you’ve <br></br>
-          been missed!</div>
-        <br></br>
-      </Fragment>}
-
-      {state.screen === 'OTP' && <Fragment>
-        <h4 className='otp-title'> Enter your verification code</h4>
-
-        <div className='FONT14 textCenter'>Enter the 4-digit code we have sent to <br></br> <span className='FONT14 underline'>{email}</span></div>
-        <br></br>   <br></br>   <br></br> <br></br> 
-      </Fragment>}
-      {state.screen === 'LOGIN' &&
-        <>
-          {
-          renderInputBox({
-            name: "email",
-            value: email,
-            placeholder: 'Enter Your Email',
-            onChange: updateAndValidateFormField,
-            errorStatus: _.get(errorStatus, 'email', false)
-          })
-          }
-          {
-            renderRememberMeAndForgotPassword()
-          }
-        </>
-      }
-      {state.screen === 'OTP' &&
-        <div className='otp-container d-flex justify-content-center'>
-          <OtpInput
-            value={otp}
-            onChange={(value) => updateAndValidateFormField({ target: { name: 'otp', value } })}
-            numInputs={4}
-            renderSeparator={<span> </span>}
-            renderInput={(props) => <input name='otp' {...props} />} />
-        </div>
-      }
-      {state.screen === 'CREATE_STORE' && <Fragment>
-        {MobileTabUI(state.tabName)}
-        {renderDropdown({
-          name: "country",
-          value: country,
-          list: INITIAL_STATE.countryList,
-          placeholder: 'Select Your Country',
-          onChange: updateAndValidateFormField
-        })}
-        {renderInputBox({
-          name: "businessName",
-          value: businessName,
-          placeholder: 'Business Name',
-          onChange: updateAndValidateFormField
-        })}
-        {renderDropdown({
-          name: "businessType",
-          value: businessType,
-          list: ["", ...FIXED_VALUES.BUSINESS_TYPE],
-          placeholder: 'Business type',
-          onChange: updateAndValidateFormField
-        })}
-      </Fragment>}
-      {emptySpace()}
-      {state.screen === 'OTP' && resentUI()}
-      <div className='fullWidth'>
-        {renderButton({ ...state.loginMethod, name: buttonLabel, data: { email, otp, updateUserStore, businessName, businessType, country, navigateToDashboard, navigateToProducts, updateShopStore, navigateToCart }, styles: loginBtnStyles })}
-      </div>
-      {emptySpace()}
-      {state.screen === 'LOGIN' && renderThirdParty({ title: 'Sign In with' })}
-
-    </Fragment>
-  }
-
-  const renderMobileVersion = () => {
-   
-    return <div className={state.screen === 'CREATE_STORE' ? "mobileLoginLayout": "mobileLoginLayout justifyCenter"}>
-      {renderLoginMobileOne()}
-    </div>
-  }
+  };
 
   return (
-    windowWidth <= 768 ? renderMobileVersion() : renderDeskTopVersion()
-  )
-}
+    <div className="loginBox">
+      <LeftBg className="position-absolute left bottom-0" />
+      <RightBg className="position-absolute end-0 top" />
+      <Container fluid className="h-100">
+        <Row className="justify-content-center align-items-center h-100">
+          {state.screen === "CREATE_STORE" ? (
+            <Col lg="12">
+              <SetupStore state={state} />
+            </Col>
+          ) : (
+            <Col lg="12" className="loginContainer">
+              <Card className="d-flex align-items-center p-3 bg-white rounded">
+                <div className="d-flex flex-column align-items-center">
+                  <Logo />
+                  <h4 className="mb-3 fw-semibold">{state.title}</h4>
+                </div>
+                {state.screen === "LOGIN" && (
+                  <CardBody className="p-4 m-1">
+                    <Formik
+                      initialValues={INITIAL_STATE}
+                      validationSchema={validationSchema}
+                      onSubmit={(fields) =>
+                        initiateLoginWithEmail({
+                          email: fields.email,
+                          setState
+                        })
+                      }
+                      render={({ errors, touched }) => (
+                        <Form>
+                          <FormGroup>
+                            <Label htmlFor="email">Email</Label>
+                            <Field
+                              name="email"
+                              type="text"
+                              className={`form-control input${
+                                errors.email && touched.email ? " is-invalid" : ""
+                              }`}
+                            />
+                            <ErrorMessage
+                              name="email"
+                              component="div"
+                              className="invalid-feedback"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <Button type="submit" color="primary" className="me-2">
+                              Get Started
+                            </Button>
+                          </FormGroup>
+                        </Form>
+                      )}
+                    />
+                    <div class="d-flex flex-column align-items-center text-center my-3">
+                      <h5 class="mb-2">Or</h5>
+                      <h5 class="mb-3">Get started with</h5>
+                      <div class="d-flex justify-content-center gap-3">
+                        <span className="cursor-pointer">
+                          <CImage align="center" src={config.APPLE} height={50} width={50} />
+                        </span>
+                        <span className="cursor-pointer">
+                          <GoogleOAuthLogin changeState={setState} />
+                        </span>
+                        <span className="cursor-pointer">
+                          <FacebookOAuthLogin changeState={setState} />
+                        </span>
+                      </div>
+                    </div>
+                  </CardBody>
+                )}
 
-export default Login
+                {state.screen === "OTP" && (
+                  <OTPView
+                    state={state}
+                    verifyOTP={verifyLoginOTP}
+                    navigateToDashboard={navigateToDashboard}
+                    setState={setState}
+                  />
+                )}
+              </Card>
+            </Col>
+          )}
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+export default Login;

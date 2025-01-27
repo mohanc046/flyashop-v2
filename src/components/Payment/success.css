@@ -1,0 +1,57 @@
+.paymentSuccessPartnerContainer {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10% 0 10%;
+}
+
+.successTickContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.successTickMark {
+    width: 132px;
+    height: 132px;
+}
+
+.paymentSuccessContainer {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 58px 58px 58px 58px #232C5D0F;
+    padding: 20% 5% 5% 5%;
+    border-radius: 32px;
+}
+
+
+.trackOrderButtonContainer {
+    padding: 5%;
+    background: #6E3BFF;
+    border-radius: 30px;
+}
+
+.continueShoppingButtonContainer {
+    padding: 5%;
+    background: transparent;
+}
+
+.yourOrderBookingLabel {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 31px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+}
+
+.yourOrderBookingDescriptionLabel {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #000000;
+}

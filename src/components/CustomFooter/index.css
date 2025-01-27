@@ -1,0 +1,38 @@
+.startTrialLabelStyle {
+    height: 20px;
+    margin-top: 10px;
+    left: 133px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: #262626;
+}
+
+.startTrialButtonColor {
+    height: 44px;
+    left: 24px;
+    padding: 8px;
+    border-radius: 64px;
+    gap: 10px;
+    background: #6E3BFF;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+    margin-top: 12px;
+    color: white;
+}
+
+.starTextLabel {
+    color: #FFFFFF;
+}
+
+.pricingFooterLayout {
+    width: 100%;
+    align-items: center;
+    background-color: #ffffff !important;
+    height: 100px;
+    top: 718px;
+  }

@@ -1,0 +1,67 @@
+@import "../../assets/scss/variables";
+.example {
+  .step-progress {
+    margin: 20px auto;
+    width: 80%;
+
+    .MuiStepper-root {
+      background-color: transparent;
+      padding: 20px 0;
+    }
+
+    .MuiStep-root {
+      .MuiStepLabel-root {
+        .MuiStepLabel-label {
+          font-size: 1rem;
+          font-weight: 500;
+          color: #555;
+          text-transform: uppercase;
+
+          &.Mui-completed {
+            color: #4caf50; // Completed step color
+          }
+
+          &.Mui-active {
+            color: $primary; // Active step color
+          }
+        }
+
+        .MuiStepIcon-root {
+          color: #ddd; // Default step circle color
+
+          &.Mui-completed {
+            color: #4caf50; // Completed step circle color
+          }
+
+          &.Mui-active {
+            color: $primary; // Active step circle color
+          }
+        }
+      }
+    }
+  }
+
+  .step-content {
+    margin: 20px 0;
+
+    .MuiTypography-root {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .step-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+
+      button {
+        font-size: 0.9rem;
+        text-transform: none;
+        padding: 5px 20px;
+        background-color: $primary;
+        color: $white;
+      }
+    }
+  }
+}

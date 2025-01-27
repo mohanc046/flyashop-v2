@@ -9,7 +9,7 @@ import { ToggleMobileSidebar } from "../../../store/customizer/CustomizerSlice";
 import NavItemContainer from "./NavItemContainer";
 import NavSubMenu from "./NavSubMenu";
 
-const Sidebar = () => {
+const Sidebar = ({ showMobileSidebar }) => {
   const location = useLocation();
   const currentURL = location.pathname.split("/").slice(0, -1).join("/");
 
@@ -23,31 +23,26 @@ const Sidebar = () => {
   const dispatch = useDispatch();
 
   return (
-    <div
-      className={`sidebarBox shadow bg-${activeBg} ${
-        isFixed ? "fixedSidebar" : ""
-      }`}
-    >
+    <div className={`sidebarBox shadow bg-${activeBg} ${isFixed ? "fixedSidebar" : ""}`}>
       <SimpleBar style={{ height: "100%" }}>
         {/********Logo*******/}
         <div className="d-flex p-3 align-items-center">
           <Logo />
-          <Button
-            close
-            size="sm"
-            className="ms-auto d-sm-block d-lg-none"
-            onClick={() => dispatch(ToggleMobileSidebar())}
-          />
+          {/* {window.innerWidth <= 768 ? (
+            <Button
+              close
+              size="sm"
+              className="ms-auto d-sm-block d-lg-none"
+              onClick={() => dispatch(ToggleMobileSidebar())}
+            />
+          ) : null} */}
         </div>
-        <div>
+        <div className="">
           <Nav vertical className={activeBg === "white" ? "" : "lightText"}>
             {SidebarData.map((navi) => {
               if (navi.caption) {
                 return (
-                  <div
-                    className="navCaption fw-bold text-uppercase mt-4"
-                    key={navi.caption}
-                  >
+                  <div className="navCaption fw-bold text-uppercase mt-4" key={navi.caption}>
                     {navi.caption}
                   </div>
                 );
@@ -71,9 +66,7 @@ const Sidebar = () => {
                 <NavItemContainer
                   key={navi.id}
                   //toggle={() => toggle(navi.id)}
-                  className={
-                    location.pathname === navi.href ? "activeLink" : ""
-                  }
+                  className={location.pathname === navi.href ? "activeLink" : ""}
                   to={navi.href}
                   title={navi.title}
                   suffix={navi.suffix}

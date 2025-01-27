@@ -1,0 +1,166 @@
+@import "../../assets/scss/variables"; 
+ 
+.button-container {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.with70 {
+    width: 70%;
+}
+
+.whiteBg {
+    background: #fff;
+    padding: 3%;
+}
+
+.with20 {
+    width: 20%;
+}
+.flexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.productImage {
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+}
+
+.productImageMobile {
+    width: 71px;
+    height: 71px;
+    border-radius: 8px
+}
+
+.commonPadding {
+    padding: 10px;
+}
+
+.alignCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
+.addButton {
+    border-radius: 20px;
+    padding: 7px;
+    background: #ffffff;
+    border: 1px solid;
+}
+
+.smallBoxLayout {
+    border: 1px solid #dfdfdf;
+    padding: 10px;
+    margin-bottom: 10%;
+}
+
+.FONT12 {
+    font-size: 12px;
+}
+
+.FONT13 {
+    font-size: 13px;
+}
+
+.FONT14 {
+    font-size: 14px;
+}
+
+.with50 {
+    width: 50%;
+}
+.with40 {
+    width: 40%;
+}
+
+.greenColor {
+    background: #6E3BFF;
+}
+
+.greyColor {
+    background: #F0F0F0;
+}
+
+.pinkFont {
+    color: #FF3333;
+}
+
+.blackColor {
+    background: #393939;
+}
+.cicleSmall {
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 7px;
+}
+
+/* OrderList.module.css */
+
+/* Modal background overlay */
+.custom-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+  }
+  
+  /* Modal container */
+  .custom-modal-container {
+    max-width: 600px;
+    margin: auto;
+    border-radius: 8px;
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  
+  /* Modal header */
+  .custom-modal-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  /* Modal body */
+  .custom-modal-body {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.6;
+    padding: 15px 0;
+  }
+  
+  /* Modal footer */
+  .custom-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    gap: 10px;
+  }
+  
+  /* Button styles inside the modal */
+  .custom-modal-footer button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-modal-footer button:hover {
+    background-color: #0056b3;
+  }
+  

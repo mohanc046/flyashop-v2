@@ -5,10 +5,10 @@ import { CImage } from "@coreui/react";
 import { config } from "../../config";
 import { useNavigate, useParams } from "react-router-dom";
 import { useStoreActions, useStoreState } from '../../store/hooks';
-import { isMobileView } from "../../utils";
 import StoreWebView from "./View/Web/Store.Web";
 import StoreMobileView from "./View/Mobile/Store.Mobile";
 import BottomNav from "./View/BottomNav/BottomNav";
+import { isMobileView } from "../../utils/utils";
 
 export default function Store() {
 

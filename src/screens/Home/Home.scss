@@ -1,0 +1,67 @@
+@import "../../assets/scss/variables";
+
+.live {
+  position: relative; // To properly position the pseudo-element
+  background-color: white;
+  overflow: hidden;
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+  width: fit-content;
+
+  // Add the red dot before the text
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 12px; // Size of the dot
+    height: 12px; // Size of the dot
+    background-color: red; // Color of the dot
+    border-radius: 50%; // Makes it a circle
+    margin-right: 5px; // Spacing between the dot and the text
+    margin-bottom: 3px;
+    vertical-align: middle; // Aligns the dot with the text
+  }
+}
+
+
+.count-text {
+  font-size: 30px;
+  color: $black;
+  font-weight: 400;
+  margin: 0;
+}
+
+.card-title-text {
+  font-size: 15px;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.card-icon {
+  color: $primary;
+}
+
+.percentage-text {
+  font-size: 13px;
+}
+
+.welcomeUser {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-right: 6px;
+}
+
+.bottom-view {
+  display: flex;
+  width: 100%;
+}

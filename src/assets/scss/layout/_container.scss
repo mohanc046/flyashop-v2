@@ -155,7 +155,11 @@
 .loginBox {
   height: 100vh;
   .loginContainer {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
     max-width: 390px;
+    align-items: center;
   }
 }
 

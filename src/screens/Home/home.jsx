@@ -1,77 +1,71 @@
-import React, { useEffect } from 'react';
-
-import { AppSidebar, AppFooter, AppHeader } from '../../components/index'
-
-import './home.css';
-
-import { Toaster } from 'react-hot-toast';
-
-import _ from 'lodash';
-
-import { useStoreState, useStoreActions } from '../../store/hooks';
-
-
-import { capitalizeFirstLetter, isMobileView } from '../../utils';
-
-import HomeMobile from './home.mobile';
-
-import { HomeDesktopUI } from './home.desktop';
+import React from "react";
+import "react-table-v6/react-table.css";
+import { Card, Col } from "reactstrap";
+import OutletCard from "../../components/OutletCard/OutletCard";
+import { useHome } from "./_hooks/useHome";
+import AnalyticsCard from "./components/AnalyticsCard";
+import CommonTable from "../../components/Table/CommonTable/CommonTable";
+import _ from "lodash";
 
 const Home = () => {
+  const {
+    columns,
+    state,
+    payload,
+    mapOrderDataToTable,
+    onApplySortFilter,
+    onClearFilterChange,
+    visitStoreColumns,
+    visitStoreData,
+    handleSearch,
+    handlePerPageRowsChange,
+    handlePageChange,
+    currentPage,
+    totalItems,
+    rowsPerPage,
+    userInfo,
+    statsData
+  } = useHome();
 
-  const userInfo = useStoreState(state => state.user); 
+  return (
+    <OutletCard>
+      <Card
+        className="d-flex flex-column gap-4 bg-light p-4"
+        style={{
+          maxHeight: "100vh",
+          overflowY: "auto",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none"
+        }}>
+        <h3 className="fw-semibold m-0">{`Hi, ${_.get(userInfo, "firstName", "User")}`}</h3>
+        <h4 className="text-muted">
+          Your Store is Active Now. Customers can visit the following shop link and place their
+          orders.
+        </h4>
+        <CommonTable columns={visitStoreColumns} data={visitStoreData} hidePagination hideSearch />
+        <AnalyticsCard statsData={statsData} />
+        <div className="d-flex flex-wrap justify-content-between align-items-start">
+          <Col lg={12} md={12}>
+            <CommonTable
+              columns={columns}
+              data={mapOrderDataToTable(state.orderList)}
+              title="Orders"
+              isLoading={state.loaderStatus}
+              filterCallback={onClearFilterChange}
+              sortCallback={onApplySortFilter}
+              sort={payload.sort}
+              searchOnChange={handleSearch}
+              onRowsPerPageChange={handlePerPageRowsChange}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
+              totalItems={totalItems}
+              rowsPerPage={rowsPerPage}
+            />
+          </Col>
+        </div>
+      </Card>
+    </OutletCard>
+  );
+};
 
-  const { firstName, lastName, existingStoreInfo = [] } = userInfo.data;
-
-  const storeInfo = _.get(existingStoreInfo, "[0].store") || {};
-
-  const { businessName = "", _id: storeId = "", addressInfo = {} } = storeInfo || {}
-
-  const userName = _.isEmpty(firstName) ? "Welcome" : `${firstName} ${lastName}`;
-
-  const storeLink = `${window.location?.origin}/store/${businessName}`;
-
-  const greetings = `Hi, ${capitalizeFirstLetter(businessName)}`;
-
-  let updateHomePageOrders = useStoreActions(action => action.adminOrder.updateHomePageOrders);
-
-  let updateStoreAddressInformation = useStoreActions(action => action.user.updateStoreAddressInformation);
-
-  const resetOrderState = () => {
-    updateHomePageOrders({
-      orderList: [],
-      totalOrderCount: 0,
-      isLoaderEnabled: false,
-      currentPage: 0,
-      totalPages: 1
-    })
-  }
-
-  useEffect(() => {
-    resetOrderState()
-    return () => {
-      resetOrderState()
-    }
-  }, [])
-
-  return (isMobileView() ? <HomeMobile
-    userName={userName}
-    storeLink={storeLink}
-    greetings={greetings}
-    storeName={businessName}
-  /> :
-
-    <HomeDesktopUI
-      userName={userName}
-      storeLink={storeLink}
-      greetings={greetings}
-      storeName={businessName}
-      addressInfo={addressInfo}
-      storeId={storeId}
-      updateStoreAddressInformation={updateStoreAddressInformation}
-    />
-   
-  )
-}
-
-export default Home
+export default Home;

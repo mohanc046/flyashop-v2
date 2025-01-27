@@ -32,7 +32,7 @@
 
 .statistics-container .img-container.logo {
     position: absolute;
-    top: 15%;
+    top: 10px;
 }
 
 .statistics-container .background .background-banner {
@@ -126,7 +126,12 @@
     font-size: 94px;
     font-weight: 600;
     line-height: 94px;
+    color: #000;
     letter-spacing: -0.04em;
+}
+
+.color-majorelle-blue {
+    color: #6E3BFF;
 }
 
 .statistics-container .banner-container .description {

@@ -280,32 +280,6 @@
     border-bottom: 4px solid green;
 }
 
-.addProductDraggerContainer {
-    display: flex;
-    flex-direction: column;
-    border-radius: 30px;
-    align-items: center;
-    padding: 43px 30px 33px;
-    gap: 20px;
-    border: 1px;
-    background-color: #E1EBF3 !important;
-    border: 1px solid #F5F9FC;
-}
-
-.addProductDraggerContainer .upload-icon {
-    height: 36px;
-    width: 36px;
-}
-
-.addProductDraggerContainer button {
-    width: 257px;
-    height: 54px;
-    padding: 8px;
-    border-radius: 30px;
-    border: 1px solid #000000;
-    background: transparent;
-}
-
 .button-div {
     width: 257px;
     height: 54px;
@@ -315,17 +289,6 @@
     border-radius: 30px;
     border: 1px solid #000000;
     background: transparent;
-    cursor: pointer;
-}
-
-.addProductDraggerContainer .paste-link {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 19px;
-    letter-spacing: 0.01em;
-    color: #757575;
-    padding-bottom: 2px;
-    border-bottom: 1px solid #757575;
     cursor: pointer;
 }
 
@@ -344,15 +307,6 @@
     letter-spacing: 0px;
     color: #000000 !important;
     margin-top: 40px;
-}
-
-.addProductDraggerContainer .file-input {
-    position: absolute;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    cursor: pointer;
 }
 
 .add-product-form-field input,
@@ -438,46 +392,6 @@
   }
 
   /* Tablet and larger */
-  @media (max-width: 1200px) {
-    .addProductDraggerContainer button {
-        width: 170px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
-    }
-
-    .addProductDraggerContainer .paste-link {
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 19px;
-        letter-spacing: 0.01em;
-        text-align: center;
-        color: #757575;
-        padding-bottom: 2px;
-    }
-
-    .button-div {
-        width: 170px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
-    }
-  }
-  
-  @media (max-width: 450px) {
-    .addProductDraggerContainer button {
-        width: 170px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
-    }
-
-    .button-div {
-        width: 180px;
-        height: 44px;
-        padding: 8px;
-        border-radius: 30px;
-    }
-  }
+ 
   
   

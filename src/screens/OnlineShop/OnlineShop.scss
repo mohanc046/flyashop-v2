@@ -1,0 +1,138 @@
+@import "../../assets/scss/variables";
+
+.heading-container {
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    gap: 100px;
+    justify-content: space-between;
+
+    h3 {
+        font-weight: 500;
+        margin-top: 5px;
+    }
+}
+
+.description {
+    font-size: 15px;
+}
+
+.banners-count-title {
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.banners-grid {
+    width: max-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // Adjust columns as needed
+    gap: 1rem;
+  }
+  
+  .banner-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden;
+  
+    &:hover {
+      border-color: $primary;
+
+      .add-banner-content {
+        color: $primary;
+      }
+
+    }
+  
+    .add-banner-content {
+      text-align: center;
+      color: #6c757d;
+  
+      i {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+  
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+  
+    .banner-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+
+@media only screen and (min-width : 320px) {
+    .userBannerLayout {
+        width: 98%;
+        margin-left: 2%;
+    }
+}
+
+@media only screen and (min-width : 480px) {
+    .userBannerLayout {
+        width: 98%;
+        margin-left: 2%;
+    }
+}
+
+@media only screen and (min-width : 768px) {
+    .userBannerLayout {
+        margin-left: 35.5%;
+        width: 60%;
+    }
+}
+
+
+@media (min-width: 767px) and (max-width: 1024px) {
+    .userBannerLayout {
+        margin-left: 35.5%;
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width : 992px) {
+    .userBannerLayout {
+        margin-left: 35.5%;
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width : 1200px) {
+    .userBannerLayout {
+        width: 50%;
+        margin-left: 22%;
+    }
+}
+
+.userBannerWrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.hideInputBox {
+    display: none;
+}
+
+.saveBanner {
+    background: #6E3BFF !important;
+    border: none;
+    padding: 6px;
+    border-radius: 23px;
+    width: 100px;
+    color: white;
+    cursor: pointer;
+}

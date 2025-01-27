@@ -2,7 +2,7 @@ import * as Icon from "react-feather";
 
 const SidebarData = [
   {
-    title: "Home",
+    title: "Dashboard",
     href: "/home",
     id: 1,
     // suffix: '4',
@@ -25,7 +25,7 @@ const SidebarData = [
     collapisble: false,
   },
   {
-    title: "Online Shop",
+    title: "Edit Shop",
     href: "/banner",
     icon: <Icon.ShoppingBag />,
     id: 4,

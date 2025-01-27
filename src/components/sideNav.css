@@ -1,0 +1,100 @@
+.DefaultBackGround {
+  background-color: #E1EBF3;
+}
+
+.defaultBackgroundColor {
+  background-color: #ffffff;
+}
+
+.border-right {
+  border-right: 0.5px solid #dfdfdf;
+}
+
+.freeTrialButtonStyle {
+  left: 24px;
+  padding: 15px;
+  border-radius: 64px;
+  gap: 10px;
+  background: #6E3BFF;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  margin-top: 12px;
+}
+
+.goPremiumStyle {
+  height: 20px;
+  margin-top: 10px;
+  left: 133px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.left-nav-logo-container {
+  background: #E1EBF3;
+  padding: 71px 27px 14px 27px;
+
+}
+
+.left-nav-icon{
+  height: 80px;
+  width: 80px;
+}
+
+.shop-name {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000000;
+  margin-top: 32px;
+}
+
+.edit-profile {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 15px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000000;
+  margin-top: 7px;
+}
+
+.footerCustom.mobile {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px 1px 4px 0px #00000040;
+}
+
+@media screen and (min-width:700px) {
+  .app-side-bar .sidebar-nav{
+    padding-top: 30px;
+  }
+  .app-side-bar .nav-item {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  .app-side-bar .nav-link.active,
+  .app-side-bar .nav-link.active:active,
+  .app-side-bar .nav-link.active:hover,
+  .app-side-bar .nav-link.active:focus {
+    border: 0 !important;
+    border-left: 4px solid #000 !important;
+  }
+
+  .app-side-bar .nav-item img {
+    margin-right: 12px;
+    height: 20px;
+    width: 20px;
+  }
+}

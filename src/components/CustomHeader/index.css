@@ -1,0 +1,19 @@
+
+
+
+.customHeaderContainer {
+    display:  flex;
+    flex: 1;
+}
+
+.customHeaderTitleContainer {
+    display: flex;
+    flex: 1;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.marginLeftAndRight{
+    width: 20%;
+}
