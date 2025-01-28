@@ -32,7 +32,7 @@ export const useProductList = () => {
   });
 
   const [payload, setPayload] = useState({
-    storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
+    storeName: getStoreInfo()?.store?.domainName || "DefaultStore",
     currentPage: 1,
     limit: 10,
     categoryType: "ALL",
@@ -85,7 +85,7 @@ export const useProductList = () => {
     // Prepare the form data for the API
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("storeName", getStoreInfo().store?.businessName);
+    formData.append("storeName", getStoreInfo().store?.domainName);
 
     try {
       // Send the file to the backend API using getServiceURL()

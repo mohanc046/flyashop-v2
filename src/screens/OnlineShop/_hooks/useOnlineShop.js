@@ -34,7 +34,7 @@ export const useOnlineShop = () => {
           "content-type": "application/json"
         },
         body: JSON.stringify({
-          businessName: getStoreInfo()?.store.businessName || ""
+          businessName: getStoreInfo()?.store.domainName || ""
         })
       });
 
@@ -134,7 +134,7 @@ export const useOnlineShop = () => {
           enable: false,
           list: banners
         },
-        businessName: getStoreInfo()?.store.businessName
+        businessName: getStoreInfo()?.store.domainName
       };
 
       const response = await fetch(`${getServiceURL()}/store/update/store`, {

@@ -46,7 +46,7 @@ export const useOrder = () => {
   });
 
   const [payload, setPayload] = useState({
-    storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
+    storeName: getStoreInfo()?.store?.domainName || "DefaultStore",
     currentPage: 1,
     itemPerPage: 10,
     categoryType: "ALL",

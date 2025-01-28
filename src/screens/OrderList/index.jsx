@@ -713,7 +713,7 @@ export default function OrderList(props) {
 
   const businessName = _.get(
     userDetails,
-    "existingStoreInfo.[0].store.businessName",
+    "existingStoreInfo.[0].store.domainName",
     ""
   );
 

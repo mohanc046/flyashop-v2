@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../store/reducers/headerTitleSlice";
 import { showToast } from "../../../store/reducers/toasterSlice";
-import { getServiceURL } from "../../../utils/utils";
+import { formatDomainName, getServiceURL } from "../../../utils/utils";
 import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 import { getAuthToken } from "../../../utils/_hooks";
 import { useNavigate } from "react-router-dom";
@@ -83,6 +83,7 @@ export const useAddProduct = () => {
           JSON.stringify({
             store: {
               businessName: mainState.businessName,
+              domainName: formatDomainName(mainState.businessName),
               businessType: [mainState.businessType],
               location: mainState.country
             }

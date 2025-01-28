@@ -44,7 +44,7 @@ export const useSettings = () => {
   const data = [
     {
       key: "1",
-      domainName: `https://flyashop.com/store/${getStoreInfo()?.store?.businessName}`,
+      domainName: `https://flyashop.com/store/${getStoreInfo()?.store?.domainName}`,
       addedAt: "Feb 27, 2024",
       status: ["LIVE"],
       provider: "Godaddy"

@@ -90,3 +90,13 @@ export const generateXlsxReport = (data, fileName) => {
 
   saveAs(blob, `${fileName}.xlsx`);
 };
+
+
+export const formatDomainName = (domain) => {
+  // Remove spaces, special characters, and ensure the domain starts and ends without hyphens
+  return domain
+    .toLowerCase()                     // Convert to lowercase
+    .replace(/\s+/g, '')                // Remove spaces
+    .replace(/[^a-z0-9\-]/g, '')        // Remove special characters
+    .replace(/^-+|-+$/g, '');           // Remove leading and trailing hyphens
+}
