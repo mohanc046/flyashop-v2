@@ -26,7 +26,7 @@ export const useDiscounts = () => {
     vouchersList: []
   });
   const [payload, setPayload] = useState({
-    storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
+    storeName: getStoreInfo()?.store?.domainName || "DefaultStore",
     currentPage: 1,
     limit: 10,
     categoryType: "ALL",

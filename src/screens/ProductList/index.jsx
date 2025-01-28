@@ -76,7 +76,7 @@ class ProductList extends Component {
 
             const shopInfo = store.getState().user.data;
 
-            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.businessName')}`.toLocaleLowerCase();
+            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.domainName')}`.toLocaleLowerCase();
 
             this.setState({ loading: true, chosenCategory: [categoryId], searchText, sort });
 
@@ -276,7 +276,7 @@ class ProductList extends Component {
 
         const shopInfo = store.getState().user.data;
 
-        const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.businessName')}`.toLocaleLowerCase();
+        const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.domainName')}`.toLocaleLowerCase();
 
         return <div className="addNewProductButtonUI">
             <div class="scrollable-container">

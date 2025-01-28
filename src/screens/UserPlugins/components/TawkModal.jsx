@@ -31,11 +31,11 @@ const TawkModal = () => {
     try {
       dispatch(showSpinner());
       const storeInfo = JSON.parse(localStorage.getItem("storeInfo"));
-      if (!storeInfo || !storeInfo.store || !storeInfo.store.businessName) {
+      if (!storeInfo || !storeInfo.store || !storeInfo.store.domainName) {
         throw new Error("Invalid store information.");
       }
 
-      const storeName = storeInfo.store.businessName;
+      const storeName = storeInfo.store.domainName;
 
       const requestPayload = {
         pluginType: "TAWK",

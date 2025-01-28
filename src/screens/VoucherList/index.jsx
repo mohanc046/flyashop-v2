@@ -90,7 +90,7 @@ class VoucherList extends Component {
 
             const shopInfo = store.getState().user.data;
 
-            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.businessName')}`.toLocaleLowerCase();
+            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.domainName')}`.toLocaleLowerCase();
 
             const response = await axios.post(`${getServiceURL()}/voucher`, { ...payload, storeName });
 
@@ -133,7 +133,7 @@ class VoucherList extends Component {
 
             const shopInfo = store.getState().user.data;
 
-            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.businessName')}`.toLocaleLowerCase();
+            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.domainName')}`.toLocaleLowerCase();
 
             const updatedPayload = _.omit(payload, 'voucherId');
 
@@ -181,7 +181,7 @@ class VoucherList extends Component {
 
             const shopInfo = store.getState().user.data;
 
-            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.businessName')}`.toLocaleLowerCase();
+            const storeName = `${_.get(shopInfo, 'existingStoreInfo[0].store.domainName')}`.toLocaleLowerCase();
 
             const chosenCategory = _.isEmpty(categoryId) ? [""] : [categoryId]
 

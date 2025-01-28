@@ -37,7 +37,7 @@ export const useHome = () => {
   });
 
   const [payload, setPayload] = useState({
-    storeName: getStoreInfo()?.store?.businessName || "DefaultStore",
+    storeName: getStoreInfo()?.store?.domainName || "DefaultStore",
     searchText: "",
     currentPage: 1,
     itemPerPage: 10,
@@ -60,7 +60,7 @@ export const useHome = () => {
       dispatch(showSpinner());
 
       let orderSummaryResponse = await axios.get(
-        `${getServiceURL()}/order/analytics/${getStoreInfo()?.store?.businessName}`
+        `${getServiceURL()}/order/analytics/${getStoreInfo()?.store?.domainName}`
       );
 
       const {

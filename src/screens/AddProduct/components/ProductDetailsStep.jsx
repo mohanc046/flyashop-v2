@@ -37,8 +37,12 @@ const ProductDetails = ({ updateStore, mainState }) => {
         gstPercentage: mainState.gstPercentage || ""
       }));
     }
-    getCategoryList();
+
   }, [mainState]);
+
+  useEffect(() => {
+    getCategoryList();
+  }, [])
 
   const getCategoryList = async () => {
     try {
