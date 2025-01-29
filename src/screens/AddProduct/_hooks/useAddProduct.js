@@ -26,7 +26,7 @@ export const useAddProduct = () => {
     dispatch(setTitle("Add Product"));
   }, []);
 
-  const storeDetailsStepValidation = () => {
+  const storeDetailsStepValidation = async () => {
     const fields = [
       { field: mainState.country, message: "Country is required." },
       { field: mainState.businessName, message: "Business Name is required." },
@@ -46,8 +46,7 @@ export const useAddProduct = () => {
       }
     }
 
-    initiateStoreCreation();
-    return false;
+    return await initiateStoreCreation();
   };
 
   const createStore = async ({ currency }) => {
@@ -91,16 +90,21 @@ export const useAddProduct = () => {
         );
 
         dispatch(hideSpinner());
+
         return true;
       } else {
         dispatch(hideSpinner());
-        dispatch(showToast({ type: "warning", title: "Success", message: message }));
+        dispatch(showToast({ type: "warning", title: "Warning", message: message }));
         return false;
       }
     } catch (error) {
       dispatch(hideSpinner());
       dispatch(
-        showToast({ type: "error", title: "Error", message: "Error while creating the store." })
+        showToast({
+          type: "error",
+          title: "Error",
+          message: `Error while creating the store: ${error}`
+        })
       );
       return false;
     } finally {
