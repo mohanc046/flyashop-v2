@@ -44,7 +44,7 @@ export const useSettings = () => {
   const data = [
     {
       key: "1",
-      domainName: `https://flyashop.com/store/${getStoreInfo()?.store?.domainName}`,
+      domainName: `http://${getStoreInfo()?.store?.domainName}.${process.env.REACT_APP_DOMAIN_EXTENSION || "afras.in"}`,
       addedAt: "Feb 27, 2024",
       status: ["LIVE"],
       provider: "Godaddy"

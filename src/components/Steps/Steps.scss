@@ -61,6 +61,11 @@
         padding: 5px 20px;
         background-color: $primary;
         color: $white;
+
+        &:disabled {
+          background-color: $white;
+          border: none;
+        }
       }
     }
   }

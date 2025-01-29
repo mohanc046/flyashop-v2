@@ -19,15 +19,12 @@ const AddProduct = () => {
     mainState
   } = useAddProduct();
 
-  useEffect(() => {
-    console.log("setup");
-  });
-
   const steps = [
     {
       name: "Store Setup",
       component: <StoreDetails updateStore={updateStore} setActiveStep={setActiveStep} />,
-      validate: () => storeDetailsStepValidation()
+      validate: () => storeDetailsStepValidation(),
+      hideBackButton: true
     },
     {
       name: "Upload Product Video",

@@ -276,7 +276,7 @@ export const useHome = () => {
 
   const visitStoreData = [
     {
-      shopLink: `http://${getStoreInfo()?.store?.domainName}.${process.env.REACT_APP_DOMAIN_EXTENSION}`,
+      shopLink: `http://${getStoreInfo()?.store?.domainName}.${process.env.REACT_APP_DOMAIN_EXTENSION || "afras.in"}`,
       status: "LIVE",
       action: "Visit"
     }
