@@ -71,7 +71,7 @@ const Steps = ({ steps, activeStep, setActiveStep }) => {
                 <Button
                   onClick={handleNext}
                   variant="contained"
-                  disabled={activeStep === 0 || steps[activeStep]?.hideNextButon}>
+                  disabled={steps[activeStep]?.hideNextButon}>
                   {activeStep === steps.length - 1 ? "Finish" : "Next"}
                 </Button>
               </div>
