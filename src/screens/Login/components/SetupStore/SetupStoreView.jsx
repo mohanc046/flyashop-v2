@@ -30,7 +30,8 @@ const AddProduct = () => {
       name: "Upload Product Video",
       component: <UploadVideo updateStore={updateStore} setActiveStep={setActiveStep} />,
       validate: () => uploadStepValidation(),
-      hideBackButton: true
+      hideBackButton: true,
+      hideNextButon: true
     },
     {
       name: "Add Details",
@@ -45,7 +46,7 @@ const AddProduct = () => {
   ];
 
   return (
-    <div className="p-2 p-sm-3 p-md-4 p-lg-5">
+    <div className="p-2 p-sm-3 p-md-4 p-lg-5 overflow-hidden">
       <ComponentCard>
         <Steps steps={steps} activeStep={activeStep} setActiveStep={setActiveStep} />
       </ComponentCard>
