@@ -169,11 +169,10 @@ export const useAddProduct = () => {
             message
           })
         );
-        return true;
+        return false;
       }
     }
-
-    return false;
+    return true;
   };
 
   const createProduct = async () => {

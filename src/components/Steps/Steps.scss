@@ -1,12 +1,21 @@
 @import "../../assets/scss/variables";
+
 .example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px; // Prevents it from stretching too wide on larger screens
+  margin: auto;
+  padding: 20px;
+
   .step-progress {
-    margin: 20px auto;
-    width: 80%;
+    width: 100%;
+    max-width: 700px;
 
     .MuiStepper-root {
       background-color: transparent;
-      padding: 20px 0;
+      padding: 15px 0;
     }
 
     .MuiStep-root {
@@ -42,6 +51,8 @@
   }
 
   .step-content {
+    width: 100%;
+    max-width: 600px;
     margin: 20px 0;
 
     .MuiTypography-root {
@@ -54,17 +65,77 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
+      flex-wrap: wrap; // Allows buttons to wrap on smaller screens
 
       button {
         font-size: 0.9rem;
         text-transform: none;
-        padding: 5px 20px;
         background-color: $primary;
         color: $white;
 
         &:disabled {
           background-color: $white;
           border: none;
+        }
+      }
+    }
+  }
+}
+
+// 📌 Responsive Styles
+@media screen and (max-width: 768px) { // For Tablets & Smaller Screens
+  .example {
+    max-width: 100%;
+    padding: 10px;
+
+    .step-progress {
+      .MuiStepLabel-label {
+        font-size: 0.5rem; // Reduce font size
+      }
+    }
+
+    .step-content {
+      max-width: 100%;
+
+      .MuiTypography-root {
+        font-size: 1rem;
+      }
+
+      .step-actions {
+        flex-direction: column; // Stack buttons vertically on smaller screens
+        align-items: center;
+
+        button {
+          width: 100%; // Full-width buttons
+          padding: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 580px) { // For Mobile Phones
+  .example {
+    padding: 5px;
+
+    .step-progress {
+      .MuiStepper-root {
+        padding: 10px 0;
+      }
+
+      .MuiStepLabel-label {
+        display: none;
+      }
+    }
+
+    .step-content {
+      .MuiTypography-root {
+        font-size: 0.9rem;
+      }
+
+      .step-actions {
+        button {
+          padding: 10px;
         }
       }
     }
