@@ -20,7 +20,7 @@ export const getServiceURL = () => {
   let IS_LOCALHOST = `${window.location.hostname}`.includes("localhost");
 
   if (!IS_LOCALHOST) {
-    SERVICE_URL = "https://flyoapi.afras.in/v1";
+    SERVICE_URL = process.env.REACT_APP_SERVICE_API;
   }
 
   return SERVICE_URL;
