@@ -20,7 +20,6 @@ import _ from "lodash";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { action } = useLocation();
   const { initiateLoginWithEmail, verifyLoginOTP } = LoginService();
 
   const [state, setState] = useState({
