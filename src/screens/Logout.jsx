@@ -13,7 +13,7 @@ const Logout = () => {
     localStorage.removeItem("storeInfo");
     dispatch(clearToken());
     sessionStorage.clear();
-    navigate("/landing");
+    navigate("/");
   }, [navigate]);
 
   return null;

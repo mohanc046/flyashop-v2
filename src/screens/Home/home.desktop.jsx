@@ -413,6 +413,10 @@ export const HomeDesktopUI = ({ userName, storeLink, greetings, storeName, addre
         )
     }
 
+    const redirectToStore = (storeLink) => {
+        return window.open(storeLink, '_blank');
+    }
+
     return (<div className='whiteBgColor desktop'>
         <AppSidebar />
         {renderAddOrEditAddressPopup()}
@@ -434,9 +438,14 @@ export const HomeDesktopUI = ({ userName, storeLink, greetings, storeName, addre
                     <div className='urlContainer d-flex justify-content-between'>
                         <div className='circle-layout-link'>
                             <label className='urlShopLabel'>Shop Link : {storeLink}</label>
-                            <div onClick={() => {
-                                window.open(storeLink, '_blank');
-                            }} className='visitButtonContainer'><label>Visit</label><FontAwesomeIcon color="#ffffff" icon={faEye} /></div>
+                            <div className='visitButtonContainer'>
+                                <button
+                                    onClick={() => redirectToStore(storeLink)}
+                                >
+                                    <span>Visit</span>
+                                    <FontAwesomeIcon color="#ffffff" icon={faEye} />
+                                </button>
+                            </div>
                         </div>
                         <div className="share-container opacity-0">
                             <span>Share Via</span>

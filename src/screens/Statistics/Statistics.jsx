@@ -46,24 +46,8 @@ const Statistics = (props) => {
 
     return (
       <div className="banner-container">
-        {/* <video
-                    autoPlay loop muted
-                    className="background-video"
-                    onClick={handleVideoClick}
-                    id="background-video"
-                >
-                    <source src={config.BANNER_VIDEO} type="video/mp4" />
-                </video> */}
-        {/* {isMobileLayout && !play && (
-                    <div className="play-button-container" onClick={handleVideoClick}>
-                        <div className="play-button">Play Video</div>
-                    </div>
-                )} */}
-        {/* <div className="background">
-          <img src={config.BANNER_BANGROUND} className="background-banner" alt="" />
-        </div> */}
         <div className="header d-flex justify-content-between align-items-center">
-          <div className="img-container logo">
+          <div className="img-container logo" onClick={()=> navigate('/home')}>
             <img src={config.LOGO_BLUE} alt="" />
           </div>
           <div className="btn-grp">

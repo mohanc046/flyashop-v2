@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Navbar, Button, Container } from "reactstrap";
 import * as Icon from "react-feather";
+import { useNavigate } from "react-router-dom";
 
 import {
   ToggleMiniSidebar,
@@ -16,6 +17,7 @@ const Header = () => {
   const topbarColor = useSelector((state) => state.customizer.topbarBg);
   const dispatch = useDispatch();
   const title = useSelector((state) => state.headerTitle.title);
+  const navigate = useNavigate();
 
   return (
     <Navbar
@@ -36,9 +38,6 @@ const Header = () => {
         >
           <Icon.Menu size={22} />
         </Button>
-        {/* <div href="/" className="d-sm-flex d-lg-none">
-          <Logo />
-        </div> */}
         <Button
           color={topbarColor}
           className="d-sm-block d-lg-none"
