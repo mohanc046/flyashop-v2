@@ -32,7 +32,8 @@ const AddProduct = () => {
       name: "Done",
       component: <Done createProduct={createProduct} />,
       validate: () => null,
-      hideBackButton: true
+      hideBackButton: true,
+      hideNextButon: true
     }
   ];
 

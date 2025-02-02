@@ -144,15 +144,23 @@ const UploadVideoStep = ({ updateStore, setActiveStep }) => {
           <div className="position-relative">
             <input onChange={handleFileUpload} className="file-input" type="file" />
             <Button label="Browse" />
-
           </div>
-          <Button label="Record" onClick={() => setIsUpload(false)} />
+          <Button
+            label="Record"
+            onClick={() => {
+              setIsUpload(false);
+            }}
+          />
         </div>
       </div>
 
       {!isUpload && (
         <div>
-          <button onClick={() => setIsUpload(!isUpload)} className="toggle-button">
+          <button
+            onClick={() => {
+              setIsUpload(false);
+            }}
+            className="toggle-button">
             Toggle Recorder
           </button>
 

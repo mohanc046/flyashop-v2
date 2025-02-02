@@ -24,6 +24,7 @@ export const useProductList = () => {
   const [totalItems, setTotalItems] = useState(null);
   const debounceRef = useRef(null);
   const fileInputRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
   const [state, setState] = useState({
     loaderStatus: false,
     productsList: [],
@@ -63,7 +64,7 @@ export const useProductList = () => {
         _id: productId
       });
       if (response?.data?.statusCode === 200) {
-        const updatedProductList = _.get(state, 'productsList', []).map(item =>
+        const updatedProductList = _.get(state, "productsList", []).map((item) =>
           item._id === productId ? { ...item, isActive } : item
         );
         setState((prevState) => ({ ...prevState, productsList: updatedProductList }));
@@ -75,7 +76,7 @@ export const useProductList = () => {
     } finally {
       setState((prevState) => ({ ...prevState, loaderStatus: false }));
     }
-  }
+  };
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -100,8 +101,11 @@ export const useProductList = () => {
 
       const { statusCode = 500, message = "Issue while Bulk upload!" } = response.data || {};
 
-      if (statusCode === 200) {
+      console.log(response.data, "djaskdj", response.data?.statusCode);
+
+      if (response.data?.statusCode === 200) {
         dispatch(showToast({ type: "success", title: "Success", message: message }));
+        showModal(true);
         loadProducts(payload);
       } else {
         dispatch(showToast({ type: "error", title: "Error", message: message }));
@@ -284,7 +288,7 @@ export const useProductList = () => {
           activeText="Active"
           hiddenText="Inactive"
           onToggle={(newStatus) => {
-            updateProduct({ productId: row?._id, isActive: newStatus === "active" ? true : false })
+            updateProduct({ productId: row?._id, isActive: newStatus === "active" ? true : false });
           }}
         />
       )
@@ -326,6 +330,8 @@ export const useProductList = () => {
     fileInputRef,
     handleButtonClick,
     handleFileChange,
-    downloadReport
+    downloadReport,
+    showModal,
+    setShowModal
   };
 };
