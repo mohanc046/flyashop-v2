@@ -42,7 +42,7 @@ export const useAddProduct = () => {
             message
           })
         );
-        return true;
+        return false;
       }
     }
 

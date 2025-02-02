@@ -12,7 +12,6 @@ import { hideSpinner, showSpinner } from "../../../store/reducers/spinnerSlice";
 import { showToast } from "../../../store/reducers/toasterSlice";
 import { BUCKET_NAME, s3 } from "../../../utils/awsConfig";
 import Button from "../../../components/Button/Button";
-import * as Icon from "react-feather";
 
 const MAX_VIDEO_SIZE_MB = 99; // Maximum size in MB
 
