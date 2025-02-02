@@ -49,34 +49,25 @@ const Steps = ({ steps, activeStep, setActiveStep }) => {
           ))}
         </Stepper>
         <div className="step-content">
-          {activeStep === steps.length ? (
-            <div>
-              <Typography>All steps completed</Typography>
-              <Button onClick={handleReset} variant="outlined">
-                Reset
+          <div>
+            {error && <Typography color="red">{error}</Typography>}
+            <Typography>{steps[activeStep]?.component || "No content"}</Typography>
+            <div className="step-actions">
+              <Button
+                disabled={activeStep === 0 || steps[activeStep]?.hideBackButton}
+                onClick={handleBack}
+                variant="outlined">
+                Back
+              </Button>
+
+              <Button
+                onClick={handleNext}
+                variant="contained"
+                disabled={steps[activeStep]?.hideNextButon}>
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
               </Button>
             </div>
-          ) : (
-            <div>
-              {error && <Typography color="red">{error}</Typography>}
-              <Typography>{steps[activeStep]?.component || "No content"}</Typography>
-              <div className="step-actions">
-                <Button
-                  disabled={activeStep === 0 || steps[activeStep]?.hideBackButton}
-                  onClick={handleBack}
-                  variant="outlined">
-                  Back
-                </Button>
-
-                <Button
-                  onClick={handleNext}
-                  variant="contained"
-                  disabled={steps[activeStep]?.hideNextButon}>
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                </Button>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

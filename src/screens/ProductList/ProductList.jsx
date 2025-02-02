@@ -1,6 +1,6 @@
 import React from "react";
 import "react-table-v6/react-table.css";
-import { Card } from "reactstrap";
+import { Card, Modal, ModalHeader } from "reactstrap";
 import * as Icon from "react-feather";
 import ComponentCardTable from "../../components/ComponentCardTable/ComponentCardTable";
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
@@ -10,6 +10,8 @@ import { useProductList } from "./_hooks/useProductList";
 import Button from "../../components/Button/Button";
 import "./ProductList.scss";
 import { productCategories } from "./ProductList.constants";
+import Lottie from "lottie-react";
+import successAnimation from "../../assets/lottie/success.json";
 
 const ProductList = () => {
   const {
@@ -31,7 +33,9 @@ const ProductList = () => {
     fileInputRef,
     handleButtonClick,
     handleFileChange,
-    downloadReport
+    downloadReport,
+    showModal,
+    setShowModal
   } = useProductList();
 
   return (
@@ -86,6 +90,18 @@ const ProductList = () => {
           handleRowClick={handleNavigateProductDetails}
         />
       </ComponentCardTable>
+      <Modal isOpen={showModal} toggle={() => setShowModal(!showModal)} size="md">
+        <ModalHeader toggle={() => setShowModal(!showModal)}>
+          Product Uploaded Successfully
+        </ModalHeader>
+        <div style={{ alignSelf: "center", justifyContent: "center", alignItems: "center" }}>
+          <Lottie
+            animationData={successAnimation}
+            loop={true}
+            style={{ width: 300, height: 300 }}
+          />
+        </div>
+      </Modal>
     </OutletCard>
   );
 };
