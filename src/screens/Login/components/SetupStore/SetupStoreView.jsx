@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import UploadVideo from "./components/UploadProductVideo";
+import UploadVideo from "../../../AddProduct/components/UploadVideoStep";
 import ProductDetails from "./components/ProductDetailsStep";
 import Done from "./components/DoneStep";
 import { useAddProduct } from "../../../AddProduct/_hooks/useAddProduct";
@@ -41,7 +41,8 @@ const AddProduct = () => {
     {
       name: "Done",
       component: <Done createProduct={createProduct} />,
-      validate: () => null
+      validate: () => true,
+      hideBackButton: true
     }
   ];
 
