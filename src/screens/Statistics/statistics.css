@@ -1,6 +1,6 @@
 .statistics-container {
-    width: fit-content;
-    background: #F6F9FC;
+    width: fit-content; 
+    background: #F6F9FC; 
 }
 
 .statistics-container .banner-container {
@@ -791,6 +791,8 @@
     padding: 8% 4% 4%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     justify-content: center;
 }
 
