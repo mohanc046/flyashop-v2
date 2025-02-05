@@ -227,7 +227,7 @@ const Statistics = (props) => {
             </li>
           </div>
           <div className="steps-banner">
-            <div className="bg"></div>
+            {/* <div className="bg"></div> */}
             <div className="content">
               <div className="step-card">
                 <img src={config.RED_VELVET_IMAGE} alt="" />
