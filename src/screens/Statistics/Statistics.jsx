@@ -5,6 +5,7 @@ import CIcon from "@coreui/icons-react";
 import { config } from "../../config";
 
 import "./statistics.css";
+import "./statistics-title.css";
 
 import { cilMenu } from "@coreui/icons";
 
@@ -106,7 +107,7 @@ const Statistics = (props) => {
         </div>
         <Row>
           <Col lg={{ span: 12 }} span={24} className="content">
-            <h4 className="title">
+            <h4 className="title title-black">
               Your global online shop, Its <span className="color-majorelle-blue">here</span>
             </h4>
             <p className="description">
@@ -131,9 +132,9 @@ const Statistics = (props) => {
     return (
       <Row className="stats-container-content mt-5">
         <img className="background" src={config.BACKGROUND_GLOBE} alt="" />
-        <p className="title">Flyashop powers businesses of all</p>
-        <p className="title">shapes and sizes build and scale globally — </p>
-        <p className="title">
+        <p className="title title-black">Flyashop powers businesses of all</p>
+        <p className="title title-black">shapes and sizes build and scale globally — </p>
+        <p className="title title-black">
           from <span className="color-majorelle-blue">hey people</span> to a billion dollar{" "}
           <span className="color-majorelle-blue">unicorn</span>.
         </p>
@@ -162,7 +163,7 @@ const Statistics = (props) => {
   const renderWays = () => {
     return (
       <div className="ways-container">
-        <h4 className="title">Shopping simplified via videos in 3 easy steps</h4>
+        <h4 className="title title-black">Shopping simplified via videos in 3 easy steps</h4>
         <h4 className="desc">
           Let your customers experience the power of videos to shop for your products and services.
         </h4>
@@ -227,7 +228,7 @@ const Statistics = (props) => {
             </li>
           </div>
           <div className="steps-banner">
-            <div className="bg"></div>
+            {/* <div className="bg"></div> */}
             <div className="content">
               <div className="step-card">
                 <img src={config.RED_VELVET_IMAGE} alt="" />
@@ -280,13 +281,13 @@ const Statistics = (props) => {
               <div className="top d-flex align-items-center">
                 <img src={config.DELIFRESH_LOGO} alt="" className="logo" />
                 <div className="details d-flex flex-column">
-                  <span className="title"> Delifresh Bakery</span>
+                  <span className="title title-black"> Delifresh Bakery</span>
                   <span className="label"> Trusted Seller</span>
                 </div>
                 <CIcon height={38} style={{ cursor: "pointer" }} icon={cilMenu} size="lg" />
               </div>
               <input type="text" className="search-product" placeholder="Search products" />
-              <span className="deals-title">Todays deals</span>
+              <span className="deals-title title-black">Todays deals</span>
               <div className="deals d-flex justify-content-between">
                 <img src={config.COOKIES_IMAGE} alt="" />
                 <img src={config.PASTRIES_IMAGE} alt="" />
@@ -310,7 +311,7 @@ const Statistics = (props) => {
     return (
       <div className="next-level d-flex flex-column align-items-center">
         <img className="background" src={config.BACKGROUND_ECOMMERCE} alt="" />
-        <h4 className="title">Next level eCommerce</h4>
+        <h4 className="title title-black">Next level eCommerce</h4>
         <p className="description">
           With our cutting-edge technology, your business is now more agile, more intelligent and
           far more scalable than ever before
@@ -320,14 +321,14 @@ const Statistics = (props) => {
             <div className="img-container d-flex align-items-center justify-content-center">
               <img src={config.DIGITAL_SHOP_ICON} alt="" />
             </div>
-            <h4 className="title">Digital Shop</h4>
+            <h4 className="title title-black">Digital Shop</h4>
             <p className="description">Amazing online shop experience from easy templates</p>
           </div>
           <div className="next-level-grid-item d-flex flex-column align-items-center">
             <div className="img-container d-flex align-items-center justify-content-center">
               <img src={config.GLOBAL_ICON} alt="" />
             </div>
-            <h4 className="title">Global Audience</h4>
+            <h4 className="title title-black">Global Audience</h4>
             <p className="description">
               Create your own online store within seconds. Share it via social media.
             </p>
@@ -336,7 +337,7 @@ const Statistics = (props) => {
             <div className="img-container d-flex align-items-center justify-content-center">
               <img src={config.UNLIMITED_PRODUCTS_ICON} alt="" />
             </div>
-            <h4 className="title">Unlimited Products</h4>
+            <h4 className="title title-black">Unlimited Products</h4>
             <p className="description">
               Create your own online store within seconds. Share it via social media.
             </p>
@@ -345,7 +346,7 @@ const Statistics = (props) => {
             <div className="img-container d-flex align-items-center justify-content-center">
               <img src={config.DATA_ANALYTICS_ICON} alt="" />
             </div>
-            <h4 className="title">Data Analytics</h4>
+            <h4 className="title title-black">Data Analytics</h4>
             <p className="description">
               Create your own online store within seconds. Share it via social media.
             </p>
@@ -354,7 +355,7 @@ const Statistics = (props) => {
             <div className="img-container d-flex align-items-center justify-content-center">
               <img src={config.TRACK_INVENTORY_ICON} alt="" />
             </div>
-            <h4 className="title">Track Inventory</h4>
+            <h4 className="title title-black">Track Inventory</h4>
             <p className="description">
               Create your own online store within seconds. Share it via social media.
             </p>
@@ -363,7 +364,7 @@ const Statistics = (props) => {
             <div className="img-container d-flex align-items-center justify-content-center">
               <img src={config.CUSTOMER_CREDIT_ICON} alt="" />
             </div>
-            <h4 className="title">Customer Credit</h4>
+            <h4 className="title title-black">Customer Credit</h4>
             <p className="description">
               Create your own online store within seconds. Share it via social media.
             </p>
@@ -430,7 +431,7 @@ const Statistics = (props) => {
   const renderGetInTouch = () => {
     return (
       <Row className="get-in-touch ">
-        <p className="title">Get in touch</p>
+        <p className="title title-black">Get in touch</p>
         <Row>
           <Col lg={13} span={24}>
             <Form className="get-in-touch-form">
@@ -510,8 +511,8 @@ const Statistics = (props) => {
   const renderMultipleChannelContents = () => {
     return (
       <Row className="multiple-channels-content">
-        <p className="title">Where run your shop via</p>
-        <p className="title">multiple channels</p>
+        <p className="title title-black">Where run your shop via</p>
+        <p className="title title-black">multiple channels</p>
         <p className="description">
           With our cutting-edge technology, your business is now more agile, more intelligent and
           far more scalable than ever before
@@ -519,7 +520,7 @@ const Statistics = (props) => {
         <Row className="multiple-channel-items">
           <Col className="multiple-channel-item" lg={8} span={24}>
             <div className="content">
-              <p className="title">Online Shop</p>
+              <p className="title title-black">Online Shop</p>
               <p className="description">
                 {" "}
                 With our cutting-edge technology, your business is now more agile, more intelligent
@@ -531,7 +532,7 @@ const Statistics = (props) => {
           </Col>
           <Col className="multiple-channel-item" lg={8} span={24}>
             <div className="content">
-              <p className="title">Online Shop</p>
+              <p className="title title-black">Online Shop</p>
               <p className="description">
                 {" "}
                 With our cutting-edge technology, your business is now more agile, more intelligent
@@ -543,7 +544,7 @@ const Statistics = (props) => {
           </Col>
           <Col className="multiple-channel-item" lg={8} span={24}>
             <div className="content">
-              <p className="title">Online Shop</p>
+              <p className="title title-black">Online Shop</p>
               <p className="description">
                 {" "}
                 With our cutting-edge technology, your business is now more agile, more intelligent
@@ -561,7 +562,7 @@ const Statistics = (props) => {
   const renderEnhanceSite = () => {
     return (
       <Row className="enhance-site">
-        <p className="title"> Enhance your site's functionality with plugins</p>
+        <p className="title title-black"> Enhance your site's functionality with plugins</p>
         <p className="description">
           {" "}
           Choose from over 40+ plugins. Be it tracking analytics, managing shipments to building
@@ -580,8 +581,8 @@ const Statistics = (props) => {
   const renderTrustedBy = () => {
     return (
       <div className="trusted-by">
-        <h4 className="title">Trusted by 1000s of shop owners</h4>
-        <h4 className="title">across the world</h4>
+        <h4 className="title title-black">Trusted by 1000s of shop owners</h4>
+        <h4 className="title title-black">across the world</h4>
         <div className="content">
           <div className="content-card-bg"></div>
           <div

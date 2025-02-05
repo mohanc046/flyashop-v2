@@ -110,7 +110,7 @@
     border-radius: 134px;
     width: 195px;
     border: 0;
-    color: #000;
+    color: white;
 }
 
 .statistics-container .banner-container .content {
@@ -185,6 +185,7 @@
     margin-bottom: 0;
     width: 100%;
     z-index: 1;
+    color: #000;
 }
 
 .statistics-container .stats-container-content .tag-lines-card .count {
@@ -309,7 +310,7 @@
     height: 64px;
     border-radius: 300px;
     border: 0;
-    color: #000000;
+    color: white;
 }
 
 .statistics-container .ways-container .steps-description .label {
@@ -327,6 +328,7 @@
     text-align: left;
     margin-top: 24px;
     margin-bottom: 21px;
+    color: #000;
 }
 
 .statistics-container .ways-container .steps-description .step {
