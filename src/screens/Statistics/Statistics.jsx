@@ -23,6 +23,8 @@ import { Col, Form, Input, Menu, Row, Segmented } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { getAuthToken } from "../../utils/_hooks";
 
+const currentYear = new Date().getFullYear(); 
+
 const Statistics = (props) => {
   const { TextArea } = Input;
 
@@ -654,7 +656,7 @@ const Statistics = (props) => {
             </Col>
           </Row>
           <Row>
-            <p className="copyrights">Copyright© 2024 Flyashop. All Rights Reserved. </p>
+          <p className="copyrights">Copyright © {currentYear} Flyashop. All Rights Reserved. </p>
           </Row>
         </Col>
       </Row>
