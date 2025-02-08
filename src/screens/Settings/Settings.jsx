@@ -3,9 +3,11 @@ import OutletCard from "../../components/OutletCard/OutletCard";
 import { useSettings } from "./_hooks/useSettings";
 import { Card, CardTitle } from "reactstrap";
 import CommonTable from "../../components/Table/CommonTable/CommonTable";
+import { getStoreInfo } from "../../utils/_hooks";
 
 const Settings = () => {
   const { columns, data } = useSettings();
+  const domainName = getStoreInfo()?.store?.domainName
 
   return (
     <OutletCard>
@@ -16,6 +18,14 @@ const Settings = () => {
         <span className="text-muted fs-8 mb-3">
           Set up and personalize your store's web address.
         </span>
+        <div className="text-danger d-block mb-3">
+          <strong>Note:</strong> When mapping a custom domain, ensure that:
+          <ul className="mt-2">
+            <li>{`"${domainName}" is either the primary domain name or a subdomain.`}</li>
+            <li>{`Your mapped domain must follow the correct format (e.g., ${domainName}.com or ${domainName}.domainname.com).`}</li>
+            <li>{`Incorrect domains may cause mapping issues.`}</li>
+          </ul>
+        </div>
         <CommonTable columns={columns} data={data} hidePagination hideSearch />
       </Card>
       <Card className="bg-white shadow-sm w-100 p-4">

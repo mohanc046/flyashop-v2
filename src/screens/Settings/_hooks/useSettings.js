@@ -44,10 +44,10 @@ export const useSettings = () => {
   const data = [
     {
       key: "1",
-      domainName: `http://${getStoreInfo()?.store?.domainName}.${process.env.REACT_APP_DOMAIN_EXTENSION || "afras.in"}`,
+      domainName: `${process.env.REACT_APP_VERCEL_DOMAIN_URL}`,
       addedAt: "Feb 27, 2024",
       status: ["LIVE"],
-      provider: "Godaddy"
+      provider: "Vercel"
     }
   ];
 
